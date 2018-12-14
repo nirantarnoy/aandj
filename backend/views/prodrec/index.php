@@ -79,7 +79,8 @@ HTML;
                 <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> บันทึกรับวัตถุดิบ'), ['create'], ['class' => 'btn btn-success']) ?>
             </div>
             <div class="btn-group">
-                    <div class="btn btn-default btn-bill"><i class="fa fa-print"></i> พิมพ์ใบรับสินค้า </div>
+                <div class="btn btn-default btn-overview"><i class="fa fa-table"></i> ภาพรวมการรับเข้า </div>
+                <div class="btn btn-default btn-bill"><i class="fa fa-print"></i> พิมพ์ใบรับสินค้า </div>
                 <div class="btn btn-default btn-invoice"><i class="fa fa-bitcoin"></i> จ่ายเงิน </div>
             </div>
             <h4 class="pull-right"><?=$this->title?> <i class="fa fa-cubes"></i><small></small></h4>
@@ -393,18 +394,18 @@ $this->registerJs('
           // alert(dr); 
            
           $("#form-modal-bill").submit();
-        $("#billxModal").modal("hide");
-//           if(sup != ""){
-//               $.ajax({
-//                    type: "post",
-//                    dataType: "html",
-//                    url: "'.Url::to(['prodrec/bill'],true).'",
-//                    data: {sup: sup,dr: dr,listdata: list},
-//                    success: function(data){
-//                     //alert(data);
-//                    }
-//                 });
-//           }
+          $("#billxModal").modal("hide");
+           if(sup != ""){
+               $.ajax({
+                    type: "post",
+                    dataType: "html",
+                    url: "'.Url::to(['prodrec/bill'],true).'",
+                    data: {sup: sup,dr: dr,listdata: list},
+                    success: function(data){
+                     //alert(data);
+                    }
+                 });
+           }
            
         });
         $(".btn-reset").click(function(){

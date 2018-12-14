@@ -725,9 +725,7 @@ $this->registerJs('
    });
    function checkzone(e){
        // alert();
-      
-  
-      
+ 
       var currow =  e.parent().parent().index();
       var curzone =  e.closest("tr").find(".line_zone_id").val();
       var maxzone =  e.closest("tr").find(".line_zone_max").val();
@@ -776,6 +774,7 @@ $this->registerJs('
       var state = "'.$state.'";
       var listzone = e.closest("tr").find(".line_zone_id").val();
       
+      alert(state);
       
        var url = "'.$url_to_findzone.'"+"&id="+prodid+"&qty="+curqty;
        var zonename = "";
@@ -788,7 +787,7 @@ $this->registerJs('
           async: false,
           data : {id:prodid,qty:curqty,state:state,listzone:listzone},
           success: function(data){
-         // alert(data);return;
+          alert(data[0]["name"]);return;
              if(data.length > 0){
                 for(var x=0;x<=data.length -1;x++){
                    if(x==0){

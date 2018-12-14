@@ -42,7 +42,7 @@ class ProdrecController extends Controller
                     [
                         'allow'=>true,
                         'actions'=>['index','create','update','view','bill','invoice',
-                                     'findzone','callbill','findsupcode','addqc','createinv','genbill'],
+                                     'findzone','callbill','findsupcode','addqc','createinv','genbill','purchoverview'],
                         'roles'=>['@'],
                     ],
 //                    [
@@ -1094,5 +1094,8 @@ class ProdrecController extends Controller
 //        $session->setFlash('msg','ยกเลิกบันทึกคุณภาพเรียบร้อย');
 //        return $this->redirect(['index']);
         return true;
+    }
+    public function actionPurchoverview(){
+        return $this->render('_purchoverview');
     }
 }
