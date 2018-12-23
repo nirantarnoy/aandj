@@ -4,7 +4,7 @@ use Yii;
 use yii\db\ActiveRecord;
 date_default_timezone_set('Asia/Bangkok');
 
-class Orchard extends \common\models\Orchard
+class Cuttable extends \common\models\CutTable
 {
     public function behaviors()
     {
@@ -47,17 +47,9 @@ class Orchard extends \common\models\Orchard
         ];
     }
 
-    public function getName($id){
-        $model = Orchard::find()->where(['id'=>$id])->one();
-        return count($model)>0?$model->name:'';
-    }
-    public function getAreasize($id){
-        $model = Orchard::find()->where(['id'=>$id])->one();
-        return count($model)>0?$model->area_size:0;
-    }
-    public function getType($id){
-        $model = Orchard::find()->where(['id'=>$id])->one();
-        return count($model)>0?$model->type_id:0;
-    }
+//    public function findLocationinfo($id){
+//        $model = Location::find()->where(['id'=>$id])->one();
+//        return count($model)>0?$model:null;
+//    }
 
 }

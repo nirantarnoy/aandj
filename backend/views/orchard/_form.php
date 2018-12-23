@@ -67,9 +67,19 @@ use kartik\select2\Select2;
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">มาตรฐาน
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
+                <?php
+                  if(!$model->isNewRecord){
+                      $liststan = explode(',',$model->standard);
+                     // print_r($liststan);
+                      $model->standard = $liststan;
+                  }
+                ?>
                 <?= $form->field($model, 'standard')->widget(Select2::className(),[
                     'data'=> \yii\helpers\ArrayHelper::map(\backend\helpers\StandardType::asArrayObject(),'id','name'),
-                    'options'=>['placeholder'=>'เลือก']
+                    'options'=>[
+                            'placeholder'=>'เลือก',
+                            'multiple' => true
+                        ]
                 ])->label(false) ?>
             </div>
         </div>
@@ -85,7 +95,7 @@ use kartik\select2\Select2;
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <?= $form->field($model, 'team_id')->widget(Select2::className(),[
-                    'data'=> \yii\helpers\ArrayHelper::map(\backend\helpers\OrchardType::asArrayObject(),'id','name'),
+                    'data'=> \yii\helpers\ArrayHelper::map(\backend\models\Team::find()->where(['team_type'=>1])->all(),'id','name'),
                     'options'=>['placeholder'=>'เลือก']
                 ])->label(false) ?>
             </div>

@@ -81,6 +81,19 @@ class OrchardController extends Controller
         $model = new Orchard();
 
         if ($model->load(Yii::$app->request->post())) {
+            $liststandard = '';
+            if(count($model->standard)){
+                for($i=0;$i<=count($model->standard)-1;$i++){
+                    if($i == 0){
+                        $liststandard .= $model->standard[$i];
+                    }
+                    else{
+                        $liststandard .= ','.$model->standard[$i];
+                    }
+                }
+            }
+            //echo $liststandard;return;
+            $model->standard = $liststandard;
             if($model->save()){
                 $session = Yii::$app->session;
                 $session->setFlash('msg','บันทึกรายการเรียบร้อย');
@@ -105,6 +118,19 @@ class OrchardController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
+            $liststandard = '';
+            if(count($model->standard)){
+                for($i=0;$i<=count($model->standard)-1;$i++){
+                    if($i == 0){
+                        $liststandard .= $model->standard[$i];
+                    }
+                    else{
+                        $liststandard .= ','.$model->standard[$i];
+                    }
+                }
+            }
+            //echo $liststandard;return;
+            $model->standard = $liststandard;
             if($model->save()){
                 $session = Yii::$app->session;
                 $session->setFlash('msg','บันทึกรายการเรียบร้อย');

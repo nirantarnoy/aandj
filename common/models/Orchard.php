@@ -39,7 +39,8 @@ class Orchard extends \yii\db\ActiveRecord
             [['name'],'required'],
             [['area_size', 'wage','transport_wage'], 'number'],
             [['type_id', 'team_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by','iscompany'], 'integer'],
-            [['name', 'description','latlong','id_card','contact_name','standard','attach_file'], 'string', 'max' => 255],
+            [['name', 'description','latlong','id_card','contact_name','attach_file'], 'string', 'max' => 255],
+            [['standard',],'safe'],
         ];
     }
 

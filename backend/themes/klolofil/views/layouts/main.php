@@ -175,7 +175,7 @@ $last_message = \backend\models\Message::find()->where(['status'=>1])->limit(6)-
                             </ul>
                         </div>
                     </li>
-                    <li><a href="index.php?r=workschedule/index" class="workschedule"><i class="fa fa-calendar-minus-o"></i> <span>ตารางตัดมะพร้าว</span></a></li>
+                    <li><a href="index.php?r=cuttable/index" class="cuttable"><i class="fa fa-calendar-minus-o"></i> <span>ตารางตัดมะพร้าว</span></a></li>
                     <li><a href="index.php?r=purchplan/index" class="purchplan"><i class="lnr lnr-cog"></i> <span>วางแผนซื้อ</span></a></li>
                     <li><a href="index.php?r=prodrec/index" class="prodrec"><i class="fa fa-list-alt"></i> <span>รับวัตถุดิบ</span></a></li>
                     <li><a href="index.php?r=prodissue/index" class="prodissue"><i class="fa fa-download"></i> <span>เบิกวัตถุดิบ</span></a></li>

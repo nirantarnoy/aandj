@@ -19,7 +19,7 @@ class StandardType
     private static $dataobj = [
         ['id'=>1,'name' => 'GAP'],
         ['id'=>2,'name' => 'Global GAP'],
-        ['id'=>3,'name' => 'Organicวัน'],
+        ['id'=>3,'name' => 'Organic'],
         ['id'=>4,'name' => 'Fairtrade'],
         ['id'=>5,'name' => 'Fair to life'],
     ];
