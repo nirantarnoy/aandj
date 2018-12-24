@@ -38,7 +38,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         </thead>
                         <tbody>
                             <?php if($model->isNewRecord):?>
+                            <?php $idx = 0;?>
                             <?php foreach ($orcard as $value):?>
+                                    <?php $idx +=1;?>
                                 <tr>
                                     <td style="background-color: greenyellow;text-align: center;vertical-align: middle"><b>25</b></td>
                                     <td style="vertical-align: middle">
@@ -79,13 +81,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </td>
                                     <td style="vertical-align: middle">
                                         <div class="input-group date" data-provide="datepicker">
-                                            <input type="date" id="theDate" name="cut_date[]" onchange="date_change($(this))" class="form-control" value="<?=date('d-m-Y')?>">
+                                            <input type="date" id="cut_date_<?=$idx?>" name="cut_date[]" onchange="date_change($(this))" class="form-control cut_date" value="<?=date('d-m-Y')?>">
 
                                         </div>
                                     </td>
                                     <td style="vertical-align: middle">
                                         <div class="input-group date" data-provide="datepicker">
-                                            <input type="date" name="next_cut_date[]" class="form-control">
+                                            <input type="date" id="cut_next_date_<?=$idx?>" name="cut_next_date[]" class="form-control cut_next_date" onchange="nextdate_change($(this))">
                                         </div>
                                     </td>
                                     <td style="vertical-align: middle">
@@ -94,7 +96,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </tr>
                             <?php endforeach;?>
                         <?php else:?>
+                            <?php $ids = 0;?>
                                 <?php foreach ($modelline as $value):?>
+                                    <?php $ids +=1;?>
                                     <tr>
                                         <td style="background-color: greenyellow;text-align: center;vertical-align: middle"><b>25</b></td>
                                         <td style="vertical-align: middle">
@@ -144,13 +148,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </td>
                                         <td style="vertical-align: middle">
                                             <div class="input-group date" data-provide="datepicker">
-                                                <input type="date" id="theDate" name="cut_date[]" onchange="date_change($(this))" class="form-control" value="<?=date('d-m-Y')?>">
+                                                <input type="date" id="cut_date_<?=$ids?>" name="cut_date[]" onchange="date_change($(this))" class="form-control" value="<?=$value->cut_date;?>">
 
                                             </div>
                                         </td>
                                         <td style="vertical-align: middle">
                                             <div class="input-group date" data-provide="datepicker">
-                                                <input type="date" name="next_cut_date[]" class="form-control">
+                                                <input type="date" id="cut_next_date_<?=$ids?>" name="cut_next_date[]" class="form-control" value="<?=$value->cut_next_date;?>">
                                             </div>
                                         </td>
                                         <td style="vertical-align: middle">
@@ -174,11 +178,34 @@ $js=<<<JS
             //format: 'mm/dd/yyyy',
            // startDate: '-3d'
        // });
-       var today = new Date();
-       document.getElementById("theDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+        var today = new Date();
+        $("input[id^='cut_next_date']").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
+      //  $("input[type='date']").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
+      
+       //document.getElementById("theDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
    });
    function date_change(e){
-       alert(e.val());
+        var cut_next_date = e.closest("tr").find(".cut_next_date").val();
+       if(cut_next_date < e.val()){
+           var today = new Date();
+           e.val(cut_next_date);
+           alert('วันที่ตัดครั่งต่อไปต้องมากกว่าวันที่ตัด');
+           
+       }
+   }
+   function nextdate_change(e){
+       var cut_date = e.closest("tr").find(".cut_date").val();
+       if(cut_date ==''){
+           alert('กรุณาใส่ข้อมูลวันที่ตัดด้วยครับ');
+           e.closest("tr").find("td:eq(0)").text("0");
+           return;
+       }else if(cut_date > e.val()){
+           var today = new Date();
+           e.val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
+           alert('วันที่ตัดครั่งต่อไปต้องมากกว่าวันที่ตัด');
+           
+       }
+      // alert(cut_date);
    }
 JS;
 $this->registerJs($js,static::POS_END);

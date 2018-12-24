@@ -152,6 +152,10 @@ class CuttableController extends Controller
                     $modelline->cut_date = $cutdate[$i];
                     $modelline->cut_next_date = $cutnextdate[$i];
                     $modelline->save();
+
+                    $detail = 'สวน '.$orcard[$i];
+                    $this->createEvent($modelline->cut_next_date,$detail);
+
                 }
             }
             $this->redirect(['index']);
@@ -196,5 +200,18 @@ class CuttableController extends Controller
     public function findMax(){
         $model = \backend\models\Cuttable::find()->max('id');
         return $model;
+    }
+    public function createEvent($date,$title){
+      //  \backend\models\Event::deleteAll(['title'=>$title]);
+        if($date !=''){
+            $model = new \backend\models\Event();
+            $model->title = $title;
+            $model->start = strtotime($date);
+            $model->trans_date = $date;
+            if($model->save(false)){
+                return true;
+            }
+            return false;
+        }
     }
 }
