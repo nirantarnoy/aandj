@@ -188,6 +188,9 @@ class CuttableController extends Controller
                         $modelline->cut_date = $cutdate[$i];
                         $modelline->cut_next_date = $cutnextdate[$i];
                         $modelline->save();
+
+                       // $this->createEvent();
+
                     }
                 }
 

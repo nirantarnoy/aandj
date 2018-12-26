@@ -59,5 +59,9 @@ class Orchard extends \common\models\Orchard
         $model = Orchard::find()->where(['id'=>$id])->one();
         return count($model)>0?$model->type_id:0;
     }
+    public function findInterval($id){
+        $model = Orchard::find()->where(['id'=>$id])->one();
+        return count($model)>0?$model->cut_interval:0;
+    }
 
 }

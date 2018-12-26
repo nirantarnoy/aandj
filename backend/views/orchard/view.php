@@ -22,23 +22,50 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+<div class="panel">
+    <div class="panel-heading">
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-            'description',
-            'area_size',
-            'type_id',
-            'team_id',
-            'wage',
-            'status',
-            'created_at',
-            'updated_at',
-            'created_by',
-            'updated_by',
-        ],
-    ]) ?>
+    </div>
+    <div class="panel-body">
+        <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                //'id',
+                'name',
+                'description',
+                'area_size',
+                [
+                    'attribute'=>'type_id',
+                    'value'=>function($data){
+                        return \backend\helpers\OrchardType::getTypeById($data->type_id);
+                    }
+                ],
+                // 'type_id',
+                [
+                    'attribute'=>'team_id',
+                    'value'=>function($data){
+                        return \backend\models\Team::findName($data->team_id);
+                    }
+                ],
+                'wage',
+                'cut_interval',
+                //    'status',
+//            'created_at',
+//            'updated_at',
+//            'created_by',
+//            'updated_by',
+            ],
+        ]) ?>
+    </div>
+</div>
+
+    <div class="panel">
+        <div class="panel-heading">
+            ประวัติการตัดมะพร้าว
+        </div>
+        <div class="panel-body">
+
+        </div>
+    </div>
 
 </div>
