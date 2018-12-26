@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <tr>
                                     <td style="background-color: greenyellow;text-align: center;vertical-align: middle"><b>25</b></td>
                                     <td style="vertical-align: middle">
-                                        <input type="hidden" name="orcard_id[]" value="<?=$value->id?>">
+                                        <input type="hidden" class="orchard_id" name="orcard_id[]" value="<?=$value->id?>">
 
                                         <?=$value->name?>
                                     </td>
@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <tr>
                                         <td style="background-color: greenyellow;text-align: center;vertical-align: middle"><b>25</b></td>
                                         <td style="vertical-align: middle">
-                                            <input type="hidden" name="orcard_id[]" value="<?=$value->orcard_id?>">
+                                            <input type="hidden" class="orchard_id" name="orcard_id[]" value="<?=$value->orcard_id?>">
                                             <?=\backend\models\Orchard::getName($value->orcard_id)?>
                                         </td>
                                         <td style="vertical-align: middle">
@@ -154,7 +154,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </td>
                                         <td style="vertical-align: middle">
                                             <div class="input-group date" data-provide="datepicker">
-                                                <input type="date" id="cut_next_date_<?=$ids?>" name="cut_next_date[]" class="form-control" value="<?=$value->cut_next_date;?>">
+                                                <input type="date" id="cut_next_date_<?=$ids?>" name="cut_next_date[]" class="form-control cut_next_date" value="<?=$value->cut_next_date;?>">
                                             </div>
                                         </td>
                                         <td style="vertical-align: middle">
@@ -172,6 +172,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </form>
 </div>
 <?php
+$url_to_finddays = Url::to(['cuttable/finddays'],true);
 $js=<<<JS
    $(function() {
        // $('.datepicker').datepicker({
@@ -185,26 +186,56 @@ $js=<<<JS
        //document.getElementById("theDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
    });
    function date_change(e){
-        var cut_next_date = e.closest("tr").find(".cut_next_date").val();
-       if(cut_next_date < e.val()){
-           var today = new Date();
-           e.val(cut_next_date);
-           alert('วันที่ตัดครั่งต่อไปต้องมากกว่าวันที่ตัด');
+          var cut_next_date = e.closest("tr").find(".cut_next_date").val();
+          
+          $.ajax({
+            'type':'post',
+            'dataType':'html',
+            'async': false,
+            'url': "$url_to_finddays",
+            'data':{'id':e.closest('tr').find('.orchard_id').val()},
+            'success': function(data) {
+                alert(data);
+                var nextday = new Date(e.val());
+                nextday.setDate(nextday.getDate() +parseInt(data));
+                //alert(nextday);
+               e.closest("tr").find(".cut_next_date").val(nextday.getFullYear() + '-' + ('0' + (nextday.getMonth() + 1)).slice(-2) + '-' + ('0' + nextday.getDate()).slice(-2));
+            }
+          });
+        
+           var end = new Date();
+           var start = new Date(e.val());
+           //alert(new Date(e.val()));
+           var diff  = new Date(end - start);
+           var days  = diff/1000/60/60/24;
+           e.closest("tr").find("td:eq(0)").text(parseInt(days));
+           if(parseInt(days)>0){
+               e.closest("tr").find("td:eq(0)").css({'background-color':'red','color':'#FFFFFF','font-weight':'bold'});
+           }else{
+               e.closest("tr").find("td:eq(0)").css({'background-color':'greenyellow','color':'#778899','font-weight':'bold'});
+           }
+        
+       //if(cut_next_date < e.val()){
+          // var today = new Date();
+         //  e.val(cut_next_date);
+         //  alert('วันที่ตัดครั่งต่อไปต้องมากกว่าวันที่ตัด');
            
-       }
+      // }else{
+          
+      // }
    }
    function nextdate_change(e){
-       var cut_date = e.closest("tr").find(".cut_date").val();
-       if(cut_date ==''){
-           alert('กรุณาใส่ข้อมูลวันที่ตัดด้วยครับ');
-           e.closest("tr").find("td:eq(0)").text("0");
-           return;
-       }else if(cut_date > e.val()){
-           var today = new Date();
-           e.val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
-           alert('วันที่ตัดครั่งต่อไปต้องมากกว่าวันที่ตัด');
-           
-       }
+       // var cut_date = e.closest("tr").find(".cut_date").val();
+       // if(cut_date ==''){
+       //     alert('กรุณาใส่ข้อมูลวันที่ตัดด้วยครับ');
+       //     e.closest("tr").find("td:eq(0)").text("0");
+       //     return;
+       // }else if(cut_date > e.val()){
+       //     var today = new Date();
+       //     e.val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
+       //     alert('วันที่ตัดครั่งต่อไปต้องมากกว่าวันที่ตัด');
+       //    
+       // }
       // alert(cut_date);
    }
 JS;

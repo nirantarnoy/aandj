@@ -214,4 +214,15 @@ class CuttableController extends Controller
             return false;
         }
     }
+    public function actionFinddays(){
+        $id = Yii::$app->request->post('id');
+        if($id){
+            $model = \backend\models\Orchard::find()->where(['id'=>$id])->one();
+            if($model){
+                return $model->cut_interval;
+            }else{
+                return 0;
+            }
+        }
+    }
 }

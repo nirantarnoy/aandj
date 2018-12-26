@@ -114,6 +114,13 @@ use kartik\select2\Select2;
                 <?= $form->field($model, 'transport_wage')->textInput(['maxlength' => true,'class'=>'form-control'])->label(false) ?>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">รอบการตัด
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <?= $form->field($model, 'cut_interval')->textInput(['maxlength' => true,'class'=>'form-control'])->label(false) ?>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">สถานะ
