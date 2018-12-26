@@ -208,10 +208,12 @@ $js=<<<JS
            //alert(new Date(e.val()));
            var diff  = new Date(end - start);
            var days  = diff/1000/60/60/24;
-           e.closest("tr").find("td:eq(0)").text(parseInt(days));
-           if(parseInt(days)>0){
+           
+           if(Math.round(days)>0){
+               e.closest("tr").find("td:eq(0)").text(Math.round(days));
                e.closest("tr").find("td:eq(0)").css({'background-color':'red','color':'#FFFFFF','font-weight':'bold'});
            }else{
+               e.closest("tr").find("td:eq(0)").text(Math.round(Math.abs(days)));
                e.closest("tr").find("td:eq(0)").css({'background-color':'greenyellow','color':'#778899','font-weight':'bold'});
            }
         
