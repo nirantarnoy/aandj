@@ -195,7 +195,7 @@ $js=<<<JS
             'url': "$url_to_finddays",
             'data':{'id':e.closest('tr').find('.orchard_id').val()},
             'success': function(data) {
-                alert(data);
+               // alert(data);
                 var nextday = new Date(e.val());
                 nextday.setDate(nextday.getDate() +parseInt(data));
                 //alert(nextday);
