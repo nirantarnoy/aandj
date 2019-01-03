@@ -5,6 +5,8 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
 use lavrentiev\widgets\toastr\Notification;
+use yii\widgets\ActiveForm;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\OrchardSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -51,6 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-heading">
             <div class="btn-group">
                 <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> สร้างสวน'), ['create'], ['class' => 'btn btn-success']) ?>
+                <div class="btn btn-default btn-show-import"><i class="fa fa-upload"></i> นำเข้า</div>
             </div>
             <h4 class="pull-right"><?=$this->title?> <i class="fa fa-users"></i><small></small></h4>
         </div>
@@ -187,6 +190,35 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php Pjax::end(); ?>
 </div>
+        <div id="importModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-md">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="fa fa-upload"></i> นำเข้าข้อมูล <small id="items"> </small></h4>
+                    </div>
+                    <div class="modal-body">
+<!--                        <form id="form-import" action="--><?//=Url::to(['orchard/import'],true);?><!--" method="post">-->
+                            <?php $form = ActiveForm::begin(['action'=>Url::to(['orchard/import'],true),'options' => ['id'=>'form-import','enctype' => 'multipart/form-data']]);?>
+                            <input type="hidden" name="line_qc_product" class="line_qc_product" value="">
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <?=$form->field($modelFile,'file')->fileInput()?>
+                                </div>
+                            </div>
+                            <?php ActiveForm::end();?>
+<!--                        </form>-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success btn-add-import">ตกลง</button>
+                        <button type="button" class="btn btn-warning btn-cancel-import">ยกเลิก</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 <?php
 $this->registerJsFile( '@web/js/sweetalert.min.js',['depends' => [\yii\web\JqueryAsset::className()]],static::POS_END);
 $this->registerCssFile( '@web/css/sweetalert.css');
@@ -195,6 +227,15 @@ $this->registerJs('
     $(function(){
         $("#perpage").change(function(){
             $("#form-perpage").submit();
+        });
+        $(".btn-show-import").click(function(){
+           $("#importModal").modal("show");
+        });
+        $(".btn-cancel-import").click(function(){
+           $("#importModal").modal("hide");
+        });
+        $(".btn-add-import").click(function(){
+          $("form#form-import").submit();
         });
     });
 
