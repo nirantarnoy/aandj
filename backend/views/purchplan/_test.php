@@ -15,6 +15,60 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
     ['depends' => [\yii\web\JqueryAsset::className()]],
     static::POS_HEAD
 );
+
+$this->registerCss(
+        '
+        table.table-plan {
+          table-layout: fixed; 
+          width: 100%;
+         // *margin-left: -100px;/*ie7*/
+         
+        }
+        td, th {
+          vertical-align: top;
+          border-top: 1px solid #ccc;
+          padding:10px;
+          width:100px;
+        }
+        th {
+        /*  position:absolute;
+          *position: relative; /*ie7*/
+        /*  left:0; */
+          width:100px;
+        }
+        .hard_left {
+          position:absolute;
+          *position: relative; /*ie7*/
+          left:0; 
+          width:100px;
+        }
+        .next_left {
+          position:absolute;
+          *position: relative; /*ie7*/
+          left:100px; 
+          width:100px;
+        }
+        .next_left_2 {
+          position: relative;
+          *position: relative; /*ie7*/
+          left: 0px; 
+          width:100px;
+        }
+        .outer {
+            position:relative;
+            width: 100%;
+           // overflow-x: auto;
+        }
+        .inner {
+          overflow-x: scroll;
+          overflow-y:visible;
+          float: left;
+          width:82%; 
+          margin-left: 18%;
+        }
+        '
+);
+
 $this->registerCssFile( '@web/css/sweetalert.css');
 
 if($model->isNewRecord){$url_plan="index.php?r=purchplan/testsave";}else{$url_plan="index.php?r=purchplan/updateplan";}
@@ -30,10 +84,11 @@ $js=<<<JS
     });
     $('.btn-add-row').click(function() {
       //  alert();
-      var tr = $("table.table tr:last");
+      var tr = $("table.table-plan tr:last");
       var clone = tr.clone();
-      
-      var last_id_row = $("table.table tr:last").attr('class');
+      //alert(clone);
+      var last_id_row = $("table.table-plan tr:last").attr('class');
+     // alert(last_id_row);
       var id_row = last_id_row.split("-");
       //alert(id_row[1]);
       idTr = parseInt(id_row[1]) + 1;
@@ -43,30 +98,30 @@ $js=<<<JS
       clone.find(".rows").val(idTr);
       clone.find(".rows_id").val("");
       tr.after(clone);
-      $("table.table tr:last").attr("class",'tr-'+idTr);
+      $("table.table-plan tr:last").attr("class",'tr-'+idTr);
       idInc = 2;
       idCol = 1;
       var loop = 3;
       var loop_cnt = 0;
-      $("table.table tbody tr:last td").each(function(){
+      $("table.table-plan tbody tr:last td").each(function(){
           loop_cnt +=1;
           if(loop_cnt > loop){
               $(this).remove();
           }
           
       });
-       $("table.table tbody tr:last").find(".sub").attr("name","plan_row_"+idTr+"_sub_"+idCol+"[]");
-       $("table.table tbody tr:last").find(".sub").attr("id","sub-"+idCol);
-       $("table.table tbody tr:last").find(".plan_qty").attr("name","plan_row_"+idTr+"_plan_qty_"+idCol+"[]");
-       $("table.table tbody tr:last").find(".plan_qty").attr("id","plan_qty-"+idCol);
-       $("table.table tbody tr:last").find(".qty").attr("name","plan_row_"+idTr+"_qty_"+idCol+"[]");
-       $("table.table tbody tr:last").find(".qty").attr("id","qty-"+idCol);
-       $("table.table tbody tr:last").find(".price").attr("name","plan_row_"+idTr+"_price_"+idCol+"[]");
-       $("table.table tbody tr:last").find(".price").attr("id","price-"+idCol);
+       $("table.table-plan tbody tr:last").find(".sub").attr("name","plan_row_"+idTr+"_sub_"+idCol+"[]");
+       $("table.table-plan tbody tr:last").find(".sub").attr("id","sub-"+idCol);
+       $("table.table-plan tbody tr:last").find(".plan_qty").attr("name","plan_row_"+idTr+"_plan_qty_"+idCol+"[]");
+       $("table.table-plan tbody tr:last").find(".plan_qty").attr("id","plan_qty-"+idCol);
+       $("table.table-plan tbody tr:last").find(".qty").attr("name","plan_row_"+idTr+"_qty_"+idCol+"[]");
+       $("table.table-plan tbody tr:last").find(".qty").attr("id","qty-"+idCol);
+       $("table.table-plan tbody tr:last").find(".price").attr("name","plan_row_"+idTr+"_price_"+idCol+"[]");
+       $("table.table-plan tbody tr:last").find(".price").attr("id","price-"+idCol);
        
-       var row_col_lenght = $("table.table tbody tr:last td").length;
-      $("table.table tbody tr:last").find(".rows_col").attr("name","row_"+idTr+"_col[]");
-      $("table.table tbody tr:last").find(".rows_col").val(row_col_lenght-2);
+       var row_col_lenght = $("table.table-plan tbody tr:last td").length;
+      $("table.table-plan tbody tr:last").find(".rows_col").attr("name","row_"+idTr+"_col[]");
+      $("table.table-plan tbody tr:last").find(".rows_col").val(row_col_lenght-2);
       
        $(".qty,.plan_qty,.price").on("keypress",function(event){
              $(this).val($(this).val().replace(/[^0-9\.]/g,""));
@@ -102,16 +157,16 @@ $js=<<<JS
      
       td.after(clone);
       
-      var row_col_lenght = $("table.table tbody tr:last td").length;
-      $("table.table tbody tr:last").find(".rows_col").attr("name","row_"+idTr+"_col[]");
-      $("table.table tbody tr:last").find(".rows_col").val(row_col_lenght-2);
+      var row_col_lenght = $("table.table-plan tbody tr:last td").length;
+      $("table.table-plan tbody tr:last").find(".rows_col").attr("name","row_"+idTr+"_col[]");
+      $("table.table-plan tbody tr:last").find(".rows_col").val(row_col_lenght-2);
       
       idCol +=1;
 }
   function remove(e) {
       var dd = e.parent().parent().parent().attr("class");
        e.parent().parent().remove();
-       $("table.table tbody tr").each(function(){
+       $("table.table-plan tbody tr").each(function(){
            var x = $(this).attr('class');
            if(x == dd){
                // var td_len = $(this).find("td").length -2;
@@ -185,15 +240,16 @@ $sub = \backend\models\Suplier::find()->all();
 </div>
         <div class="panel-body">
 <form action="<?=$url_plan?>" method="post">
-    <div class="table-responsive">
-    <table class="table table-plan">
-        <tbody class="xaa">
+    <div class="outer">
+        <div class="inner">
+        <table class="table-plan">
+        <tbody>
 
         <?php if($model->isNewRecord):?>
         <tr class="tr-1">
             <input type="hidden" class="rows" name="row[]" value="1">
             <input type="hidden" class="rows_col" name="row_1_col[]" value="1">
-            <td style="width: 10%;">
+            <td style="width: 10%;" class="hard_left">
                 <div class="row">
                     <select name="plan_row_1_type[]" id="plan-1" class="form-control plan-type" style="left: -10px;">
                         <?php $raw = \backend\models\Product::find()->all()  ?>
@@ -204,15 +260,15 @@ $sub = \backend\models\Suplier::find()->all();
 
                     <br>
                     <div class="row" style="text-align: center;">
-                        <div class="btn btn-success" onclick="addline($(this));"><i class="fa fa-plus-circle"></i></div>
+                        <div class="btn btn-sm btn-success" onclick="addline($(this));"><i class="fa fa-plus-circle"></i></div>
                     </div>
                     <br>
                     <div class="row" style="text-align: center;">
-                        <div class="btn btn-danger" onclick="delline($(this));">ลบ</div>
+                        <div class="btn btn-sm btn-danger" onclick="delline($(this));">ลบ</div>
                     </div>
                 </div>
             </td>
-            <td style="width: 5%;">
+            <td class="next_left">
                 <div class="row">
                     <input type="text" disabled class="form-control" value="ผู้ขาย">
                 </div>
@@ -227,7 +283,7 @@ $sub = \backend\models\Suplier::find()->all();
                 </div>
 
             </td>
-            <td style="padding-left: 5px ;width: 20px;">
+            <td style="width: 150px;" style="left: 0px">
                 <div class="row">
 <!--                    <input type="text" name="plan-1-1sup[]" class="form-control sub">-->
                     <select name="plan_row_1_sub_1[]" class="form-control sub" id="">
@@ -266,7 +322,7 @@ $sub = \backend\models\Suplier::find()->all();
 
                     <input type="hidden" class="planid" name="planid" value="<?=$model->id;?>">
 
-                    <td style="width: 10%;">
+                    <td style="width: 10%;" class="hard_left">
                         <div class="row">
                             <select name="plan_row_<?=$i+1?>_type[]" id="plan-1" class="form-control plan-type" style="left: -10px;">
                                 <?php $raw = \backend\models\Product::find()->all()  ?>
@@ -289,7 +345,7 @@ $sub = \backend\models\Suplier::find()->all();
                             </div>
                         </div>
                     </td>
-                    <td style="width: 5%;">
+                    <td class="next_left">
                         <div class="row">
                             <input type="text" disabled class="form-control" value="ผู้ขาย">
                         </div>
@@ -308,7 +364,7 @@ $sub = \backend\models\Suplier::find()->all();
                     <?php foreach ($modelline as $data): ?>
                     <?php if($data->plan_type === $modelrow[$i]['plan_type']):?>
                             <?php $nums +=1;?>
-                    <td style="padding-left: 5px ;">
+                    <td style="width: 150px;" style="left: 0px">
                         <div class="row">
                             <!--                    <input type="text" name="plan-1-1sup[]" class="form-control sub">-->
                             <select name="plan_row_<?=$i+1?>_sub_<?=$nums?>[]" class="form-control sub" id="">
@@ -343,6 +399,7 @@ $sub = \backend\models\Suplier::find()->all();
         <?php endif;?>
         </tbody>
     </table>
+        </div>
     </div>
     <hr>
     <div class="row">
