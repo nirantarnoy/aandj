@@ -191,6 +191,7 @@ class ProdrecController extends Controller
 
             $prod_recid = Yii::$app->request->post('product_id');
             $line_zone = Yii::$app->request->post('line_zone_id');
+            $line_zone_name = Yii::$app->request->post('line_zone');
             $line_lot = Yii::$app->request->post('line_lot');
             $line_qty = Yii::$app->request->post('line_zone_qty');
             $line_orchard = Yii::$app->request->post('line_orchard');
@@ -218,7 +219,7 @@ class ProdrecController extends Controller
 
                     for($i=0;$i<=count($prod_recid)-1;$i++){
                         if($prod_recid[$i]==''){continue;}
-                        $zone_line = explode(",",$line_zone[$i]);
+                        $zone_line = explode(",",$line_zone_name[$i]);
                         $qty_line = explode(",",$line_qty[$i]);
 
                         $zone_message = '';
@@ -230,11 +231,13 @@ class ProdrecController extends Controller
                                     $modelrec = new \backend\models\Prodrecline();
                                     $modelrec->prod_rec_id = $model->id;
                                     $modelrec->product_id = $prod_recid[$i];
-                                    $modelrec->zone_id = $zone_line[$m];
+                                  //  $modelrec->zone_id = $zone_line[$m];
+                                    $modelrec->zone_id = $this->findZoneid($zone_line[$m]);
                                     $modelrec->lot_no = $line_lot[$i];
                                     $modelrec->qty = $qty_line[$m];
                                     $modelrec->line_type = 1; // รับสินค้า
-                                    $modelrec->list_zone = $line_zone[$i];
+                                  //  $modelrec->list_zone = $line_zone[$i];
+                                    $modelrec->list_zone = $line_zone_name[$i];
                                     $modelrec->list_qty = $line_qty[$i];
                                     $modelrec->orchard = $line_orchard[$i];
                                     $modelrec->team1 = $line_team[$i];
@@ -305,6 +308,10 @@ class ProdrecController extends Controller
             'modelissue'=>null,
             'suptype'=>$suptype,
         ]);
+    }
+    public function findZoneid($name){
+        $model = \backend\models\Zone::find()->where(['name'=>trim($name)])->one();
+        return count($model)>0?$model->id:0;
     }
 
     /**
