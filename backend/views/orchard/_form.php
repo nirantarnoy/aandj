@@ -4,9 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use toxor88\switchery\Switchery;
 use kartik\select2\Select2;
+use kartik\date\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Orchard */
 /* @var $form yii\widgets\ActiveForm */
+
+$treat = \backend\models\Treat::find()->all();
+
 ?>
 
 <div class="panel panel-headlin">
@@ -135,9 +139,111 @@ use kartik\select2\Select2;
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+                <div class="btn btn-primary btn-treat">บันทึกรายการดูแลสวน</div>
             </div>
         </div>
 
         <?php ActiveForm::end(); ?>
     </div>
 </div>
+<div id="treatModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-list-alt"></i> บันทึกรายการดูแลสวน <small id="items"> </small></h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="line_qc_product" class="line_qc_product" value="">
+                <input type="hidden" name="line_qc_zone" class="line_qc_zone" value="">
+                <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">วันที่</label>
+                            <?php
+                            echo DatePicker::widget([
+                                'name'=>'trans_date',
+                                'options'=>['class'=>'cut-date'],
+                                'value' => date('d-m-Y'),
+                                'pluginOptions' => [
+                                    'format'=>'dd-mm-yyyy',
+                                ]
+                            ])
+                            ?>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">รายการ</label>
+                            <?php
+                                echo Select2::widget([
+                                   'name'=> 'treat_title',
+                                   'model'=> $treat,
+                                   'attribute' => 'title',
+                                   'options' => ['placeholder'=>'เลือกหัวข้อ']
+                                ]);
+                            ?>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label for="">จำนวน</label>
+                        <input type="number" min="1" class="form-control">
+                    </div>
+                </div>
+                <h4>รายละเอียด</h4>
+                <hr>
+
+                <div class="row">
+                   <table class="table table-treat-list">
+                       <thead>
+                       <tr>
+                           <th>#</th>
+                           <th>วันที่</th>
+                           <th>รายการ</th>
+                           <th>จำนวน</th>
+                           <th>หน่วย</th>
+                           <th>หมายเหตุ</th>
+                           <th>-</th>
+                       </tr>
+                       </thead>
+                       <tbody>
+                       <tr>
+                           <td>#</td>
+                           <td>วันที่</td>
+                           <td>รายการ</td>
+                           <td>จำนวน</td>
+                           <td>หน่วย</td>
+                           <td>หมายเหตุ</td>
+                           <td>-</td>
+                       </tr>
+                       </tbody>
+                   </table>
+                </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-add-qc">บันทึก</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<?php
+$js=<<<JS
+ $(function(){
+    $(".btn-treat").click(function(){
+        $("#treatModal").modal("show");
+    });
+ });
+JS;
+$this->registerJs($js,static::POS_END);
+?>
