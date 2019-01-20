@@ -679,25 +679,26 @@ class ProdrecController extends Controller
                if($state == 0){ // new
                    $modelzone = \backend\models\Zone::find()->where(['like','name',$zonegroup])->andFilterWhere(['lock'=>0])->all();
                    if($modelzone){
+                      // return Json::encode($modelzone);
                        $json = [];
                        $xqty = $qty;
                        $mqty = 0;
                        foreach ($modelzone as $data){
                           if($mqty == $qty){continue;}
-                           $zon = $data->name;
+                          // $zon = $data->name;
                            if($data->qty == 0 && $xqty > 0){
                                if($data->max_qty > $xqty){
                                    array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$xqty]);
-                                   $mqty =  $mqty + $xqty;
-                                   return Json::encode($json);
+                                 //  $mqty =  $mqty + $xqty;
+                                  // return Json::encode($json);
                                }else{
                                    if($qty > $data->max_qty){
                                        array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$data->max_qty]);
                                        $xqty = $xqty - $data->max_qty;
-                                       $mqty =  $mqty + $xqty;
+                                       //$mqty =  $mqty + $xqty;
                                    }else{
                                        array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$xqty]);
-                                       $mqty =  $mqty + $xqty;
+                                       //$mqty =  $mqty + $xqty;
                                    }
 
                                }

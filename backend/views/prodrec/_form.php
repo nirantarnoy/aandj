@@ -182,9 +182,11 @@ $state = $model->isNewRecord?0:1;
                                 </td>
                                 <td>
 <!--                                    <input readonly id="task-1" class="line_zone"  type="text" name="line_zone[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="">-->
-                                    <select name="line_zone[]" onchange="checkzone($(this));" class="form-control line_zone" id="line_zone" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center">
-                                        <option value="">เลือกกอง</option>
-                                    </select>
+<!--                                    <select name="line_zone[]" onchange="checkzone($(this));" class="form-control line_zone" id="line_zone" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center">-->
+<!--                                        <option value="">เลือกกอง</option>-->
+<!--                                    </select>-->
+<!--                                    <label for="">คลิกเลือกกอง</label>-->
+                                    <input id="task-1" class="line_zone"  type="text" name="line_zone[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="">
                                     <input readonly id="task-1" class="line_zone_id"  type="hidden" name="line_zone_id[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="">
                                     <input readonly id="task-1" class="line_zone_qty"  type="hidden" name="line_zone_qty[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="">
                                 </td>
@@ -774,7 +776,7 @@ $this->registerJs('
       var state = "'.$state.'";
       var listzone = e.closest("tr").find(".line_zone_id").val();
       
-      alert(state);
+      //alert(state);
       
        var url = "'.$url_to_findzone.'"+"&id="+prodid+"&qty="+curqty;
        var zonename = "";
@@ -787,7 +789,8 @@ $this->registerJs('
           async: false,
           data : {id:prodid,qty:curqty,state:state,listzone:listzone},
           success: function(data){
-          alert(data[0]["name"]);return;
+         // alert(data.length); return;
+          //alert(data[0]["name"]);return;
              if(data.length > 0){
                 for(var x=0;x<=data.length -1;x++){
                    if(x==0){
@@ -816,8 +819,8 @@ $this->registerJs('
        e.closest("tr").find(".line_zone_id").val("");
        e.closest("tr").find(".line_zone").val("");
        
-      // e.closest("tr").find(".line_zone").val(zonename);
-       e.closest("tr").find(".line_zone").html(zonename);
+       e.closest("tr").find(".line_zone").val(zonename);
+      // e.closest("tr").find(".line_zone").html(zonename);
        e.closest("tr").find(".line_zone_id").val(zonelist);
        e.closest("tr").find(".line_zone_qty").val(zonelistqty);
        
