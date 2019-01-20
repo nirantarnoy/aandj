@@ -228,11 +228,12 @@ class ProdrecController extends Controller
                         if(count($zone_line)>0){
                                 for($m=0;$m<=count($zone_line)-1;$m++){
                                     $data = [];
+                                    $rec_for_zone = $this->findZoneid($zone_line[$m]);
                                     $modelrec = new \backend\models\Prodrecline();
                                     $modelrec->prod_rec_id = $model->id;
                                     $modelrec->product_id = $prod_recid[$i];
                                   //  $modelrec->zone_id = $zone_line[$m];
-                                    $modelrec->zone_id = $this->findZoneid($zone_line[$m]);
+                                    $modelrec->zone_id = $rec_for_zone;
                                     $modelrec->lot_no = $line_lot[$i];
                                     $modelrec->qty = $qty_line[$m];
                                     $modelrec->line_type = 1; // รับสินค้า
@@ -247,7 +248,7 @@ class ProdrecController extends Controller
 
                                     if($modelrec->save(false)){
                                         $modelzoneproduct = new \backend\models\Zoneproduct();
-                                        $modelzoneproduct->zone_id = $zone_line[$m];
+                                        $modelzoneproduct->zone_id = $this->findZoneid($zone_line[$m]);
                                         $modelzoneproduct->product_id = $prod_recid[$i];
                                         $modelzoneproduct->lot_no = $line_lot[$i];
                                         $modelzoneproduct->qty = $qty_line[$m];
@@ -259,7 +260,7 @@ class ProdrecController extends Controller
 
 
                                         array_push($data,['product_id'=>$prod_recid[$i],'qty'=>$qty_line[$m],'price'=>$model->plan_price]);
-                                        \backend\models\Journal::createTrans($zone_line[$m],$data,'',\backend\helpers\RunnoTitle::RUNNO_PRODREC);
+                                        \backend\models\Journal::createTrans($rec_for_zone,$data,'',\backend\helpers\RunnoTitle::RUNNO_PRODREC);
                                     }
                                   $this->updatePurchPlan($model->plan_id,$prod_recid[$i],$model->suplier_id,$qty_line[$m]);
                                   $this->updateReceiveQty($model->id,$model->lot_no);
