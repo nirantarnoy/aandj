@@ -11,6 +11,7 @@ use backend\models\Treat;
  */
 class TreatSearch extends Treat
 {
+    public $globalSearch;
     /**
      * {@inheritdoc}
      */
@@ -19,6 +20,7 @@ class TreatSearch extends Treat
         return [
             [['id', 'interval_day', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['code', 'title', 'description'], 'safe'],
+            [['globalSearch'],'string']
         ];
     }
 
@@ -67,9 +69,12 @@ class TreatSearch extends Treat
             'updated_by' => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['like', 'code', $this->code])
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        if($this->globalSearch !=""){
+            $query->orFilterWhere(['like', 'code', $this->globalSearch])
+                ->orFilterWhere(['like', 'title', $this->globalSearch])
+                ->orFilterWhere(['like', 'description', $this->globalSearch]);
+        }
+
 
         return $dataProvider;
     }

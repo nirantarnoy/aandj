@@ -46,11 +46,11 @@ class Treat extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'code' => 'Code',
-            'title' => 'Title',
-            'description' => 'Description',
-            'interval_day' => 'Interval Day',
-            'status' => 'Status',
+            'code' => 'รหัส',
+            'title' => 'ชื่องาน',
+            'description' => 'รายละเอียด',
+            'interval_day' => 'รอบทำงาน',
+            'status' => 'สถาณะ',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
