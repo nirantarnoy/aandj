@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $searchModel backend\models\TreatSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Treats';
+$this->title = 'บำรุงรักษาสวน';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="treat-index">
@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="panel panel-headline">
         <div class="panel-heading">
             <div class="btn-group">
-                <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> สร้างแผนก'), ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> สร้างรายการบำรุงรักษา'), ['create'], ['class' => 'btn btn-success']) ?>
             </div>
             <h4 class="pull-right"><?=$this->title?> <i class="fa fa-institution"></i><small></small></h4>
             <!-- <ul class="nav navbar-right panel_toolbox">

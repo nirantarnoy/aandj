@@ -18,7 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-lg-12">
         <div class="panel panel-headline">
             <div class="panel-heading">
-                <h2>ตารางจัดการตัดมะพร้าว #<?=$model->cut_no?></h2>
+                <h2>ตารางจัดการตัดมะพร้าว <?php //echo $model->cut_no?></h2>
+                <div class="btn-group">
+                    <a href="index.php?r=cuttable/showcalendar" class="btn btn-default btn-calendar"><i class="fa fa-calendar"></i> ปฏิทิน </a>
+                </div>
             </div>
                 <div class="panel-body">
                     <table class="table table-bordered table-item">
@@ -163,7 +166,66 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </td>
                                     </tr>
                                 <?php endforeach;?>
-                        <?php endif;?>
+                            <?php if($orcardall):?>
+                                <?php $idx = 0;?>
+                                <?php foreach ($orcardall as $value):?>
+                                    <?php $idx +=1;?>
+                                    <tr>
+                                        <td style="background-color: greenyellow;text-align: center;vertical-align: middle"><b>25</b></td>
+                                        <td style="vertical-align: middle">
+                                            <input type="hidden" class="orchard_id" name="orcard_id[]" value="<?=$value->id?>">
+                                            <input type="hidden" class="cut_interval" value="<?=$value->cut_interval?>">
+                                            <a href="<?=Url::to(['orchard/view','id'=>$value->id],true)?>"><?=$value->name?></a>
+                                        </td>
+                                        <td style="vertical-align: middle">
+                                            <?php
+                                            $x = explode(',',$value->standard);
+                                            $list_stand ='';
+                                            if(count($x)>1){
+                                                for($i=0;$i<=count($x)-1;$i++){
+                                                    $list_stand.= \backend\helpers\StandardType::getTypeById($x[$i]).",";
+                                                }
+                                            }
+                                            echo $list_stand;
+
+                                            ?>
+                                        </td>
+                                        <td style="vertical-align: middle;text-align: center"><?=$value->area_size?></td>
+                                        <td style="vertical-align: middle"><?=\backend\helpers\OrchardType::getTypeById($value->type_id)?></td>
+                                        <td style="vertical-align: middle">
+                                            <select name="product[]" class="form-control" id="">
+                                                <option value="">-- เลือก --</option>
+                                                <?php foreach ($product as $t):?>
+                                                    <option value="<?=$t->id?>"><?=$t->name?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </td>
+                                        <td style="vertical-align: middle">
+                                            <select name="team[]" class="form-control" id="">
+                                                <option value="">-- เลือกทีมตัด --</option>
+                                                <?php foreach ($team2 as $t):?>
+                                                    <option value="<?=$t->id?>"><?=$t->name?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </td>
+                                        <td style="vertical-align: middle">
+                                            <div class="input-group date" data-provide="datepicker">
+                                                <input type="date" id="cut_date_<?=$idx?>" name="cut_date[]" onchange="date_change($(this))" class="form-control cut_date" value="<?=date('d-m-Y')?>">
+
+                                            </div>
+                                        </td>
+                                        <td style="vertical-align: middle">
+                                            <div class="input-group date" data-provide="datepicker">
+                                                <input type="date" id="cut_next_date_<?=$idx?>" name="cut_next_date[]" class="form-control cut_next_date" onchange="nextdate_change($(this))">
+                                            </div>
+                                        </td>
+                                        <td style="vertical-align: middle">
+                                            <?=\backend\helpers\OrchardType::getTypeById($value->type_id)?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach;?>
+                            <?php endif;?>
+                            <?php endif;?>
                         </tbody>
                     </table>
                     <input type="submit" class="btn btn-primary" value="บันทกข้อมูล">

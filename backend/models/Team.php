@@ -47,6 +47,10 @@ class Team extends \common\models\Team
         ];
     }
 
+    public function getName($teamid,$type){
+        $model = Team::find()->where(['id'=>$teamid,'team_type'=>1])->one();
+        return count($model)>0?$model->name:'';
+    }
     public function findName($id){
         $model = Team::find()->where(['id'=>$id])->one();
         return count($model)>0?$model->name:'';

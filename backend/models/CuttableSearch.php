@@ -47,9 +47,24 @@ class CuttableSearch extends Cuttable
 
         // add conditions that should always apply here
 
+        $query->joinWith('cutline')->all();
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['cutline.orcard_id'] = [
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['cut_table_line.orcard_id' => SORT_ASC],
+            'desc' => ['cut_table_line.orcard_id' => SORT_DESC],
+        ];
+        $dataProvider->sort->attributes['cutline.cut_team'] = [
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['cut_table_line.cut_team' => SORT_ASC],
+            'desc' => ['cut_table_line.cut_team' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -66,7 +81,7 @@ class CuttableSearch extends Cuttable
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by,
+            'updated_by' => $this->updated_by
         ]);
 
         if($this->globalSearch!=''){

@@ -36,18 +36,66 @@ class CuttableController extends Controller
      */
     public function actionIndex()
     {
-        $pageSize = \Yii::$app->request->post("perpage");
-        $searchModel = new CuttableSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->pagination->pageSize = $pageSize;
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'perpage' => $pageSize,
-        ]);
+        $model = \backend\models\Cuttable::find()->one();
+        if($model){
+            return $this->redirect(['update','id'=>$model->id]);
+        }else{
+            return $this->redirect(['create']);
+        }
+//        $pageSize = \Yii::$app->request->post("perpage");
+//        $searchModel = new CuttableSearch();
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//        $dataProvider->pagination->pageSize = $pageSize;
+//
+//        return $this->render('index', [
+//            'searchModel' => $searchModel,
+//            'dataProvider' => $dataProvider,
+//            'perpage' => $pageSize,
+//        ]);
     }
+    public function actionShowcalendar(){
+        $modelevent = new \common\models\Event();
+        return $this->render('_cutcalendar',['modelevent'=>$modelevent,]);
+    }
+    public function actionFindevent(){
+        $datefind = Yii::$app->request->post('datefind');
+        // return strtotime($datefind ."+1 days");
+        $times = date('Y-m-d',strtotime($datefind));
+        // return $times;
+        // return date('d-m-Y',$times);
+        if($datefind !='') {
+//            $model = \backend\models\Purchplan::find()->where(['>','id',1])->all();
+//            if($model){
+//                return Json::encode($model);
+//            }
 
+
+            $sql = "SELECT plan_type,SUM(plan_qty)as qty FROM purch_plan_line WHERE trans_date = '$times'  GROUP BY plan_type";
+            $query = Yii::$app->db->createCommand($sql)->queryAll();
+            $data = [];
+            for ($i = 0; $i < sizeof($query); $i++) {
+                array_push($data, ['no' => $i + 1, 'product' => \backend\models\Product::findName($query[$i]['plan_type']), 'qty' => number_format($query[$i]['qty'])]);
+            }
+
+            $modelwork = \backend\models\Workschedule::find()->where(['trans_date' => $times])->one();
+            $data2 = [];
+            if($modelwork){
+                array_push($data2, ['no' => 1, 'orchard' => \backend\models\Orchard::getName($modelwork->orchard_id),
+                    'team_cut' => \backend\models\Team::findName($modelwork->team_cut),
+                    'team_pick'=> \backend\models\Team::findName($modelwork->team_pick)]);
+            }
+            $x=[];
+            $m=[];
+            $xdata = [];
+//            array_push($x,['name'=>'niran']);
+//            array_push($m,['name'=>'tarlek']);
+            // return Json::encode($data);
+            $xdata[0]= $data;
+            $xdata[1]= $data2;
+            return Json::encode($xdata);
+        }
+    }
     /**
      * Displays a single Cuttable model.
      * @param integer $id
@@ -90,6 +138,13 @@ class CuttableController extends Controller
     {
         $model = $this->findModel($id);
         $modelline = \backend\models\Cutline::find()->where(['cut_id'=>$id])->all();
+        $list = [];
+        if($modelline){
+            foreach ($modelline as $value){
+                array_push($list,$value->orcard_id);
+            }
+        }
+        $model_orcard =  \backend\models\Orchard::find()->where(['NOT IN','id',$list])->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -98,6 +153,7 @@ class CuttableController extends Controller
         return $this->render('_create', [
             'model' => $model,
             'modelline'=>$modelline,
+            'orcardall' => $model_orcard,
 
         ]);
     }
@@ -153,8 +209,8 @@ class CuttableController extends Controller
                     $modelline->cut_next_date = $cutnextdate[$i];
                     $modelline->save();
 
-                    $detail = 'สวน '.$orcard[$i];
-                    $this->createEvent($modelline->cut_next_date,$detail);
+                    $detail = 'สวน '.\backend\models\Orchard::getName($orcard[$i]);
+                    $this->createEvent($modelline->cut_next_date,$detail,\backend\helpers\EventType::TYPE_CUT,$model->id);
 
                 }
             }
@@ -162,6 +218,34 @@ class CuttableController extends Controller
         }
 
 
+    }
+    public function actionCalendaritem($start=NULL,$end=NULL,$_=NULL){
+
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        // $times = \app\modules\timetrack\models\Timetable::find()->where(array('category'=>\app\modules\timetrack\models\Timetable::CAT_TIMETRACK))->all();
+        $times = \common\models\Event::find()->where(['event_type'=>2])->all();
+        // $times = \common\models\PurchPlan::find()->all();
+        $events = [];
+
+
+        foreach ($times AS $time){
+            //Testing
+            $bgcolor = 'green';
+
+            if($time->event_type == 2){$bgcolor = "blue";}
+
+            $Event = new \yii2fullcalendar\models\Event();
+            $Event->id = $time->id;
+            $Event->title = $time->title;
+            //  $Event->start = date('Y-m-d\TH:i:s\Z');
+            $Event->start = date('Y-m-d',strtotime($time->trans_date));
+            // $Event->end = date('Y-m-d\TH:i:s\Z',strtotime($time->end.' '.$time->end));
+            $Event->backgroundColor = $bgcolor;
+            $events[] = $Event;
+        }
+
+        return $events;
     }
     public function actionCutupdate(){
         $cutid = Yii::$app->request->post('cut_id');
@@ -179,6 +263,7 @@ class CuttableController extends Controller
             if($model->save()){
                 if(count($orcard)){
                     \backend\models\Cutline::deleteAll(['cut_id'=>$cutid]);
+                    $this->deleteEvent($cutid);
                     for($i=0;$i<=count($orcard)-1;$i++){
                         $modelline = new \backend\models\Cutline();
                         $modelline->cut_id = $model->id;
@@ -188,8 +273,9 @@ class CuttableController extends Controller
                         $modelline->cut_date = $cutdate[$i];
                         $modelline->cut_next_date = $cutnextdate[$i];
                         $modelline->save();
+                        $detail = 'สวน '.\backend\models\Orchard::getName($orcard[$i]);
+                        $this->createEvent($modelline->cut_next_date,$detail,\backend\helpers\EventType::TYPE_CUT,$model->id);
 
-                       // $this->createEvent();
 
                     }
                 }
@@ -204,13 +290,18 @@ class CuttableController extends Controller
         $model = \backend\models\Cuttable::find()->max('id');
         return $model;
     }
-    public function createEvent($date,$title){
+    public function deleteEvent($lineid){
+        \backend\models\Event::deleteAll(['event_type'=>2,'ref_type'=>$lineid]);
+    }
+    public function createEvent($date,$title,$type,$lineid){
       //  \backend\models\Event::deleteAll(['title'=>$title]);
         if($date !=''){
             $model = new \backend\models\Event();
             $model->title = $title;
             $model->start = strtotime($date);
+            $model->event_type = $type;
             $model->trans_date = $date;
+            $model->ref_type = $lineid; // id of cut table
             if($model->save(false)){
                 return true;
             }

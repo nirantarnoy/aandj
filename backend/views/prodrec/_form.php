@@ -468,7 +468,8 @@ $state = $model->isNewRecord?0:1;
 
             <div class="form-group">
             <?php if($model->status <2):?>
-                <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+                <?php echo Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success btn-submit']) ?>
+                <?php //echo Html::button(Yii::t('app', 'Save'), ['class' => 'btn btn-success btn-submit']) ?>
             <?php endif;?>
             </div>
 
@@ -577,8 +578,9 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
     static::POS_HEAD
 );
 $this->registerCssFile( '@web/css/sweetalert.css');
-$this->registerJs('
-   var cur_product = 0;
+
+$js ='
+var cur_product = 0;
    $(function(){
       var idInc = 2;
       var hasissue = "'.$has.'";
@@ -724,7 +726,18 @@ $this->registerJs('
        removeQc($cur_no);
     });
     
+    $(".btn-submit").click(function(){
+      var i = 0;
+      $("table.table-line tbody tr").each(function(){
+       if($(this).find(".line_zone_id").val() == ""){
+          i+=1;
+       }
+      });
+      return false;
+    });
+    
    });
+   
    function checkzone(e){
        // alert();
  
@@ -776,7 +789,7 @@ $this->registerJs('
       var state = "'.$state.'";
       var listzone = e.closest("tr").find(".line_zone_id").val();
       
-      //alert(state);
+     // alert(listzone);
       
        var url = "'.$url_to_findzone.'"+"&id="+prodid+"&qty="+curqty;
        var zonename = "";
@@ -789,7 +802,7 @@ $this->registerJs('
           async: false,
           data : {id:prodid,qty:curqty,state:state,listzone:listzone},
           success: function(data){
-         // alert(data.length); return;
+        // console.log(data.length);
           //alert(data[0]["name"]);return;
              if(data.length > 0){
                 for(var x=0;x<=data.length -1;x++){
@@ -947,5 +960,7 @@ $this->registerJs('
                     });
         });
  }
- ',static::POS_END);
+';
+
+$this->registerJs($js,static::POS_END);
 ?>

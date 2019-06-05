@@ -14,7 +14,7 @@ $Event->start = date('Y-m-d\TH:i:s\Z');
 //    'field2' => 'Something I want to be included in object #2',
 //];
 $events[] = $Event;
-$url_to_find_event = Url::to(['purchplan/findevent'],true);
+$url_to_find_event = Url::to(['cuttable/findevent'],true);
 
 $jsEvent = <<<JS
  function (event,jsEvent,ui,view) {
@@ -76,7 +76,7 @@ $this->registerJs($js,static::POS_END);
 ?>
 <div class="panel panel-headlin">
     <div class="panel-heading">
-        <h3><i class="fa fa-calendar"></i> วางแผนซื้อ<small></small></h3>
+        <h3><i class="fa fa-calendar"></i> ตารางตัดมะพร้าว<small></small></h3>
 
         <div class="clearfix"></div>
     </div>
@@ -94,7 +94,7 @@ $this->registerJs($js,static::POS_END);
             //
                         ],
                 'eventClick'=> new \yii\web\JsExpression($jsEvent),
-                'events' => Url::to(['purchplan/calendaritem']),
+                'events' => Url::to(['cuttable/calendaritem']),
             //    'select' => new \yii\web\JsExpression($jsEvent)
                         //'events' => $events
                     ]);

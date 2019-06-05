@@ -227,19 +227,24 @@ class PurchplanController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
        // $times = \app\modules\timetrack\models\Timetable::find()->where(array('category'=>\app\modules\timetrack\models\Timetable::CAT_TIMETRACK))->all();
-        $times = \common\models\Event::find()->all();
+        $times = \common\models\Event::find()->where(['event_type'=>1])->all();
        // $times = \common\models\PurchPlan::find()->all();
         $events = [];
 
+
         foreach ($times AS $time){
             //Testing
+            $bgcolor = 'green';
+
+            if($time->event_type == 2){$bgcolor = "blue";}
+
             $Event = new \yii2fullcalendar\models\Event();
             $Event->id = $time->id;
             $Event->title = $time->title;
           //  $Event->start = date('Y-m-d\TH:i:s\Z');
             $Event->start = date('Y-m-d',strtotime($time->trans_date));
             // $Event->end = date('Y-m-d\TH:i:s\Z',strtotime($time->end.' '.$time->end));
-            $Event->backgroundColor = "green";
+            $Event->backgroundColor = $bgcolor;
             $events[] = $Event;
         }
 
@@ -281,7 +286,7 @@ class PurchplanController extends Controller
             $model->status = 1;
             $model->trans_date = date('Y-m-d');
             if($model->save(false)){
-                $this->createEvent($model->trans_date,$model->name);
+                $this->createEvent($model->trans_date,$model->name,\backend\helpers\EventType::TYPE_PURCH);
                 for($i=0;$i<=count($rows)-1;$i++){
                     $sup = 0;
                     $plan_qty = 0;
@@ -367,7 +372,7 @@ class PurchplanController extends Controller
             $model->status = 1;
             if($model->save(false)){
                 \backend\models\Purchplanline::deleteAll(['plan_id'=>$planid]);
-                $this->createEvent($model->trans_date,$model->name);
+                $this->createEvent($model->trans_date,$model->name,\backend\helpers\EventType::TYPE_PURCH);
                 for($i=0;$i<=count($rows)-1;$i++){
                     $sup = 0;
                     $plan_qty = 0;
@@ -426,12 +431,13 @@ class PurchplanController extends Controller
 
 
     }
-    public function createEvent($date,$title){
+    public function createEvent($date,$title,$type){
         \backend\models\Event::deleteAll(['title'=>$title]);
         if($date !=''){
             $model = new \backend\models\Event();
             $model->title = $title;
             $model->start = strtotime($date);
+            $model->event_type = $type;
             $model->trans_date = $date;
             if($model->save(false)){
                 return true;
@@ -455,7 +461,7 @@ class PurchplanController extends Controller
                     $modeloldline = \backend\models\Purchplanline::find()->where(['plan_id'=>$model->id])->all();
                     if($modeloldline){
                         \backend\models\Purchplanline::deleteAll(['plan_id'=>$newmodel->id]);
-                        $this->createEvent($newmodel->trans_date,$newmodel->name);
+                        $this->createEvent($newmodel->trans_date,$newmodel->name,\backend\helpers\EventType::TYPE_PURCH);
                         foreach($modeloldline as $data){
                                 $modelline = new \backend\models\Purchplanline();
                                 $modelline->plan_type = $data->plan_type;

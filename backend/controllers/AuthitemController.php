@@ -226,6 +226,12 @@ class AuthitemController extends Controller
         $auth->add($plant_view);
         $plant_create = $auth->createPermission('plant/create');
         $auth->add($plant_create);
+        $plant_showcity = $auth->createPermission('plant/showcity');
+        $auth->add($plant_showcity);
+        $plant_showdistrict = $auth->createPermission('plant/showdistrict');
+        $auth->add($plant_showdistrict);
+        $plant_showzipcode = $auth->createPermission('plant/showzipcode');
+        $auth->add($plant_showzipcode);
 
         $plant_permission = $auth->createPermission('plantmodule');
         $plant_permission->description = "สิทธิ์ใช้งานโมดูล Plant";
@@ -236,6 +242,9 @@ class AuthitemController extends Controller
         $auth->addChild($plant_permission,$plant_update);
         $auth->addChild($plant_permission,$plant_delete);
         $auth->addChild($plant_permission,$plant_create);
+        $auth->addChild($plant_permission,$plant_showcity);
+        $auth->addChild($plant_permission,$plant_showdistrict);
+        $auth->addChild($plant_permission,$plant_showzipcode);
 
         $manage_plant = $auth->createRole('Manage Plant');
         $manage_plant->description = "Manage plant";
@@ -567,9 +576,6 @@ class AuthitemController extends Controller
         $auth->addChild($manage_warehouse,$warehouse_permission);
 
 
-
-
-
         $admin_role = $auth->createRole('System Administrator');
         $admin_role->description = "ผู้ดูแลระบบ";
         $auth->add($admin_role);
@@ -596,13 +602,8 @@ class AuthitemController extends Controller
         $auth->addChild($user_role,$manage_productionrec);
 
 
-        $auth->assign($admin_role,17);
-        $auth->assign($user_role,19);
-
-
-
-
-
+        $auth->assign($admin_role,1);
+        $auth->assign($user_role,1);
 
     }
 }

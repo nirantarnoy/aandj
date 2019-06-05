@@ -18,6 +18,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="btn-group">
                 <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> สร้างตาราง'), ['create'], ['class' => 'btn btn-success']) ?>
             </div>
+            <div class="btn-group">
+                <a href="index.php?r=cuttable/showcalendar" class="btn btn-default btn-calendar"><i class="fa fa-calendar"></i> ปฏิทิน </a>
+            </div>
             <h4 class="pull-right"><?=$this->title?> <i class="fa fa-calendar-minus-o"></i><small></small></h4>
         </div>
         <div class="panel-body">
@@ -58,24 +61,45 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
            // 'id',
-            'cut_no',
-            'status',
+            //'cut_no',
             [
-                'attribute'=>'created_at',
+                'attribute'=>'status',
+                'format' => 'html',
                 'contentOptions' => ['style' => 'vertical-align: middle'],
                 'value'=>function($data){
-                    return date('d-m-Y',$data->created_at);
+                    if($data->status == 1){
+                        return '<div class="label label-success">รอตัด</div>';
+                    }
                 }
             ],
-            [
-                'attribute'=>'updated_at',
-                'contentOptions' => ['style' => 'vertical-align: middle'],
-                'value'=>function($data){
-                    return date('d-m-Y',$data->updated_at);
-                }
-            ],
-            //'created_by',
-            //'updated_by',
+//            [
+//                    'attribute' => 'cutline.orcard_id',
+//                    'label' => 'สวน',
+//                    'value' => function($data){
+//                       return \backend\models\Orchard::getName($data['cutline']['orcard_id']);
+//                    }
+//            ],
+//            [
+//                'attribute' => 'cutline.cut_team',
+//                'label' => 'ทีมตัด',
+//                'value' => function($data){
+//                    return \backend\models\Team::getName($data['cutline']['cut_team'],1);
+//                }
+//            ],
+//            [
+//                'attribute' => 'cutline.cut_date',
+//                'label' => 'กำหนดตัด',
+//                'value' => function($data){
+//                    return date('d/m/Y',strtotime($data['cutline']['cut_date']));
+//                }
+//            ],
+//            [
+//                'attribute' => 'cutline.cut_next_date',
+//                'label' => 'กำหนดตัดครั้งหน้า',
+//                'value' => function($data){
+//                    return date('d/m/Y',strtotime($data['cutline']['cut_next_date']));
+//                }
+//            ],
 
             [
 

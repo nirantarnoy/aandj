@@ -670,6 +670,7 @@ class ProdrecController extends Controller
        //return $id;
 
         $modelprod = \backend\models\Product::find()->where(['id'=>$id])->one();
+        $list = [];
         if($modelprod){
             $zonegroup = '';
             if($modelprod->zone_group==1){
@@ -684,6 +685,7 @@ class ProdrecController extends Controller
           //  $maxqty = $modelprod->zone_qty_per;
           //  $currentqty = $modelprod->all_qty;
            if($zonegroup !=''){
+               return Json::encode($list);
                if($state == 0){ // new
                    $modelzone = \backend\models\Zone::find()->where(['like','name',$zonegroup])->andFilterWhere(['lock'=>0])->all();
                    if($modelzone){

@@ -47,6 +47,10 @@ class Cuttable extends \common\models\CutTable
         ];
     }
 
+    public function getCutline(){
+        return $this->hasOne(\backend\models\Cutline::className(),['cut_id'=>'id']);
+    }
+
 //    public function findLocationinfo($id){
 //        $model = Location::find()->where(['id'=>$id])->one();
 //        return count($model)>0?$model:null;

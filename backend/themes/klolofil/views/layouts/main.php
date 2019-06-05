@@ -172,7 +172,7 @@ $last_message = \backend\models\Message::find()->where(['status'=>1])->limit(6)-
                                 <li><a href="index.php?r=treat/index" class="treat">ดูแลสวน</a></li>
                                 <li><a href="index.php?r=team/index" class="team">ทีมตัด</a></li>
                                 <li><a href="index.php?r=warehouse/index" class="warehouse">คลังสินค้า</a></li>
-                                <li><a href="index.php?r=location/index" class="location">ล๊อก</a></li>
+<!--                                <li><a href="index.php?r=location/index" class="location">ล๊อก</a></li>-->
                             </ul>
                         </div>
                     </li>
@@ -186,7 +186,7 @@ $last_message = \backend\models\Message::find()->where(['status'=>1])->limit(6)-
                     <li><a href="index.php?r=invoice/index" class="invoice"><i class="lnr lnr-file-add"></i> <span>ใบเสร็จ</span></a></li>
 
 
-                    <li><a href="typography.html" class=""><i class="lnr lnr-text-format"></i> <span>บัญชี</span></a></li>
+<!--                    <li><a href="typography.html" class=""><i class="lnr lnr-text-format"></i> <span>บัญชี</span></a></li>-->
                     <li><a href="index.php?r=report/index" class="report"><i class="fa fa-area-chart"></i> <span>รายงาน</span></a></li>
 <?php else:?>
                       <li><a href="index.php?r=prodrec/index" class="prodrec"><i class="fa fa-list-alt"></i> <span>รับวัตถุดิบ</span></a></li>
