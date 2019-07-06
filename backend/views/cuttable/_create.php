@@ -11,6 +11,8 @@ $url = $model->isNewRecord?'cuttable/cutcreate':'cuttable/cutupdate';
 $this->title = 'ตารางตัดมะพร้าว'.'#'.$model->cut_no;
 $this->params['breadcrumbs'][] = ['label' => 'จัดตาราง', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$url_to_print = Url::to(['cuttable/printcuttable'],true);
 ?>
 <div class="row">
     <form action="<?=Url::to([$url],true)?>" method="post" id="form-cut">
@@ -18,7 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-lg-12">
         <div class="panel panel-headline">
             <div class="panel-heading">
+                <form id="form-print" action="<?=$url_to_print?>" target="_blank"></form>
                 <h2>ตารางจัดการตัดมะพร้าว <?php //echo $model->cut_no?></h2>
+
                 <div class="btn-group">
                     <a href="index.php?r=cuttable/showcalendar" class="btn btn-default btn-calendar"><i class="fa fa-calendar"></i> ปฏิทิน </a>
                     <a href="index.php?r=cuttable/printcuttable" class="btn btn-info btn-print"><i class="fa fa-print"></i> พิมพ์ </a>
@@ -265,7 +269,9 @@ $js=<<<JS
                $(this).closest("tr").find("td:eq(0)").css({'background-color':'greenyellow','color':'#778899','font-weight':'bold'});
            }
       });
-   
+      $(".btn-print").click(function(){
+          $("#form-print").submit();
+      });
    });
    function date_change(e){
           var cut_next_date = e.closest("tr").find(".cut_next_date").val();
