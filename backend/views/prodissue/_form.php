@@ -259,6 +259,10 @@ $this->registerJs('
                   alert("ข้อมูลสินค้าต้องไม่ว่าง กรุณาตรวจสอบใหม่");
                        return;
               }
+              if($tr.find(".line_qty").val()==""){
+                  alert("กรุณาใส่จำนวน");
+                       return;
+              }
               var $clone = $tr.clone();
               $clone.find(":text").val("");
               $clone.find(".line_lot").val("");

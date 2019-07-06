@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h2>ตารางจัดการตัดมะพร้าว <?php //echo $model->cut_no?></h2>
                 <div class="btn-group">
                     <a href="index.php?r=cuttable/showcalendar" class="btn btn-default btn-calendar"><i class="fa fa-calendar"></i> ปฏิทิน </a>
+                    <a href="index.php?r=cuttable/printcuttable" class="btn btn-info btn-print"><i class="fa fa-print"></i> พิมพ์ </a>
                 </div>
             </div>
                 <div class="panel-body">
