@@ -8,6 +8,7 @@ use backend\models\CuttableSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\mpdf\Pdf;
 
 /**
  * CuttableController implements the CRUD actions for Cuttable model.
@@ -318,5 +319,36 @@ class CuttableController extends Controller
                 return 0;
             }
         }
+    }
+    public function actionPrintcuttable(){
+        $model = \backend\models\Cuttable::find()->one();
+        $modelline = \backend\models\Cutline::find()->where(['cut_id'=>$model->id])->all();
+        $pdf = new Pdf([
+            'mode' => Pdf::MODE_ASIAN, // leaner size using standard fonts
+            //  'format' => [150,236], //manaul
+            //'format' => $papersize ==1? Pdf::FORMAT_A4:[100,200],
+            'format' =>  Pdf::FORMAT_A4,
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $this->renderPartial('_printcuttable',[
+                'model'=>$model,
+                'modelline' => $modelline,
+            ]),
+            //'content' => "nira",
+            'defaultFont' => '@backend/web/fonts/config.php',
+            'cssFile' => '@backend/web/css/pdf.css',
+            'options' => [
+                'title' => 'รายงานระหัสินค้า',
+                'subject' => ''
+            ],
+            'methods' => [
+                //  'SetHeader' => ['รายงานรหัสสินค้า||Generated On: ' . date("r")],
+                //  'SetFooter' => ['|Page {PAGENO}|'],
+                //'SetFooter'=>'niran',
+            ],
+
+        ]);
+        //return $this->redirect(['genbill']);
+        return $pdf->render();
     }
 }

@@ -59,9 +59,32 @@ class Orchard extends \common\models\Orchard
         $model = Orchard::find()->where(['id'=>$id])->one();
         return count($model)>0?$model->type_id:0;
     }
+    public function findStandard($id){
+        $standardlist = '';
+        $model = Orchard::find()->where(['id'=>$id])->one();
+        if($model){
+            if($model->standard != ''){
+                $list = explode(',',$model->standard);
+                if($list){
+                    for($i=0;$i<=count($list)-1;$i++){
+                        $standardlist = \backend\helpers\StandardType::getTypeById($list[$i]);
+                    }
+                }
+            }
+        }
+        return $standardlist;
+    }
     public function findInterval($id){
         $model = Orchard::find()->where(['id'=>$id])->one();
         return count($model)>0?$model->cut_interval:0;
+    }
+    public function findTypename($id){
+        $model = Orchard::find()->where(['id'=>$id])->one();
+        if($model){
+            $typeid = self::getType($id);
+            $modeltype = \backend\helpers\OrchardType::getTypeById($typeid);
+            return $modeltype != ''?$modeltype:'';
+        }
     }
 
 }
