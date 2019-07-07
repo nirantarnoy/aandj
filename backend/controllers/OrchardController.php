@@ -34,7 +34,7 @@ class OrchardController extends Controller
                 'rules'=>[
                     [
                         'allow'=>true,
-                        'actions'=>['index','create','update','delete','view','import'],
+                        'actions'=>['index','create','update','delete','view','import','treatrecord'],
                         'roles'=>['@'],
                     ]
                 ]
@@ -121,6 +121,7 @@ class OrchardController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model_treat = \backend\models\Orchardtreat::find()->where(['orchard_id'=>$id])->all();
 
         if ($model->load(Yii::$app->request->post())) {
             $liststandard = '';
@@ -145,6 +146,7 @@ class OrchardController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'modeltreat' => $model_treat,
         ]);
     }
 
@@ -262,5 +264,20 @@ class OrchardController extends Controller
             //$modellastupdate = Product::find()->max('updated_at');
             return $this->redirect(['index']);
     }
+    public function actionTreatrecord(){
+        $treat_id = Yii::$app->request->post('treat_title');
+        $trans_date =  Yii::$app->request->post('trans_date');
+        $qty =  Yii::$app->request->post('treat_qty');
+        $orchardid =  Yii::$app->request->post('orchard_id');
 
+        if($treat_id != ''){
+            $model = new \backend\models\Orchardtreat();
+            $model->orchard_id = $orchardid;
+            $model->action_date = date('d-m-Y H:s:i',strtotime($trans_date));
+            $model->job_id = $treat_id;
+            $model->use_qty = $qty;
+            $model->save(false);
+        }
+        $this->redirect(['orchard/update','id'=>$orchardid]);
+    }
 }

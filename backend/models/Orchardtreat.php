@@ -16,13 +16,7 @@ class Orchardtreat extends \common\models\OrchardTreat
                 ],
                 'value'=> time(),
             ],
-            'timestampudate'=>[
-                'class'=> \yii\behaviors\AttributeBehavior::className(),
-                'attributes'=>[
-                    ActiveRecord::EVENT_BEFORE_INSERT=>'updated_at',
-                ],
-                'value'=> time(),
-            ],
+
             'timestampcby'=>[
                 'class'=> \yii\behaviors\AttributeBehavior::className(),
                 'attributes'=>[
@@ -37,13 +31,7 @@ class Orchardtreat extends \common\models\OrchardTreat
                 ],
                 'value'=> Yii::$app->user->identity->id,
             ],
-            'timestampupdate'=>[
-                'class'=> \yii\behaviors\AttributeBehavior::className(),
-                'attributes'=>[
-                    ActiveRecord::EVENT_BEFORE_UPDATE=>'updated_at',
-                ],
-                'value'=> time(),
-            ],
+
         ];
     }
 

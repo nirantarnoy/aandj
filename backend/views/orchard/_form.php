@@ -5,11 +5,14 @@ use yii\widgets\ActiveForm;
 use toxor88\switchery\Switchery;
 use kartik\select2\Select2;
 use kartik\date\DatePicker;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Orchard */
 /* @var $form yii\widgets\ActiveForm */
 
 $treat = \backend\models\Treat::find()->all();
+
+
 
 ?>
 
@@ -157,86 +160,98 @@ $treat = \backend\models\Treat::find()->all();
             <div class="modal-body">
                 <input type="hidden" name="line_qc_product" class="line_qc_product" value="">
                 <input type="hidden" name="line_qc_zone" class="line_qc_zone" value="">
-                <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">วันที่</label>
-                            <?php
-                            echo DatePicker::widget([
-                                'name'=>'trans_date',
-                                'options'=>['class'=>'cut-date'],
-                                'value' => date('d-m-Y'),
-                                'pluginOptions' => [
-                                    'format'=>'dd-mm-yyyy',
-                                ]
-                            ])
-                            ?>
+
+                <form class="panel-body" id="form-treat" action="<?=Url::to(['orchard/treatrecord'],true)?>" method="post">
+                    <input type="hidden" name="orchard_id" value="<?=$model->id?>">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">วันที่</label>
+                                <?php
+                                echo DatePicker::widget([
+                                    'name'=>'trans_date',
+                                    'options'=>['class'=>'cut-date'],
+                                    'value' => date('d-m-Y'),
+                                    'pluginOptions' => [
+                                        'format'=>'dd-mm-yyyy',
+                                    ]
+                                ])
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">รายการ</label>
+                                <select name="treat_title" id="" class="form-control">
+                                    <?php foreach ($treat as $value): ?>
+                                        <option value="<?=$value->id?>"><?=$value->title?></option>
+                                    <?php endforeach;?>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="">จำนวน</label>
+                            <input type="number" min="1" name="treat_qty" class="form-control">
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">รายการ</label>
-                            <?php
-                                echo Select2::widget([
-                                   'name'=> 'treat_title',
-                                   'model'=> $treat,
-                                   'attribute' => 'title',
-                                   'options' => ['placeholder'=>'เลือกหัวข้อ']
-                                ]);
-                            ?>
 
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <label for="">จำนวน</label>
-                        <input type="number" min="1" class="form-control">
-                    </div>
-                </div>
-                <h4>รายละเอียด</h4>
+                <h4>ประวัติการทำรายการ</h4>
                 <hr>
 
                 <div class="row">
-                   <table class="table table-treat-list">
-                       <thead>
-                       <tr>
-                           <th>#</th>
-                           <th>วันที่</th>
-                           <th>รายการ</th>
-                           <th>จำนวน</th>
-                           <th>หน่วย</th>
-                           <th>หมายเหตุ</th>
-                           <th>-</th>
-                       </tr>
-                       </thead>
-                       <tbody>
-                       <tr>
-                           <td>#</td>
-                           <td>วันที่</td>
-                           <td>รายการ</td>
-                           <td>จำนวน</td>
-                           <td>หน่วย</td>
-                           <td>หมายเหตุ</td>
-                           <td>-</td>
-                       </tr>
-                       </tbody>
-                   </table>
-                </div>
+                    <div class="col-lg-12">
+                        <table class="table table-treat-list">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>วันที่</th>
+                                <th>รายการ</th>
+                                <th>จำนวน</th>
+                                <th>หมายเหตุ</th>
+                                <th>-</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php if($modeltreat):?>
+                            <?php $i = 0;?>
+                            <?php foreach($modeltreat as $value):?>
+
+                                    <?php $i +=1;?>
+                                <tr>
+                                    <td><?=$i?></td>
+                                    <td><?=date('d-m-Y', strtotime($value->action_date))?></td>
+                                    <td><?=\backend\models\Treat::findName($value->job_id)?></td>
+                                    <td><?=number_format($value->use_qty)?></td>
+                                    <td></td>
+                                    <td>-</td>
+                                </tr>
+                            <?php endforeach;?>
+                            <?php endif;?>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success btn-add-qc">บันทึก</button>
+                <input type="submit" class="btn btn-success btn-save" value="บันทึก">
                 <button type="button" class="btn btn-default" data-dismiss="modal">ปิดหน้าต่าง</button>
             </div>
+            </form>
         </div>
 
     </div>
 </div>
+
+
+
+
 <?php
 $js=<<<JS
  $(function(){

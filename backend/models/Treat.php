@@ -51,5 +51,9 @@ class Treat extends \common\models\Treat
 //        $model = Location::find()->where(['id'=>$id])->one();
 //        return count($model)>0?$model:null;
 //    }
+public function findName($id){
+        $model = Treat::find()->where(['id'=>$id])->one();
+        return count($model)>0?$model->title:'';
+}
 
 }
