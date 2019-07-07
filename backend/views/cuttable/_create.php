@@ -163,7 +163,7 @@ $url_to_print = Url::to(['cuttable/printcuttable'],true);
                                         </td>
                                         <td style="vertical-align: middle">
                                             <div class="input-group date" data-provide="datepicker">
-                                                <input type="date" id="cut_next_date_<?=$ids?>" name="cut_next_date[]" class="form-control cut_next_date" value="<?=$value->cut_next_date;?>">
+                                                <input type="date" id="cut_next_date_<?=$ids?>" name="cut_next_date[]" disabled class="form-control cut_next_date" value="<?=$value->cut_next_date;?>">
                                             </div>
                                         </td>
                                         <td style="vertical-align: middle">
@@ -248,7 +248,7 @@ $js=<<<JS
            // startDate: '-3d'
        // });
         var today = new Date();
-        $("input[id^='cut_next_date']").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
+        //$("input[id^='cut_next_date']").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
       //  $("input[type='date']").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
       
        //document.getElementById("theDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);

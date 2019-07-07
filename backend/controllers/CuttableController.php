@@ -255,8 +255,8 @@ class CuttableController extends Controller
         $teamcut = Yii::$app->request->post('team');
         $cutdate = Yii::$app->request->post('cut_date');
         $cutnextdate = Yii::$app->request->post('cut_next_date');
-
-       // echo $cutid;return;
+        //print_r($cutnextdate);return;
+       // echo $cutnextdate[2];return;
 
         if(count($cutid)){
             $model = \backend\models\Cuttable::find()->where(['id'=>$cutid])->one();
@@ -266,14 +266,19 @@ class CuttableController extends Controller
                     \backend\models\Cutline::deleteAll(['cut_id'=>$cutid]);
                     $this->deleteEvent($cutid);
                     for($i=0;$i<=count($orcard)-1;$i++){
+                        //echo $cutnextdate[$i];return;
+                        $next_date = date('d-m-Y');
+                        if($cutnextdate[$i]!=''){
+                           $next_date = $cutnextdate[$i];
+                        }
                         $modelline = new \backend\models\Cutline();
                         $modelline->cut_id = $model->id;
                         $modelline->orcard_id = $orcard[$i];
                         $modelline->product_id = $product[$i];
                         $modelline->cut_team = $teamcut[$i];
                         $modelline->cut_date = $cutdate[$i];
-                        $modelline->cut_next_date = $cutnextdate[$i];
-                        $modelline->save();
+                        $modelline->cut_next_date = $next_date;
+                        $modelline->save(false);
                         $detail = 'สวน '.\backend\models\Orchard::getName($orcard[$i]);
                         $this->createEvent($modelline->cut_next_date,$detail,\backend\helpers\EventType::TYPE_CUT,$model->id);
 
