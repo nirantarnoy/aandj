@@ -671,7 +671,9 @@ class ProdrecController extends Controller
 
         $modelprod = \backend\models\Product::find()->where(['id'=>$id])->one();
         $list = [];
+
         if($modelprod){
+            //return count($modelprod);
             $zonegroup = '';
             if($modelprod->zone_group==1){
                 $zonegroup = 'A';
@@ -682,18 +684,22 @@ class ProdrecController extends Controller
             else if($modelprod->zone_group==3){
                 $zonegroup = 'C';
             }
+
+            //return $state;
           //  $maxqty = $modelprod->zone_qty_per;
           //  $currentqty = $modelprod->all_qty;
            if($zonegroup !=''){
-               return Json::encode($list);
+               //return Json::encode($list);
                if($state == 0){ // new
                    $modelzone = \backend\models\Zone::find()->where(['like','name',$zonegroup])->andFilterWhere(['lock'=>0])->all();
                    if($modelzone){
-                      // return Json::encode($modelzone);
+
+                      // return count($modelzone);
                        $json = [];
                        $xqty = $qty;
                        $mqty = 0;
                        foreach ($modelzone as $data){
+                          // return $data->qty;
                           if($mqty == $qty){continue;}
                           // $zon = $data->name;
                            if($data->qty == 0 && $xqty > 0){
@@ -769,6 +775,8 @@ class ProdrecController extends Controller
                    }
                }
            }
+        }else{
+            return "no data";
         }
 
 //        if (count($model) > 0) {

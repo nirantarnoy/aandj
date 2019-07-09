@@ -789,7 +789,7 @@ var cur_product = 0;
       var state = "'.$state.'";
       var listzone = e.closest("tr").find(".line_zone_id").val();
       
-     // alert(listzone);
+      //alert(prodid);
       
        var url = "'.$url_to_findzone.'"+"&id="+prodid+"&qty="+curqty;
        var zonename = "";
@@ -802,7 +802,7 @@ var cur_product = 0;
           async: false,
           data : {id:prodid,qty:curqty,state:state,listzone:listzone},
           success: function(data){
-        // console.log(data.length);
+          console.log(data);
           //alert(data[0]["name"]);return;
              if(data.length > 0){
                 for(var x=0;x<=data.length -1;x++){
@@ -825,6 +825,9 @@ var cur_product = 0;
              if(data == null){
              alert("ไม่มีกองให้ลงสินค้า");
              }
+          },
+          error: function(data){
+            console.log("error");
           }
        });
       // alert(zonename);
