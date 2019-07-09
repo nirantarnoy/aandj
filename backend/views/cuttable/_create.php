@@ -117,13 +117,17 @@ $url_to_print = Url::to(['cuttable/printcuttable'],true);
                                         <td style="vertical-align: middle">
                                             <?php
                                             $modelstand = \backend\models\Orchard::find()->where(['id'=>$value->orcard_id])->one();
-                                            $x = explode(',',$modelstand->standard);
                                             $list_stand ='';
-                                            if(count($x)>1){
-                                                for($i=0;$i<=count($x)-1;$i++){
-                                                    $list_stand.= \backend\helpers\StandardType::getTypeById($x[$i]).",";
+                                            if($modelstand->standard){
+                                                $x = explode(',',$modelstand->standard);
+
+                                                if(count($x)>1){
+                                                    for($i=0;$i<=count($x)-1;$i++){
+                                                        $list_stand.= \backend\helpers\StandardType::getTypeById($x[$i]).",";
+                                                    }
                                                 }
                                             }
+
                                             echo $list_stand;
 
                                             ?>
