@@ -11,6 +11,11 @@ use lavrentiev\widgets\toastr\Notification;
 
 $this->title = Yii::t('app', 'เบิกวัตถุดิบ');
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
+    ['depends' => [\yii\web\JqueryAsset::className()]],
+    static::POS_HEAD
+);
+$this->registerCssFile( '@web/css/sweetalert.css');
 ?>
 <div class="prodissue-index">
 
@@ -184,6 +189,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <?php
 //$url_to_delete =  Url::to(['product/bulkdelete'],true);
+
 $this->registerJs('
     $(function(){
         $("#perpage").change(function(){
@@ -194,7 +200,7 @@ $this->registerJs('
    function recDelete(e){
         //e.preventDefault();
         var url = e.attr("data-url");
-        //alert(url);
+        alert(url);
         swal({
               title: "ต้องการลบรายการนี้ใช่หรือไม่",
               text: "",

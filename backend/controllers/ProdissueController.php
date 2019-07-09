@@ -18,6 +18,7 @@ use yii\web\ForbiddenHttpException;
  */
 class ProdissueController extends Controller
 {
+    public $enableCsrfValidation = false;
     /**
      * {@inheritdoc}
      */
@@ -27,7 +28,7 @@ class ProdissueController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['POST','GET'],
                 ],
             ],
             'access'=>[
@@ -36,6 +37,28 @@ class ProdissueController extends Controller
                     throw new ForbiddenHttpException('คุณไม่ได้รับอนุญาติให้เข้าใช้งาน!');
                 },
                 'rules'=>[
+                    [
+                        'allow'=>true,
+                        'actions'=>['index','create','update','view','bill','invoice',
+                            'findzone','callbill','findsupcode','addqc','createinv','genbill','purchoverview'],
+                        'roles'=>['@'],
+                    ],
+//                    [
+//                        'allow'=>true,
+//                        'actions'=>['delete'],
+//                        'roles'=>['System Administrator'],
+//                    ]
+//                    [
+//                        'allow'=>true,
+//                        'actions'=>['update'],
+//                        'roles'=>['@'],
+//                        'matchCallback'=>function($rule,$action){
+//                            $model = $this->findModel(Yii::$app->request->get('id'));
+//                            if (\Yii::$app->user->can('blog/update',['model'=>$model])) {
+//                                return true;
+//                            }
+//                        }
+//                    ],
                     [
                         'allow'=>true,
                         'roles'=>['@'],
