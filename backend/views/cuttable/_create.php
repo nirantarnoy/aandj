@@ -118,7 +118,7 @@ $url_to_print = Url::to(['cuttable/printcuttable'],true);
                                             <?php
                                             $modelstand = \backend\models\Orchard::find()->where(['id'=>$value->orcard_id])->one();
                                             $list_stand ='';
-                                            if($modelstand->standard){
+                                            if($modelstand->standard !=''){
                                                 $x = explode(',',$modelstand->standard);
 
                                                 if(count($x)>1){
