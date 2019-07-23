@@ -200,7 +200,8 @@ $this->registerJs('
    function recDelete(e){
         //e.preventDefault();
         var url = e.attr("data-url");
-        alert(url);
+        var newurl = url.replace("%2F","/");
+        alert(newurl);
         swal({
               title: "ต้องการลบรายการนี้ใช่หรือไม่",
               text: "",
@@ -209,7 +210,7 @@ $this->registerJs('
               closeOnConfirm: false,
               showLoaderOnConfirm: true
             }, function () {
-              e.attr("href",url); 
+              e.attr("href",newurl); 
               e.toggle("click");        
         });
     }

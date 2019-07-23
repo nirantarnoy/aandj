@@ -283,7 +283,7 @@ $sub = \backend\models\Suplier::find()->all();
                 </div>
 
             </td>
-            <td style="width: 150px;" style="left: 0px">
+            <td style="width: 150px;" class="pull-left">
                 <div class="row">
 <!--                    <input type="text" name="plan-1-1sup[]" class="form-control sub">-->
                     <select name="plan_row_1_sub_1[]" class="form-control sub" id="">
