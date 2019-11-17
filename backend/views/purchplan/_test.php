@@ -52,7 +52,7 @@ $this->registerCss(
           position: relative;
           *position: relative; /*ie7*/
           left: 0px; 
-          width:100px;
+         // width:100px;
         }
         .outer {
             position:relative;
@@ -364,7 +364,7 @@ $sub = \backend\models\Suplier::find()->all();
                     <?php foreach ($modelline as $data): ?>
                     <?php if($data->plan_type === $modelrow[$i]['plan_type']):?>
                             <?php $nums +=1;?>
-                    <td style="width: 150px;" style="left: 0px">
+                    <td style="width: 150px;" class="pull-left">
                         <div class="row">
                             <!--                    <input type="text" name="plan-1-1sup[]" class="form-control sub">-->
                             <select name="plan_row_<?=$i+1?>_sub_<?=$nums?>[]" class="form-control sub" id="">
