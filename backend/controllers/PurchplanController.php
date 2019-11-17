@@ -114,7 +114,7 @@ class PurchplanController extends Controller
             }
         }
 
-        return $this->render('_test', [
+        return $this->render('_newform', [
             'model' => $model,
             'title'=>'สร้างแผนสั่งซื้อ'
         ]);
