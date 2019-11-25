@@ -1119,4 +1119,8 @@ class ProdrecController extends Controller
     public function actionPurchoverview(){
         return $this->render('_purchoverview');
     }
+
+    public function actionProdrecall(){
+        return $this->render('_prodrecall');
+    }
 }

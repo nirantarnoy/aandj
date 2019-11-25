@@ -31,24 +31,24 @@ class PurchplanController extends Controller
                     'delete' => ['POST','GET'],
                 ],
             ],
-            'access'=>[
-                'class'=>AccessControl::className(),
-                'denyCallback' => function ($rule, $action) {
-                    throw new ForbiddenHttpException('คุณไม่ได้รับอนุญาติให้เข้าใช้งาน!');
-                },
-                'rules'=>[
-                    [
-                        'allow'=>true,
-                        'roles'=>['@'],
-                        'matchCallback'=>function($rule,$action){
-                            $currentRoute = Yii::$app->controller->getRoute();
-                            if(Yii::$app->user->can($currentRoute)){
-                                return true;
-                            }
-                        }
-                    ]
-                ]
-            ]
+//            'access'=>[
+//                'class'=>AccessControl::className(),
+//                'denyCallback' => function ($rule, $action) {
+//                    throw new ForbiddenHttpException('คุณไม่ได้รับอนุญาติให้เข้าใช้งาน!');
+//                },
+//                'rules'=>[
+//                    [
+//                        'allow'=>true,
+//                        'roles'=>['@'],
+//                        'matchCallback'=>function($rule,$action){
+//                            $currentRoute = Yii::$app->controller->getRoute();
+//                            if(Yii::$app->user->can($currentRoute)){
+//                                return true;
+//                            }
+//                        }
+//                    ]
+//                ]
+//            ]
         ];
     }
 
@@ -129,12 +129,33 @@ class PurchplanController extends Controller
      */
     public function actionUpdate($id)
     {
+//        $model = $this->findModel($id);
+//        $modelline = \backend\models\Purchplanline::find()->where(['plan_id'=>$id])->orderBy(['id'=>SORT_ASC])->all();
+//        $modelrow = \backend\models\Purchplanline::find()->select('plan_type')->where(['plan_id'=>$id])->distinct()->orderBy(['plan_type'=>SORT_ASC])->all();
+//
+//        if ($model->load(Yii::$app->request->post())) {
+//           // $pdate = date_create($model->plan_date);
+//
+//            $model->plan_date = strtotime($model->plan_date);
+//            if($model->save()){
+//                $session = Yii::$app->session;
+//                $session->setFlash('msg','บันทึกรายการเรียบร้อย');
+//                return $this->redirect(['index']);
+//            }
+//        }
+//
+//        return $this->render('_test', [
+//            'model' => $model,
+//            'modelline'=> $modelline,
+//            'modelrow'=>$modelrow,
+//            'title'=>'แก้ไขแผน'
+//        ]);
         $model = $this->findModel($id);
         $modelline = \backend\models\Purchplanline::find()->where(['plan_id'=>$id])->orderBy(['id'=>SORT_ASC])->all();
         $modelrow = \backend\models\Purchplanline::find()->select('plan_type')->where(['plan_id'=>$id])->distinct()->orderBy(['plan_type'=>SORT_ASC])->all();
 
         if ($model->load(Yii::$app->request->post())) {
-           // $pdate = date_create($model->plan_date);
+            // $pdate = date_create($model->plan_date);
 
             $model->plan_date = strtotime($model->plan_date);
             if($model->save()){
@@ -144,7 +165,7 @@ class PurchplanController extends Controller
             }
         }
 
-        return $this->render('_test', [
+        return $this->render('_newform', [
             'model' => $model,
             'modelline'=> $modelline,
             'modelrow'=>$modelrow,
@@ -494,6 +515,111 @@ class PurchplanController extends Controller
             $date = date('Y-m-d',strtotime(date('d-m-Y')));
             $model = \backend\models\Purchplan::find()->where(['trans_date'=>$date])->count();
             return $model;
+        }
+
+        public function actionCreatenew(){
+            $post = \Yii::$app->request->post();
+
+//            print_r($post[0]);return;
+            $linesup1 = \Yii::$app->request->post('line_sup1');
+            $lineplan1 = \Yii::$app->request->post('line_plan1');
+            $lineqty1 = \Yii::$app->request->post('line_qty1');
+            $lineprice1 = \Yii::$app->request->post('line_price1');
+
+            $linesup2 = \Yii::$app->request->post('line_sup2');
+            $lineplan2 = \Yii::$app->request->post('line_plan2');
+            $lineqty2 = \Yii::$app->request->post('line_qty2');
+            $lineprice2 = \Yii::$app->request->post('line_price2');
+
+            $linesup3 = \Yii::$app->request->post('line_sup3');
+            $lineplan3 = \Yii::$app->request->post('line_plan3');
+            $lineqty3 = \Yii::$app->request->post('line_qty3');
+            $lineprice3 = \Yii::$app->request->post('line_price3');
+
+            $linesup4 = \Yii::$app->request->post('line_sup4');
+            $lineplan4 = \Yii::$app->request->post('line_plan4');
+            $lineqty4 = \Yii::$app->request->post('line_qty4');
+            $lineprice4 = \Yii::$app->request->post('line_price4');
+
+            if($this->checktodayplan()){
+                $session = Yii::$app->session;
+                $session->setFlash('error','แผนสั่งซื้อประจำวันที่ '.date('d-m-Y'). ' มีในระบบแล้ว');
+                return $this->redirect(['index']);
+            }
+
+            if($post){
+                $model = new \backend\models\Purchplan();
+                $model->name = "แผนซื้อประจำวันที่ ".date('d-m-Y');
+                $model->plan_date = strtotime(date('d-m-Y'));
+                $model->status = 1;
+                $model->trans_date = date('Y-m-d');
+                if($model->save(false)){
+                    $this->createEvent($model->trans_date,$model->name,\backend\helpers\EventType::TYPE_PURCH);
+                        for($x=0;$x<=count($linesup1)-1;$x++){
+                            if($lineplan1[$x] == '')continue;
+                            $modelline = new \backend\models\Purchplanline();
+                            $modelline->plan_type = 1;
+                            $modelline->plan_id = $model->id;
+                            $modelline->sup_id = $linesup1[$x];
+                            $modelline->plan_qty = $lineplan1[$x];
+                            $modelline->received_qty = $lineqty1[$x];
+                            $modelline->plan_price = $lineprice1[$x];
+                            $modelline->trans_date = date('Y-m-d');
+                            $modelline->save(false);
+
+                        }
+                    for($x=0;$x<=count($linesup2)-1;$x++){
+                        if($lineplan2[$x] == '')continue;
+                        $modelline = new \backend\models\Purchplanline();
+                        $modelline->plan_type = 2;
+                        $modelline->plan_id = $model->id;
+                        $modelline->sup_id = $linesup2[$x];
+                        $modelline->plan_qty = $lineplan2[$x];
+                        $modelline->received_qty = $lineqty2[$x];
+                        $modelline->plan_price = $lineprice2[$x];
+                        $modelline->trans_date = date('Y-m-d');
+                        $modelline->save(false);
+
+                    }
+                    for($x=0;$x<=count($linesup3)-1;$x++){
+                        if($lineplan3[$x] == '')continue;
+                        $modelline = new \backend\models\Purchplanline();
+                        $modelline->plan_type = 3;
+                        $modelline->plan_id = $model->id;
+                        $modelline->sup_id = $linesup3[$x];
+                        $modelline->plan_qty = $lineplan3[$x];
+                        $modelline->received_qty = $lineqty3[$x];
+                        $modelline->plan_price = $lineprice3[$x];
+                        $modelline->trans_date = date('Y-m-d');
+                        $modelline->save(false);
+
+                    }
+                    for($x=0;$x<=count($linesup4)-1;$x++){
+                        if($lineplan4[$x] == '')continue;
+                        $modelline = new \backend\models\Purchplanline();
+                        $modelline->plan_type = 4;
+                        $modelline->plan_id = $model->id;
+                        $modelline->sup_id = $linesup4[$x];
+                        $modelline->plan_qty = $lineplan4[$x];
+                        $modelline->received_qty = $lineqty4[$x];
+                        $modelline->plan_price = $lineprice4[$x];
+                        $modelline->trans_date = date('Y-m-d');
+                        $modelline->save(false);
+
+                    }
+
+                        // print_r($plan_qty);
+
+                    $session = Yii::$app->session;
+                    $session->setFlash('msg','บันทึกรายการเรียบร้อย');
+                    return $this->redirect(['index']);
+                }
+            }
+
+
+            $session = Yii::$app->session;
+            $session->setFlash('msg','บันทึกรายการเรียบร้อย');
+            return $this->redirect(['index']);
         }
 
     }

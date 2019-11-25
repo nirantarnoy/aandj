@@ -79,7 +79,7 @@ HTML;
                 <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> บันทึกรับวัตถุดิบ'), ['create'], ['class' => 'btn btn-success']) ?>
             </div>
             <div class="btn-group">
-                <div class="btn btn-default btn-overview"><i class="fa fa-table"></i> ภาพรวมการรับเข้า </div>
+                <a class="btn btn-default btn-overview" href="index.php?r=prodrec/prodrecall"><i class="fa fa-table"></i> ภาพรวมการรับเข้า </a>
                 <div class="btn btn-default btn-bill"><i class="fa fa-print"></i> พิมพ์ใบรับสินค้า </div>
                 <div class="btn btn-default btn-invoice"><i class="fa fa-bitcoin"></i> จ่ายเงิน </div>
             </div>
