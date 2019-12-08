@@ -700,20 +700,24 @@ class ProdrecController extends Controller
                        $mqty = 0;
                        foreach ($modelzone as $data){
                           // return $data->qty;
+                           $html = '';
                           if($mqty == $qty){continue;}
                           // $zon = $data->name;
                            if($data->qty == 0 && $xqty > 0){
                                if($data->max_qty > $xqty){
-                                   array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$xqty]);
+                                   $html = "<option value='" .$data->id. "' selected>$data->name</option>";
+                                   array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$xqty,'html'=>$html]);
                                  //  $mqty =  $mqty + $xqty;
                                   // return Json::encode($json);
                                }else{
                                    if($qty > $data->max_qty){
-                                       array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$data->max_qty]);
+                                       $html = "<option value='" .$data->id. "'>$data->name</option>";
+                                       array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$data->max_qty,'html'=>$html]);
                                        $xqty = $xqty - $data->max_qty;
                                        //$mqty =  $mqty + $xqty;
                                    }else{
-                                       array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$xqty]);
+                                       $html = "<option value='" .$data->id. "'>$data->name</option>";
+                                       array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$xqty,'html'=>$html]);
                                        //$mqty =  $mqty + $xqty;
                                    }
 
@@ -749,18 +753,21 @@ class ProdrecController extends Controller
                        $json = [];
                        $xqty = 0;
                        foreach ($modelzone as $data){
-
+                           $html = '';
                            $zon = $data->name;
                            if($data->lock == 0){
                                if($data->max_qty > $qty){
-                                   array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$qty]);
+                                   $html = "<option value='" .$data->id. "'>$data->name</option>";
+                                   array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$qty,'html'=>$html]);
                                    return Json::encode($json);
                                }else{
                                    if($qty > $data->max_qty){
-                                       array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$data->max_qty]);
+                                       $html = "<option value='" .$data->id. "'>$data->name</option>";
+                                       array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$data->max_qty,'html'=>$html]);
                                        $qty = $qty - $data->max_qty;
                                    }else{
-                                       array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$qty]);
+                                       $html = "<option value='" .$data->id. "'>$data->name</option>";
+                                       array_push($json,['id'=>$data->id,'name'=>$data->name,'qty'=>$qty,'html'=>$html]);
                                    }
 
                                }

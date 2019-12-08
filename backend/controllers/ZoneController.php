@@ -32,7 +32,7 @@ class ZoneController extends Controller
                 'rules'=>[
                     [
                         'allow'=>true,
-                        'actions'=>['index','create','update','delete','view'],
+                        'actions'=>['index','create','update','delete','view','genzone'],
                         'roles'=>['@'],
                     ]
                 ]
@@ -155,5 +155,38 @@ class ZoneController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+    public function actionGenzone(){
+        $zonelist = ['A','B'];
+        $res = 0;
+        for($i=0;$i<=count($zonelist)-1;$i++){
+            for($x=1;$x<=99;$x++){
+                if($this->checkzone($zonelist[$i].$x))continue;
+                $model = new \backend\models\Zone();
+                $model->name = $zonelist[$i].$x;
+                $model->discription = $zonelist[$i].$x;
+                $model->max_qty = 2000;//$model->max_qty == ''?1000:$model->max_qty;
+                $model->lock = 0;
+                $model->qty = 0;
+                $model->status = 1;
+                if($model->save()){
+                    $res +=1;
+                }
+            }
+        }
+        if($res > 0){
+            $session = Yii::$app->session;
+            $session->setFlash('msg','บันทึกรายการเรียบร้อย');
+            return $this->redirect(['index']);
+        }
+    }
+    public function checkzone($name){
+        $model = \backend\models\Zone::find()->where(['name'=>$name])->one();
+        if($model){
+            return true;
+        }else{
+            return false;
+        }
+        return false;
     }
 }
