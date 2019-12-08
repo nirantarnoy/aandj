@@ -952,7 +952,7 @@ var data = [
           data : {id:prodid,qty:curqty,state:state,listzone:listzone},
           success: function(data){
           console.log(data);
-          //alert(data[0]["name"]);return;
+          alert(data[0]["name"]);return;
              if(data.length > 0){
                 for(var x=0;x<=data.length -1;x++){
 //                   if(x==0){
