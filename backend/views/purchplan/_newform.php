@@ -104,6 +104,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <?php if($model->isNewRecord):?>
                             <tr>
                                 <td>
                                     <select name="line_sup2[]" class="form-control sub" id="">
@@ -129,6 +130,38 @@
                                     <div class="btn btn-danger btn-delete-plan2" onclick="removeline2($(this))">ลบ</div>
                                 </td>
                             </tr>
+                            <?php else:?>
+                                <?php foreach ($modelline as $val):?>
+                                    <?php if($val->plan_type == 2):?>
+                                        <tr>
+                                            <td>
+                                                <select name="line_sup2[]" class="form-control sub" id="">
+                                                    <?php $sub = \backend\models\Suplier::find()->all();?>
+                                                    <?php foreach($sub as $data2):?>
+                                                        <?php
+                                                        $select = '';
+                                                        if($val->sup_id == $data2->id)$select='selected';
+                                                        ?>
+                                                        <option value="<?=$data2->id?>" <?=$select?>><?=$data2->name?></option>
+                                                    <?php endforeach;?>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" style="text-align: right" class="form-control" name="line_plan2[]" value="<?=$val->plan_qty?>">
+                                            </td>
+                                            <td>
+                                                <input type="text" style="text-align: right" class="form-control" name="line_qty2[]" value="<?=$val->received_qty?>">
+                                            </td>
+                                            <td>
+                                                <input type="text" style="text-align: right" class="form-control" name="line_price2[]" value="<?=$val->plan_price?>">
+                                            </td>
+                                            <td style="text-align: center">
+                                                <div class="btn btn-danger btn-delete-plan2" onclick="removeline2($(this))">ลบ</div>
+                                            </td>
+                                        </tr>
+                                    <?php endif;?>
+                                <?php endforeach;?>
+                            <?php endif;?>
                             </tbody>
                         </table>
                         <div class="btn btn-primary btn-add-plan2">เพิ่มรายการ</div>
@@ -146,6 +179,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <?php if($model->isNewRecord):?>
                             <tr>
                                 <td>
                                     <select name="line_sup3[]" class="form-control sub" id="">
@@ -171,6 +205,38 @@
                                     <div class="btn btn-danger btn-delete-plan3" onclick="removeline3($(this))">ลบ</div>
                                 </td>
                             </tr>
+                            <?php else:?>
+                                <?php foreach ($modelline as $val):?>
+                                    <?php if($val->plan_type == 3):?>
+                                        <tr>
+                                            <td>
+                                                <select name="line_sup3[]" class="form-control sub" id="">
+                                                    <?php $sub = \backend\models\Suplier::find()->all();?>
+                                                    <?php foreach($sub as $data2):?>
+                                                        <?php
+                                                        $select = '';
+                                                        if($val->sup_id == $data2->id)$select='selected';
+                                                        ?>
+                                                        <option value="<?=$data2->id?>" <?=$select?>><?=$data2->name?></option>
+                                                    <?php endforeach;?>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" style="text-align: right" class="form-control" name="line_plan3[]" value="<?=$val->plan_qty?>">
+                                            </td>
+                                            <td>
+                                                <input type="text" style="text-align: right" class="form-control" name="line_qty3[]" value="<?=$val->received_qty?>">
+                                            </td>
+                                            <td>
+                                                <input type="text" style="text-align: right" class="form-control" name="line_price3[]" value="<?=$val->plan_price?>">
+                                            </td>
+                                            <td style="text-align: center">
+                                                <div class="btn btn-danger btn-delete-plan3" onclick="removeline3($(this))">ลบ</div>
+                                            </td>
+                                        </tr>
+                                    <?php endif;?>
+                                <?php endforeach;?>
+                            <?php endif;?>
                             </tbody>
                         </table>
                         <div class="btn btn-primary btn-add-plan3">เพิ่มรายการ</div>
@@ -188,6 +254,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <?php if($model->isNewRecord):?>
                             <tr>
                                 <td>
                                     <select name="line_sup4[]" class="form-control sub" id="">
@@ -213,6 +280,38 @@
                                     <div class="btn btn-danger btn-delete-plan4" onclick="removeline4($(this))">ลบ</div>
                                 </td>
                             </tr>
+                            <?php else:?>
+                            <?php foreach ($modelline as $val):?>
+                            <?php if($val->plan_type == 4):?>
+                            <tr>
+                                <td>
+                                    <select name="line_sup4[]" class="form-control sub" id="">
+                                        <?php $sub = \backend\models\Suplier::find()->all();?>
+                                                    <?php foreach($sub as $data2):?>
+                                                        <?php
+                                        $select = '';
+                                        if($val->sup_id == $data2->id)$select='selected';
+                                        ?>
+                                        <option value="<?=$data2->id?>" <?=$select?>><?=$data2->name?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" style="text-align: right" class="form-control" name="line_plan4[]" value="<?=$val->plan_qty?>">
+                                </td>
+                                <td>
+                                    <input type="text" style="text-align: right" class="form-control" name="line_qty4[]" value="<?=$val->received_qty?>">
+                                </td>
+                                <td>
+                                    <input type="text" style="text-align: right" class="form-control" name="line_price4[]" value="<?=$val->plan_price?>">
+                                </td>
+                                <td style="text-align: center">
+                                    <div class="btn btn-danger btn-delete-plan4" onclick="removeline4($(this))">ลบ</div>
+                                </td>
+                            </tr>
+                            <?php endif;?>
+                            <?php endforeach;?>
+                            <?php endif;?>
                             </tbody>
                         </table>
                         <div class="btn btn-primary btn-add-plan4">เพิ่มรายการ</div>
