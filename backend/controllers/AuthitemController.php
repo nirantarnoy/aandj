@@ -15,6 +15,7 @@ use yii\filters\AccessControl;
  */
 class AuthitemController extends Controller
 {
+    public $test;
     /**
      * {@inheritdoc}
      */
