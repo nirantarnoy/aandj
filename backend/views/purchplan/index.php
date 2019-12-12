@@ -115,7 +115,7 @@ $this->registerJs($js,static::POS_END);
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
         'emptyCell'=>'-',
-        'layout'=>'{items}{summary}{pager}',
+        'layout'=>'{items}{summary}<br>{pager}',
         'summary' => "แสดง {begin} - {end} ของทั้งหมด {totalCount} รายการ",
         'showOnEmpty'=>false,
         'tableOptions' => ['class' => 'table table-hover'],

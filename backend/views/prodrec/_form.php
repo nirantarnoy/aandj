@@ -25,7 +25,7 @@ $modelorchard = \backend\models\Orchard::find()->all();
 $has = count($modelissue) > 0 ? 1 : 0;
 $state = $model->isNewRecord ? 0 : 1;
 ?>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 <div class="prodrec-form">
     <div class="panel panel-headlin">
@@ -58,7 +58,7 @@ $state = $model->isNewRecord ? 0 : 1;
                 <div class="col-lg-3">
                     <?= $form->field($model, 'plan_id')->widget(Select2::className(), [
                         'data' => ArrayHelper::map(\backend\models\Purchplan::find()->orderBy(['id' => SORT_DESC])->all(), 'id', 'name'),
-                        'options' => ['placeholder' => 'เลือกแผนซื้อ', 'id' => 'plan_id','class'=>'input-group-lg']
+                        'options' => ['placeholder' => 'เลือกแผนซื้อ', 'id' => 'plan_id', 'class' => 'input-group-lg']
                     ]) ?>
                 </div>
                 <div class="col-lg-3">
@@ -134,6 +134,8 @@ $state = $model->isNewRecord ? 0 : 1;
                                   }
                                   
                                });
+                              
+                              
 //                                $.post("' . Url::to(['prodrec/findsupcode'], true) . '"+"&id="+$(this).val(),function(data){
 //                                        alert(data[0]["code"]);return;
 //                                          var xdate = new Date();
@@ -191,13 +193,16 @@ $state = $model->isNewRecord ? 0 : 1;
                                     <!--                                        <option value="">เลือกกอง</option>-->
                                     <!--                                    </select>-->
                                     <!--                                    <label for="">คลิกเลือกกอง</label>-->
-<!--                                    <input id="task-1" class="line_zone" type="text" name="line_zone[]"-->
-<!--                                           style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"-->
-<!--                                           value="">-->
-                                    <select class="form-control line_zone" name="line_zone[]" multiple="multiple">
-                                        <option value="AL">Alabama</option>
-                                        <option value="WY">Wyoming</option>
-                                    </select>
+                                    <!--                                    <input id="task-1" class="line_zone" type="text" name="line_zone[]"-->
+                                    <!--                                           style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"-->
+                                    <!--                                           value="">-->
+                                    <!--                                    <select class="form-control line_zone" name="line_zone[]" multiple="multiple">-->
+                                    <!--                                        <option value="AL">Alabama</option>-->
+                                    <!--                                        <option value="WY">Wyoming</option>-->
+                                    <!--                                    </select>-->
+                                    <div class="btn btn-warning btn-select-zone" onclick="selectzone($(this));"
+                                         style="display: none;">เลือกกองที่ต้องการ
+                                    </div>
                                     <input readonly id="task-1" class="line_zone_id" type="hidden" name="line_zone_id[]"
                                            style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                            value="">
@@ -302,9 +307,14 @@ $state = $model->isNewRecord ? 0 : 1;
                                             }
                                             ?>
 
-                                            <input readonly id="task-1" class="line_zone" type="text" name="line_zone[]"
-                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
-                                                   value="<?= $value->list_zone ?>">
+                                            <!--                                            <input readonly id="task-1" class="line_zone" type="text" name="line_zone[]"-->
+                                            <!--                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"-->
+                                            <!--                                                   value="-->
+                                            <? //= $value->list_zone ?><!--">-->
+                                            <select class="form-control line_zone" name="line_zone[]"
+                                                    multiple="multiple">
+                                                <option value="">dfdf</option>
+                                            </select>
                                             <input readonly id="task-1" class="line_zone_id" type="hidden"
                                                    name="line_zone_id[]"
                                                    style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
@@ -678,6 +688,32 @@ $state = $model->isNewRecord ? 0 : 1;
     </div>
 </div>
 
+<div id="selectModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-list-alt"></i> เลือกกองลงมะพร้าว
+                    <small id="items"></small>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="xx" class="xx" value="">
+                <select class="js-example-basic-multiple" id="selected-zone" name="states[]" multiple="multiple">
+
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-add-qc">บันทึก</button>
+                <button type="button" class="btn btn-warning btn-cancel-qc">ยกเลิกการบันทึกคุณภาพ</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <?php
 $url_to_search = Url::to(['productionrec/findemp'], true);
 $url_to_cancelqc = Url::to(['prodrec/cancelqc'], true);
@@ -718,13 +754,15 @@ var data = [
       var hasissue = "' . $has . '";
       var suptype = "' . $suptype . '";
       
-      $(".line_zone").select2();
+     // $(".line_zone").select2();
+     
+    
       
       if(hasissue == 1){
          $(".has-issue").prop("checked",true);
          $("div.issue").show();
       }
-//       $
+
       if(suptype != 1){
          $("table.table-line thead tr").each(function(){
             $(this).find("th:eq(4)").hide();
@@ -769,7 +807,7 @@ var data = [
 //                });
               $clone.find(".line_zone").attr("id","niran");
               $clone.find(".select2").remove();
-              $clone.find(\'.line_zone\').select2();
+              $clone.find(".line_zone").select2();
               $clone.find(".line_zone").val(null).trigger("change");
               //$clone.find(".line_lot").attr("id","task-"+idInc);
               $clone.find(".line_lot").val($tr.find(".line_lot").val());
@@ -943,6 +981,7 @@ var data = [
        var zonename = "";
        var zonelist = [];
        var zonelistqty = [];
+       var res = 0;
        
        $.ajax({
           type: "get",
@@ -955,6 +994,7 @@ var data = [
           alert(data[0]["name"]);
              if(data.length > 0){
                 for(var x=0;x<=data.length -1;x++){
+                res+=1;
 //                   if(x==0){
 //                       zonename=zonename+data[x]["name"];
 //                   }else if(x == data.length -1){
@@ -981,15 +1021,24 @@ var data = [
           }
        });
        //alert(zonename);
+      // e.closest("tr").find(".line_zone").select2();
 
        e.closest("tr").find(".line_zone_id").val("");
+       
+       if(res>0){
+        e.closest("tr").find(".btn-select-zone").show();
+       }
+       
+       
        //e.closest("tr").find(".line_zone").val("");
 
        //e.closest("tr").find(".line_zone").val(zonename);
-       e.closest("tr").find(".line_zone").html(zonename);
+       //e.closest("tr").find(".line_zone").html(zonename);
+       
        e.closest("tr").find(".line_zone_id").val(zonelist);
        e.closest("tr").find(".line_zone_qty").val(zonelistqty);
-
+       
+      
         //alert(url);
        // $.post(url,function(data){
 //                var xdata = data.split("/");
@@ -1113,6 +1162,14 @@ var data = [
                     });
         });
  }
+ 
+ function selectzone(e){
+ var html = "<option value=0 selected>niran</option>"; 
+    $("#selected-zone").html(html);
+    $("#selected-zone").select2();
+    $("#selectModal").modal("show");
+ }
+ 
 ';
 
 $this->registerJs($js, static::POS_END);

@@ -157,7 +157,7 @@ class ZoneController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
     public function actionGenzone(){
-        $zonelist = ['A','B'];
+        $zonelist = ['A','B','C'];
         $res = 0;
         for($i=0;$i<=count($zonelist)-1;$i++){
             for($x=1;$x<=99;$x++){
