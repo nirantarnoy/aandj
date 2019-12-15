@@ -26,7 +26,7 @@ $has = count($modelissue) > 0 ? 1 : 0;
 $state = $model->isNewRecord ? 0 : 1;
 ?>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>-->
 <div class="prodrec-form">
     <div class="panel panel-headlin">
         <div class="panel-heading">
@@ -38,7 +38,6 @@ $state = $model->isNewRecord ? 0 : 1;
         </div>
         <div class="panel-body">
             <?php $form = ActiveForm::begin(); ?>
-
 
             <div class="row">
                 <div class="col-lg-3">
@@ -587,11 +586,11 @@ $state = $model->isNewRecord ? 0 : 1;
 
             <div class="form-group">
                 <?php if ($model->status < 2): ?>
-                    <?php echo Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success btn-submit']) ?>
-                    <?php //echo Html::button(Yii::t('app', 'Save'), ['class' => 'btn btn-success btn-submit']) ?>
+                    <?php // echo Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success btn-submit']) ?>
+                    <input type="submit" class="btn btn-success" value="Save">
                 <?php endif; ?>
             </div>
-
+<!--            <input type="submit" value="ok">-->
             <?php ActiveForm::end(); ?>
         </div>
     </div>

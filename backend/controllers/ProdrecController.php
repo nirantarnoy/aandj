@@ -820,7 +820,7 @@ class ProdrecController extends Controller
               กอง : '.$zone.'
                จำนวนส่ง : '.number_format($qty,0).'
                 รอบตัด : '.$intervalday[0].' วัน
-                ตัดวันที่ : '.date('d-m-Y',$intervalday[1]).'
+             
                 เล็กตกไซต์ : '.$qcitem[0].'
                 เล็กควบ2  : '.$qcitem[1].'
                 เล็กจิ๋ว  : '.$qcitem[2].'
@@ -831,6 +831,7 @@ class ProdrecController extends Controller
                 มะพร้าวกลาย : '.$qcitem[7].'
               
  ';
+//        ตัดวันที่ : '.date('d-m-Y',$intervalday[1]).'
   //echo $mess;
      //   $this->notifymessage($mess);
     }
