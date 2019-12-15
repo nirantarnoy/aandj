@@ -38,7 +38,7 @@ class ProductionRec extends \yii\db\ActiveRecord
     {
         return [
             [['zone_id','productrec_no'],'required'],
-            [[ 'zone_id','zone_type','product_id', 'zone_status', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [[ 'zone_id','zone_type','dept_id','product_id', 'zone_status', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['all_qty'], 'number'],
             [['zone_date','trans_date'],'safe'],
             [['rec_date'],'date'],
@@ -61,6 +61,7 @@ class ProductionRec extends \yii\db\ActiveRecord
             'zone_date' => Yii::t('app', 'วันที่กอง'),
             'zone_status' => Yii::t('app', 'สถานะกอง'),
             'rec_date'=>'Rec Date',
+            'dept_id'=>'แผนก',
             'name' => Yii::t('app', 'ชื่อ'),
             'all_qty' => Yii::t('app', 'จำนวนผลิต'),
             'note' => Yii::t('app', 'Note'),

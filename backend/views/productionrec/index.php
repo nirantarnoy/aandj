@@ -106,12 +106,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'attribute'=>'dept_id',
+                'contentOptions' => ['style' => 'vertical-align: middle'],
+                'value'=>function($data){
+                    return \backend\models\Section::findName($data->dept_id);
+                }
+            ],
+            [
                 'attribute'=>'zone_id',
                 'contentOptions' => ['style' => 'vertical-align: middle'],
                 'value'=>function($data){
                     return \backend\models\Zone::findName($data->zone_id);
                 }
             ],
+
             [
                 'attribute'=>'zone_date',
                 'contentOptions' => ['style' => 'vertical-align: middle'],

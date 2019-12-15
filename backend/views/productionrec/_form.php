@@ -29,6 +29,8 @@ if($modelhaszone){
 }
 $modelzone = \backend\models\Zone::find()->where(['id'=>$zonelist])->all();
 $modelemp = \backend\models\Employee::find()->all();
+$dept = \backend\models\Section::find()->all();
+
 $url_to_find = Url::to(['productionrec/finditem'],true);
 $js=<<<JS
  $(function() {
@@ -126,6 +128,37 @@ $this->registerJs($js,static::POS_END);
                     ]) ?>
                 </div>
                 <div class="col-lg-3">
+                    <?= $form->field($model, 'dept_id')->widget(Select2::className(),[
+                        'data'=>ArrayHelper::map($dept,'id','name'),
+                        'options' => ['placeholder'=>'เลือก','id'=>'dept-id',
+                            'onchange'=>' 
+                                  var xx = "'.Url::to(['productionrec/findzonedate'],true).'&id="+$(this).val();
+                                    $.post(xx,function(data){
+                                           $(".zone_date").val(data);                                             
+                                        });
+                                  var this_val = $("#dept-id option:checked").text();
+                                  if(this_val == "ควั่น"){
+                                     $("table.table-line thead>tr").each(function(){
+                                        $(this).find(".type-1").show();
+                                        $(this).find(".type-2,.type-3").hide();
+                                     });
+                                  }else if(this_val == "หัวโต"){
+                                     $("table.table-line thead>tr").each(function(){
+                                     $(this).find(".type-2").show();
+                                        $(this).find(".type-1,.type-3").hide();
+                                     });
+                                  }else if(this_val == "ปอกฝาก"){
+                                     $("table.table-line thead>tr").each(function(){
+                                     $(this).find(".type-3").show();
+                                        $(this).find(".type-2,.type-1").hide();
+                                     });
+                                  }       
+                                '
+                        ],
+                    ]) ?>
+                </div>
+
+                <div class="col-lg-3">
                     <?= $form->field($model, 'zone_id')->widget(Select2::className(),[
                             'data'=>ArrayHelper::map($modelzone,'id','name'),
                             'options' => ['placeholder'=>'เลือก',
@@ -138,12 +171,13 @@ $this->registerJs($js,static::POS_END);
                                 ],
                     ]) ?>
                 </div>
-                <div class="col-lg-3">
-                    <?php $model->zone_date = $model->isNewRecord?date('d-m-Y'):date('d-m-Y',$model->zone_date); ?>
-                    <?= $form->field($model, 'zone_date')->textInput(['class'=>'form-control zone_date','readonly'=>'readonly']) ?>
-                </div>
+
             </div>
            <div class="row">
+               <div class="col-lg-3">
+                   <?php $model->zone_date = $model->isNewRecord?date('d-m-Y'):date('d-m-Y',$model->zone_date); ?>
+                   <?= $form->field($model, 'zone_date')->textInput(['class'=>'form-control zone_date','readonly'=>'readonly']) ?>
+               </div>
                <div class="col-lg-4">
                    <?= $form->field($model, 'zone_status')->widget(Select2::className(),[
                        'data'=>ArrayHelper::map([['id'=>1,'name'=>'ยังไม่ปิดกอง'],['id'=>2,'name'=>'ปิดกอง']],'id','name'),
@@ -162,11 +196,17 @@ $this->registerJs($js,static::POS_END);
                            <tr style="background: #c3c3c3">
                                <th>#</th>
                                <th>พนักงาน</th>
-                               <th style="text-align: center">1</th>
-                               <th style="text-align: center">2</th>
-                               <th style="text-align: center">3</th>
-                               <th style="text-align: center">4</th>
-                               <th style="text-align: center">5</th>
+                               <th class="type-1" style="text-align: center">ควั่นใหญ่</th>
+                               <th class="type-1" style="text-align: center">ขี้กาก</th>
+                               <th class="type-1" style="text-align: center">เศษ</th>
+                               <th class="type-2" style="text-align: center">หัวโต</th>
+                               <th class="type-2" style="text-align: center">หัวแหลม</th>
+                               <th class="type-2" style="text-align: center">เฉาะเสีย</th>
+                               <th class="type-3" style="text-align: center">ดีใหญ่</th>
+                               <th class="type-3" style="text-align: center">ดีเล็ก</th>
+                               <th class="type-3" style="text-align: center">แก่</th>
+                               <th class="type-3" style="text-align: center">อ่อน</th>
+                               <th class="type-3" style="text-align: center">เสียทิ้ง</th>
                                <th style="text-align: center">รวม</th>
                                <th style="text-align: center">-</th>
                            </tr>

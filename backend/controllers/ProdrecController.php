@@ -256,7 +256,7 @@ class ProdrecController extends Controller
 
                                     if($modelrec->save(false)){
                                         $modelzoneproduct = new \backend\models\Zoneproduct();
-                                        $modelzoneproduct->zone_id = $this->findZoneid($check_zone_user[$m]);
+                                        $modelzoneproduct->zone_id = $check_zone_user[$m];
                                         $modelzoneproduct->product_id = $prod_recid[$i];
                                         $modelzoneproduct->lot_no = $line_lot[$i];
                                         $modelzoneproduct->qty = $qty_line[$m];
