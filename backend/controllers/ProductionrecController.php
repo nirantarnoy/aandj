@@ -360,9 +360,12 @@ public function countOld($prodrecid){
 
             $modelbalance = \backend\models\Stockbalance::find()->where(['product_id'=>$modelproduct->id])->sum('qty');
 
-            $modelproduct = \backend\models\Product::find()->where(['id'=>$modelproduct->id])->one();
-            $modelproduct->all_qty = $modelbalance;
-            $modelproduct->save(false);
+            if($modelbalance){
+                $modelproduct = \backend\models\Product::find()->where(['id'=>$modelproduct->id])->one();
+                $modelproduct->all_qty = $modelbalance;
+                $modelproduct->save(false);
+            }
+
 
         }
 

@@ -18,21 +18,21 @@ $this->registerJsFile(
 );
 $this->registerCssFile('@web/jquery-ui-1.12.1/jquery-ui.css');
 
-$neworupdate = $model->isNewRecord?0:1;
+$neworupdate = $model->isNewRecord ? 0 : 1;
 
 $zonelist = [];
-$modelhaszone = \backend\models\Zoneproduct::find()->where(['status'=>1])->all(); // 0=ปกติ 1 = เบิกผลิต
-if($modelhaszone){
-    foreach($modelhaszone as $data){
-        array_push($zonelist,$data->zone_id);
+$modelhaszone = \backend\models\Zoneproduct::find()->where(['status' => 1])->all(); // 0=ปกติ 1 = เบิกผลิต
+if ($modelhaszone) {
+    foreach ($modelhaszone as $data) {
+        array_push($zonelist, $data->zone_id);
     }
 }
-$modelzone = \backend\models\Zone::find()->where(['id'=>$zonelist])->all();
+$modelzone = \backend\models\Zone::find()->where(['id' => $zonelist])->all();
 $modelemp = \backend\models\Employee::find()->all();
 $dept = \backend\models\Section::find()->all();
 
-$url_to_find = Url::to(['productionrec/finditem'],true);
-$js=<<<JS
+$url_to_find = Url::to(['productionrec/finditem'], true);
+$js = <<<JS
  $(function() {
    $(".itemsearch").change(function(){
         if($(this).val()!=''){
@@ -104,7 +104,7 @@ function findItem(e) {
     $("#findModal").modal("hide");
   }
 JS;
-$this->registerJs($js,static::POS_END);
+$this->registerJs($js, static::POS_END);
 
 ?>
 
@@ -113,26 +113,26 @@ $this->registerJs($js,static::POS_END);
         <div class="panel-heading">
         </div>
         <div class="panel-body">
-    <?php $form = ActiveForm::begin(); ?>
+            <?php $form = ActiveForm::begin(); ?>
 
             <div class="row">
                 <div class="col-lg-3">
-                    <?= $form->field($model, 'productrec_no')->textInput(['maxlength' => true,'value'=>$model->isNewRecord?$runno:$model->productrec_no,'readonly'=>'readonly','class'=>'form-control journal_no']) ?>
+                    <?= $form->field($model, 'productrec_no')->textInput(['maxlength' => true, 'value' => $model->isNewRecord ? $runno : $model->productrec_no, 'readonly' => 'readonly', 'class' => 'form-control journal_no']) ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php $model->trans_date = $model->isNewRecord?date('d-m-Y'):date('d-m-Y',$model->trans_date); ?>
-                    <?= $form->field($model, 'trans_date')->widget(DatePicker::className(),[
-                            'pluginOptions' => [
+                    <?php $model->trans_date = $model->isNewRecord ? date('d-m-Y') : date('d-m-Y', $model->trans_date); ?>
+                    <?= $form->field($model, 'trans_date')->widget(DatePicker::className(), [
+                        'pluginOptions' => [
 
-                            ],
+                        ],
                     ]) ?>
                 </div>
                 <div class="col-lg-3">
-                    <?= $form->field($model, 'dept_id')->widget(Select2::className(),[
-                        'data'=>ArrayHelper::map($dept,'id','name'),
-                        'options' => ['placeholder'=>'เลือก','id'=>'dept-id',
-                            'onchange'=>' 
-                                  var xx = "'.Url::to(['productionrec/findzonedate'],true).'&id="+$(this).val();
+                    <?= $form->field($model, 'dept_id')->widget(Select2::className(), [
+                        'data' => ArrayHelper::map($dept, 'id', 'name'),
+                        'options' => ['placeholder' => 'เลือก', 'id' => 'dept-id',
+                            'onchange' => ' 
+                                  var xx = "' . Url::to(['productionrec/findzonedate'], true) . '&id="+$(this).val();
                                     $.post(xx,function(data){
                                            $(".zone_date").val(data);                                             
                                         });
@@ -159,211 +159,263 @@ $this->registerJs($js,static::POS_END);
                 </div>
 
                 <div class="col-lg-3">
-                    <?= $form->field($model, 'zone_id')->widget(Select2::className(),[
-                            'data'=>ArrayHelper::map($modelzone,'id','name'),
-                            'options' => ['placeholder'=>'เลือก',
-                                'onchange'=>' 
-                                  var xx = "'.Url::to(['productionrec/findzonedate'],true).'&id="+$(this).val();
+                    <?= $form->field($model, 'zone_id')->widget(Select2::className(), [
+                        'data' => ArrayHelper::map($modelzone, 'id', 'name'),
+                        'options' => ['placeholder' => 'เลือก',
+                            'onchange' => ' 
+                                  var xx = "' . Url::to(['productionrec/findzonedate'], true) . '&id="+$(this).val();
                                     $.post(xx,function(data){
                                            $(".zone_date").val(data);                                             
                                         });
                                 '
-                                ],
+                        ],
                     ]) ?>
                 </div>
 
             </div>
-           <div class="row">
-               <div class="col-lg-3">
-                   <?php $model->zone_date = $model->isNewRecord?date('d-m-Y'):date('d-m-Y',$model->zone_date); ?>
-                   <?= $form->field($model, 'zone_date')->textInput(['class'=>'form-control zone_date','readonly'=>'readonly']) ?>
-               </div>
-               <div class="col-lg-4">
-                   <?= $form->field($model, 'zone_status')->widget(Select2::className(),[
-                       'data'=>ArrayHelper::map([['id'=>1,'name'=>'ยังไม่ปิดกอง'],['id'=>2,'name'=>'ปิดกอง']],'id','name'),
-                   ]) ?>
-           </div>
-               <div class="col-lg-4">
-                   <?php //echo $form->field($model, 'all_qty')->textInput() ?>
-               </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <?php $model->zone_date = $model->isNewRecord ? date('d-m-Y') : date('d-m-Y', $model->zone_date); ?>
+                    <?= $form->field($model, 'zone_date')->textInput(['class' => 'form-control zone_date', 'readonly' => 'readonly']) ?>
+                </div>
+                <div class="col-lg-4">
+                    <?= $form->field($model, 'zone_status')->widget(Select2::className(), [
+                        'data' => ArrayHelper::map([['id' => 1, 'name' => 'ยังไม่ปิดกอง'], ['id' => 2, 'name' => 'ปิดกอง']], 'id', 'name'),
+                    ]) ?>
+                </div>
+                <div class="col-lg-4">
+                    <?php //echo $form->field($model, 'all_qty')->textInput() ?>
+                </div>
 
-               <br />
-               <br />
-               <div class="row">
-                   <div class="col-lg-12">
-                       <table class="table table-line">
-                         <thead>
-                           <tr style="background: #c3c3c3">
-                               <th>#</th>
-                               <th>พนักงาน</th>
-                               <th class="type-1" style="text-align: center">ควั่นใหญ่</th>
-                               <th class="type-1" style="text-align: center">ขี้กาก</th>
-                               <th class="type-1" style="text-align: center">เศษ</th>
-                               <th class="type-2" style="text-align: center">หัวโต</th>
-                               <th class="type-2" style="text-align: center">หัวแหลม</th>
-                               <th class="type-2" style="text-align: center">เฉาะเสีย</th>
-                               <th class="type-3" style="text-align: center">ดีใหญ่</th>
-                               <th class="type-3" style="text-align: center">ดีเล็ก</th>
-                               <th class="type-3" style="text-align: center">แก่</th>
-                               <th class="type-3" style="text-align: center">อ่อน</th>
-                               <th class="type-3" style="text-align: center">เสียทิ้ง</th>
-                               <th style="text-align: center">รวม</th>
-                               <th style="text-align: center">-</th>
-                           </tr>
-                         </thead>
-                           <tbody>
-                           <?php if($model->isNewRecord):?>
-                               <tr>
-                                   <td style="vertical-align: middle">1</td>
-                                   <td>
-<!--                                       <input type="hidden" class="emp_id" name="emp_id[]" value="">-->
-<!--                                       <input  id="task-1" class="line_emp_code" type="text" name="line_emp_code[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: left" value="">-->
-<!--                                       <select name="line_emp_code[]" class="form-control" id="">-->
-                                           <?php //foreach ($modelemp as $value):?>
-<!--                                             <option value="--><?php ////echo $value->id?><!--">--><?php ////echo $value->first_name.' '.$value->last_name?><!--</option>-->
-                                           <?php //endforeach;?>
-<!--                                       </select>-->
-                                       <div class="input-group">
-                                           <input type="text" name="line_emp_code[]" class="form-control emp_code" placeholder="ค้นหารหัส..." value="">
-                                           <input type="hidden" class="emp_id" name="emp_id[]" value="">
-                                           <span class="input-group-btn">
-                                    <div class="btn btn-default btn-search-item"  onclick="findItem($(this));"><i class="fa fa-search-plus"></i></div>
+                <br/>
+                <br/>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table table-line">
+                            <thead>
+                            <tr style="background: #c3c3c3">
+                                <th>#</th>
+                                <th>พนักงาน</th>
+                                <th class="type-1" style="text-align: center">ควั่นใหญ่</th>
+                                <th class="type-1" style="text-align: center">ขี้กาก</th>
+                                <th class="type-1" style="text-align: center">เศษ</th>
+                                <th class="type-2" style="text-align: center">หัวโต</th>
+                                <th class="type-2" style="text-align: center">หัวแหลม</th>
+                                <th class="type-2" style="text-align: center">เฉาะเสีย</th>
+                                <th class="type-3" style="text-align: center">ดีใหญ่</th>
+                                <th class="type-3" style="text-align: center">ดีเล็ก</th>
+                                <th class="type-3" style="text-align: center">แก่</th>
+                                <th class="type-3" style="text-align: center">อ่อน</th>
+                                <th class="type-3" style="text-align: center">เสียทิ้ง</th>
+                                <th style="text-align: center">รวม</th>
+                                <th style="text-align: center">-</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php if ($model->isNewRecord): ?>
+                                <tr>
+                                    <td style="vertical-align: middle">1</td>
+                                    <td>
+                                        <!--                                       <input type="hidden" class="emp_id" name="emp_id[]" value="">-->
+                                        <!--                                       <input  id="task-1" class="line_emp_code" type="text" name="line_emp_code[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: left" value="">-->
+                                        <!--                                       <select name="line_emp_code[]" class="form-control" id="">-->
+                                        <?php //foreach ($modelemp as $value):?>
+                                        <!--                                             <option value="-->
+                                        <?php ////echo $value->id?><!--">-->
+                                        <?php ////echo $value->first_name.' '.$value->last_name?><!--</option>-->
+                                        <?php //endforeach;?>
+                                        <!--                                       </select>-->
+                                        <div class="input-group">
+                                            <input type="text" name="line_emp_code[]" class="form-control emp_code"
+                                                   placeholder="ค้นหารหัส..." value="">
+                                            <input type="hidden" class="emp_id" name="emp_id[]" value="">
+                                            <span class="input-group-btn">
+                                    <div class="btn btn-default btn-search-item" onclick="findItem($(this));"><i
+                                                class="fa fa-search-plus"></i></div>
                                 </span>
-                                       </div>
-                                   </td>
-                                   <td>
-                                       <input  id="task-1" class="line_time_one" onchange="cal_num($(this));" type="text" name="line_time_one[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="">
-                                   </td>
-                                   <td>
-                                       <input  id="task-1" class="line_time_two" onchange="cal_num($(this));" type="text" name="line_time_two[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="">
-                                   </td>
-                                   <td>
-                                       <input  id="task-1" class="line_time_three" onchange="cal_num($(this));" type="text" name="line_time_three[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="">
-                                   </td>
-                                   <td>
-                                       <input  id="task-1" class="line_time_four" onchange="cal_num($(this));" type="text" name="line_time_four[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="">
-                                   </td>
-                                   <td>
-                                       <input  id="task-1" class="line_time_five" onchange="cal_num($(this));" type="text" name="line_time_five[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="">
-                                   </td>
-                                   <td>
-                                       <input readonly id="task-1" class="line_total"  type="text" name="line_total[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: right" value="">
-                                   </td>
-                                   <td>
-                                       <div class="btn btn-danger btn-sm btn-remove-line" onclick="removeline($(this))">ลบ</div>
-                                   </td>
-                               </tr>
-                           <?php else:?>
-                           <?php // print_r($modelline[0][6]);
-                               $i=0;
-                               ?>
-                                <?php for($m=0;$m<=count($modelline)-1;$m++): ?>
-                                   <tr>
-                                       <td><?=$i+=1;?></td>
-                                       <td>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input id="task-1" class="line_time_one" onchange="cal_num($(this));"
+                                               type="text" name="line_time_one[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td>
+                                        <input id="task-1" class="line_time_two" onchange="cal_num($(this));"
+                                               type="text" name="line_time_two[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td>
+                                        <input id="task-1" class="line_time_three" onchange="cal_num($(this));"
+                                               type="text" name="line_time_three[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td>
+                                        <input id="task-1" class="line_time_four" onchange="cal_num($(this));"
+                                               type="text" name="line_time_four[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td>
+                                        <input id="task-1" class="line_time_five" onchange="cal_num($(this));"
+                                               type="text" name="line_time_five[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td>
+                                        <input readonly id="task-1" class="line_total" type="text" name="line_total[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: right"
+                                               value="">
+                                    </td>
+                                    <td>
+                                        <div class="btn btn-danger btn-sm btn-remove-line"
+                                             onclick="removeline($(this))">ลบ
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php else: ?>
+                                <?php // print_r($modelline[0][6]);
+                                $i = 0;
+                                ?>
+                                <?php for ($m = 0; $m <= count($modelline) - 1; $m++): ?>
+                                    <tr>
+                                        <td><?= $i += 1; ?></td>
+                                        <td>
 
-                                           <div class="input-group">
-                                               <input type="text" name="line_emp_code[]" class="form-control emp_code" placeholder="ค้นหารหัส..." value="<?=\backend\models\Employee::findFullname($modelline[$m][0])?>">
-                                               <input type="hidden" class="emp_id" name="emp_id[]" value="<?=$modelline[$m][0]?>">
-                                               <input type="hidden" class="line_id" name="line_id[]" value="<?php echo $modelline[$m][6]?>">
-                                               <span class="input-group-btn">
-                                                 <div class="btn btn-default btn-search-item"  onclick="findItem($(this));"><i class="fa fa-search-plus"></i></div>
+                                            <div class="input-group">
+                                                <input type="text" name="line_emp_code[]" class="form-control emp_code"
+                                                       placeholder="ค้นหารหัส..."
+                                                       value="<?= \backend\models\Employee::findFullname($modelline[$m][0]) ?>">
+                                                <input type="hidden" class="emp_id" name="emp_id[]"
+                                                       value="<?= $modelline[$m][0] ?>">
+                                                <input type="hidden" class="line_id" name="line_id[]"
+                                                       value="<?php echo $modelline[$m][6] ?>">
+                                                <span class="input-group-btn">
+                                                 <div class="btn btn-default btn-search-item"
+                                                      onclick="findItem($(this));"><i
+                                                             class="fa fa-search-plus"></i></div>
                                                </span>
-                                           </div>
-                                       </td>
-                                       <td>
-                                           <input  id="task-1" class="line_time_one" onchange="cal_num($(this));" type="text" name="line_time_one[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="<?=$modelline[$m][1]?>">
-                                       </td>
-                                       <td>
-                                           <input  id="task-1" class="line_time_two" onchange="cal_num($(this));" type="text" name="line_time_two[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="<?=$modelline[$m][2]?>">
-                                       </td>
-                                       <td>
-                                           <input  id="task-1" class="line_time_three" onchange="cal_num($(this));" type="text" name="line_time_three[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="<?=$modelline[$m][3]?>">
-                                       </td>
-                                       <td>
-                                           <input  id="task-1" class="line_time_four" onchange="cal_num($(this));" type="text" name="line_time_four[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="<?=$modelline[$m][4]?>">
-                                       </td>
-                                       <td>
-                                           <input  id="task-1" class="line_time_five" onchange="cal_num($(this));" type="text" name="line_time_five[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center" value="<?=$modelline[$m][5]?>">
-                                       </td>
-                                       <td>
-                                           <input readonly id="task-1" class="line_total"  type="text" name="line_total[]" style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: right" value="">
-                                       </td>
-                                       <td>
-                                           <div class="btn btn-danger btn-sm btn-remove-line" onclick="removeline($(this))">ลบ</div>
-                                       </td>
-                                   </tr>
-                                <?php endfor;?>
-                            <?php endif;?>
-                           </tbody>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input id="task-1" class="line_time_one" onchange="cal_num($(this));"
+                                                   type="text" name="line_time_one[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                                   value="<?= $modelline[$m][1] ?>">
+                                        </td>
+                                        <td>
+                                            <input id="task-1" class="line_time_two" onchange="cal_num($(this));"
+                                                   type="text" name="line_time_two[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                                   value="<?= $modelline[$m][2] ?>">
+                                        </td>
+                                        <td>
+                                            <input id="task-1" class="line_time_three" onchange="cal_num($(this));"
+                                                   type="text" name="line_time_three[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                                   value="<?= $modelline[$m][3] ?>">
+                                        </td>
+                                        <td>
+                                            <input id="task-1" class="line_time_four" onchange="cal_num($(this));"
+                                                   type="text" name="line_time_four[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                                   value="<?= $modelline[$m][4] ?>">
+                                        </td>
+                                        <td>
+                                            <input id="task-1" class="line_time_five" onchange="cal_num($(this));"
+                                                   type="text" name="line_time_five[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                                   value="<?= $modelline[$m][5] ?>">
+                                        </td>
+                                        <td>
+                                            <input readonly id="task-1" class="line_total" type="text"
+                                                   name="line_total[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: right"
+                                                   value="">
+                                        </td>
+                                        <td>
+                                            <div class="btn btn-danger btn-sm btn-remove-line"
+                                                 onclick="removeline($(this))">ลบ
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endfor; ?>
+                            <?php endif; ?>
+                            </tbody>
 
-                       </table>
-                        <?php if($model->status != 2):?>
-                                <div class="btn btn-primary btn-add"><i class="fa fa-plus-circle"></i> เพิ่มรายการ</div>
-                        <?php endif;?>
-                   </div>
-               </div>
+                        </table>
+                        <?php if ($model->status != 2): ?>
+                            <div class="btn btn-primary btn-add"><i class="fa fa-plus-circle"></i> เพิ่มรายการ</div>
+                        <?php endif; ?>
+                    </div>
+                </div>
 
-           </div>
+            </div>
             <hr>
-    <div class="form-group">
-        <?php if($model->status != 2):?>
-            <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
-        <?php endif;?>
-    </div>
+            <div class="form-group">
+                <?php if ($model->status != 2): ?>
+                    <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+                <?php endif; ?>
+            </div>
 
-    <?php ActiveForm::end(); ?>
+            <?php ActiveForm::end(); ?>
         </div>
     </div>
 
 </div>
 
-    <div id="findModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-md">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><i class="fa fa-search-plus text-primary"></i> ค้นหารหัสพนักงาน</h4>
-                </div>
-                <div class="modal-body">
-                    <input type="text" placeholder="ใส่คำค้นแล้วกด Enter" class="form-control itemsearch" name="itemsearch" >
-                    <br>
-                    <table class="table table-striped table-hover table-list" style="display: none;">
-                        <thead>
-                        <tr style="background-color: #00b488;color: #FFF;">
-                            <th>รหัส</th>
-                            <th>ชื่อ</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+<div id="findModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-search-plus text-primary"></i> ค้นหารหัสพนักงาน</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="ใส่คำค้นแล้วกด Enter" class="form-control itemsearch" name="itemsearch">
+                <br>
+                <table class="table table-striped table-hover table-list" style="display: none;">
+                    <thead>
+                    <tr style="background-color: #00b488;color: #FFF;">
+                        <th>รหัส</th>
+                        <th>ชื่อ</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                        </tbody>
-                    </table>
-                    <div class="modal-error" style="display: none;">
-                        <i class="fa fa-exclamation-triangle text-danger"> ไม่พบข้อมูล กรุณาลองใหม่อีกครั้ง</i>
-                    </div>
+                    </tbody>
+                </table>
+                <div class="modal-error" style="display: none;">
+                    <i class="fa fa-exclamation-triangle text-danger"> ไม่พบข้อมูล กรุณาลองใหม่อีกครั้ง</i>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success btn-ok" data-dismiss="modal">ตกลง</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-ok" data-dismiss="modal">ตกลง</button>
             </div>
         </div>
     </div>
+</div>
 
 <?php
-$url_to_search = Url::to(['productionrec/findemp'],true);
+$url_to_search = Url::to(['productionrec/findemp'], true);
 
 
- $this->registerJs('
+$this->registerJs('
    $(function(){
+   
+   checkDeptType();
+   
     var idInc = 2;
-    var neworupdate = "'.$neworupdate.'";
+    var neworupdate = "' . $neworupdate . '";
     $(".line_emp_code").autocomplete({
         minLength: 1,
         source: function(query,response){
             $.ajax({
-            url: "'.$url_to_search.'",
+            url: "' . $url_to_search . '",
             data: { term: query},
             dataType: "json",
             type: "POST",
@@ -417,7 +469,7 @@ $url_to_search = Url::to(['productionrec/findemp'],true);
                 minLength: 1,
                 source: function(query,response){
                     $.ajax({
-                    url: "'.$url_to_search.'",
+                    url: "' . $url_to_search . '",
                     data: { term: query},
                     dataType: "json",
                     type: "POST",
@@ -521,5 +573,27 @@ $url_to_search = Url::to(['productionrec/findemp'],true);
          $(this).closest("tr").find("td:eq(0)").text(xline);
       });
  }
- ',static::POS_END);
+ function checkDeptType(){
+    var type = $("#dept-id option:selected").text();
+    if(type == "ควั่น"){
+         $("table.table-line thead>tr").each(function(){
+          $(this).find(".type-1").show();
+          $(this).find(".type-2,.type-3").hide();
+         });
+    }else if(type == "หัวโต"){
+          $("table.table-line thead>tr").each(function(){
+            $(this).find(".type-2").show();
+            $(this).find(".type-1,.type-3").hide();
+          });
+    }else if(type == "ปอกฝาก"){
+          //alert();
+           $("table.table-line thead>tr").each(function(){
+               $(this).find(".type-3").show();
+               $(this).find(".type-2,.type-1").hide();
+           });
+    }  
+ }
+ 
+ 
+ ', static::POS_END);
 ?>
