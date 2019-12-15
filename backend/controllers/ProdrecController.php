@@ -205,9 +205,9 @@ class ProdrecController extends Controller
             $line_issue_qty = Yii::$app->request->post('line_issue_qty');
             $line_issue_price = Yii::$app->request->post('line_issue_price');
 
-             // echo count($product_issue_id);return;
+          //  echo count($line_zone_name);return;
 
-             //print_r($line_qty);return;
+           // print_r($line_zone_name);return;
 
             $model->status = 1;
             $model->lot_no = $line_lot[0];
@@ -220,6 +220,7 @@ class ProdrecController extends Controller
                     for($i=0;$i<=count($prod_recid)-1;$i++){
                         if($prod_recid[$i]==''){continue;}
                         $zone_line = explode(",",$line_zone_name[$i]);
+                       // $zone_line = $line_zone_name[$i];
                         $qty_line = explode(",",$line_qty[$i]);
 
                         $zone_message = '';
@@ -233,7 +234,8 @@ class ProdrecController extends Controller
                                     $modelrec->prod_rec_id = $model->id;
                                     $modelrec->product_id = $prod_recid[$i];
                                   //  $modelrec->zone_id = $zone_line[$m];
-                                    $modelrec->zone_id = $rec_for_zone;
+                                  //  $modelrec->zone_id = $rec_for_zone;
+                                    $modelrec->zone_id = $zone_line[$m];
                                     $modelrec->lot_no = $line_lot[$i];
                                     $modelrec->qty = $qty_line[$m];
                                     $modelrec->line_type = 1; // รับสินค้า

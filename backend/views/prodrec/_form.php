@@ -116,11 +116,15 @@ $state = $model->isNewRecord ? 0 : 1;
                                                   if(i==0){
                                                     var $tr = $(".table-line tbody tr:first");
                                                     $tr.find(".line_product").val(plan[i]["product_id"]);
+                                                    $tr.find(".selected-zone-hidden").attr("id",plan[i]["product_id"]);
+                                                   // $tr.find(".selected-zone-hidden").attr("name","line_zone"+i+"[]");
                                                     
                                                   }else{
                                                      var $tr = $(".table-line tbody tr:last");
                                                      var $clone = $tr.clone();
                                                      $clone.find(".line_product").val(plan[i]["product_id"]);
+                                                     $clone.find(".selected-zone-hidden").attr("id",plan[i]["product_id"]);
+                                                     // $tr.find(".selected-zone-hidden").attr("name","line_zone"+i+"[]");
                                                      $tr.after($clone);
                                                   }
                                                }                            
@@ -202,7 +206,8 @@ $state = $model->isNewRecord ? 0 : 1;
                                     <div class="btn btn-warning btn-select-zone" onclick="selectzone($(this));"
                                          style="display: none;">เลือกกองที่ต้องการ
                                     </div>
-                                    <select name="" class="selected-zone-hidden" name="line_zone[]" style="display: none;"></select>
+                                    <select class="selected-zone-hidden" multiple="multiple" style="display: none;"></select>
+                                    <input type="hidden" name="line_zone[]" class="line_selected_zone" value="">
                                     <input readonly id="task-1" class="line_zone_id" type="hidden" name="line_zone_id[]"
                                            style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                            value="">
@@ -314,7 +319,7 @@ $state = $model->isNewRecord ? 0 : 1;
                                             <div class="btn btn-warning btn-select-zone" onclick="selectzone($(this));"
                                                  style="display: none;">เลือกกองที่ต้องการ
                                             </div>
-                                            <select name="" class="selected-zone-hidden" name="line_zone[]" style="display: none;"></select>
+                                            <select class="selected-zone-hidden" name="line_zone[]" multiple="multiple" style="display: none;"></select>
                                             <input readonly id="task-1" class="line_zone_id" type="hidden"
                                                    name="line_zone_id[]"
                                                    style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
@@ -405,7 +410,7 @@ $state = $model->isNewRecord ? 0 : 1;
                                         <div class="btn btn-warning btn-select-zone" onclick="selectzone($(this));"
                                              style="display: none;">เลือกกองที่ต้องการ
                                         </div>
-                                        <select name="" class="selected-zone-hidden" name="line_zone[]" style="display: none;"></select>
+                                        <select class="selected-zone-hidden" name="line_zone[]" multiple="multiple" style="display: none;"></select>
                                         <input readonly id="task-1" class="line_zone_id" type="hidden"
                                                name="line_zone_id[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
@@ -793,11 +798,14 @@ var data = [
           var selected = $("#selected-zone").val();
           var i = 0;
           
+          
+          
           $(".table-line tbody >tr").each(function(){
           
            var this_index = $(this).index();
            
            if(cur_index == this_index){
+           $(this).find(".line_selected_zone").val(selected);
               $(this).find("select.selected-zone-hidden >option").each(function(){
               var cval = $(this).val();
               
