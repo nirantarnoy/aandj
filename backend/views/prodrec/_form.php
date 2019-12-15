@@ -310,7 +310,7 @@ $state = $model->isNewRecord ? 0 : 1;
                                             <!--                                            <input readonly id="task-1" class="line_zone" type="text" name="line_zone[]"-->
                                             <!--                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"-->
                                             <!--                                                   value="-->
-                                            <? //= $value->list_zone ?><!--">-->
+                                            <?php //echo $value->list_zone ?><!--">-->
                                             <div class="btn btn-warning btn-select-zone" onclick="selectzone($(this));"
                                                  style="display: none;">เลือกกองที่ต้องการ
                                             </div>
