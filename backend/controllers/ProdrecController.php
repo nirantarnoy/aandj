@@ -223,19 +223,25 @@ class ProdrecController extends Controller
                        // $zone_line = $line_zone_name[$i];
                         $qty_line = explode(",",$line_qty[$i]);
 
+                        $zone_use = [];
+                        $check_zone_user = $this->findZoneCanUse($zone_line,$qty_line[$i]);
+                        if($check_zone_user){
+
+                        }
+
                         $zone_message = '';
                         $qty_message = 0;
 
-                        if(count($zone_line)>0){
-                                for($m=0;$m<=count($zone_line)-1;$m++){
+                        if(count($check_zone_user)>0){
+                                for($m=0;$m<=count($check_zone_user)-1;$m++){
                                     $data = [];
-                                    $rec_for_zone = $this->findZoneid($zone_line[$m]);
+                                   // $rec_for_zone = $this->findZoneid($zone_line[$m]);
                                     $modelrec = new \backend\models\Prodrecline();
                                     $modelrec->prod_rec_id = $model->id;
                                     $modelrec->product_id = $prod_recid[$i];
                                   //  $modelrec->zone_id = $zone_line[$m];
                                   //  $modelrec->zone_id = $rec_for_zone;
-                                    $modelrec->zone_id = $zone_line[$m];
+                                    $modelrec->zone_id = $check_zone_user[$m];
                                     $modelrec->lot_no = $line_lot[$i];
                                     $modelrec->qty = $qty_line[$m];
                                     $modelrec->line_type = 1; // รับสินค้า
@@ -250,19 +256,19 @@ class ProdrecController extends Controller
 
                                     if($modelrec->save(false)){
                                         $modelzoneproduct = new \backend\models\Zoneproduct();
-                                        $modelzoneproduct->zone_id = $this->findZoneid($zone_line[$m]);
+                                        $modelzoneproduct->zone_id = $this->findZoneid($check_zone_user[$m]);
                                         $modelzoneproduct->product_id = $prod_recid[$i];
                                         $modelzoneproduct->lot_no = $line_lot[$i];
                                         $modelzoneproduct->qty = $qty_line[$m];
                                         $modelzoneproduct->status = 0;
                                         $modelzoneproduct->save(false);
 
-                                        $zone_message = $zone_message.\backend\models\Zone::findName($zone_line[$m]);
+                                        $zone_message = $zone_message.\backend\models\Zone::findName($check_zone_user[$m]);
                                         $qty_message = $qty_message + $qty_line[$m];
 
 
                                         array_push($data,['product_id'=>$prod_recid[$i],'qty'=>$qty_line[$m],'price'=>$model->plan_price]);
-                                        \backend\models\Journal::createTrans($rec_for_zone,$data,'',\backend\helpers\RunnoTitle::RUNNO_PRODREC);
+                                        \backend\models\Journal::createTrans($check_zone_user[$m],$data,'',\backend\helpers\RunnoTitle::RUNNO_PRODREC);
                                     }
                                   $this->updatePurchPlan($model->plan_id,$prod_recid[$i],$model->suplier_id,$qty_line[$m]);
                                   $this->updateReceiveQty($model->id,$model->lot_no);
@@ -311,6 +317,27 @@ class ProdrecController extends Controller
             'modelissue'=>null,
             'suptype'=>$suptype,
         ]);
+    }
+    public function findZoneCanUse($zone,$qty){
+        $data = [];
+        $qty_total = $qty;
+        if($zone){
+            for($i=0;$i<=count($zone)-1;$i++){
+                $model = \backend\models\Zone::find()->where(['id'=>$zone[$i],'lock'=>0,'qty'=>0])->one();
+                if($model){
+                   if($model->max_qty >= $qty_total){
+                      array_push($data,$model->id);
+                      return $data;
+                   }else{
+                       $qty_total = $qty_total - $model->max_qty;
+                       array_push($data,$model->id);
+                   }
+                }
+            }
+
+        }
+        return $data;
+
     }
     public function findZoneid($name){
         $model = \backend\models\Zone::find()->where(['name'=>trim($name)])->one();
