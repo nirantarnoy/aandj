@@ -203,6 +203,7 @@ $state = $model->isNewRecord ? 0 : 1;
                                     <div class="btn btn-warning btn-select-zone" onclick="selectzone($(this));"
                                          style="display: none;">เลือกกองที่ต้องการ
                                     </div>
+                                    <select name="" class="selected-zone-hidden" name="line_zone[]" style="display: none;"></select>
                                     <input readonly id="task-1" class="line_zone_id" type="hidden" name="line_zone_id[]"
                                            style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                            value="">
@@ -311,10 +312,10 @@ $state = $model->isNewRecord ? 0 : 1;
                                             <!--                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"-->
                                             <!--                                                   value="-->
                                             <? //= $value->list_zone ?><!--">-->
-                                            <select class="form-control line_zone" name="line_zone[]"
-                                                    multiple="multiple">
-                                                <option value="">dfdf</option>
-                                            </select>
+                                            <div class="btn btn-warning btn-select-zone" onclick="selectzone($(this));"
+                                                 style="display: none;">เลือกกองที่ต้องการ
+                                            </div>
+                                            <select name="" class="selected-zone-hidden" name="line_zone[]" style="display: none;"></select>
                                             <input readonly id="task-1" class="line_zone_id" type="hidden"
                                                    name="line_zone_id[]"
                                                    style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
@@ -402,9 +403,10 @@ $state = $model->isNewRecord ? 0 : 1;
                                         </select>
                                     </td>
                                     <td>
-                                        <input readonly id="task-1" class="line_zone" type="text" name="line_zone[]"
-                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
-                                               value="">
+                                        <div class="btn btn-warning btn-select-zone" onclick="selectzone($(this));"
+                                             style="display: none;">เลือกกองที่ต้องการ
+                                        </div>
+                                        <select name="" class="selected-zone-hidden" name="line_zone[]" style="display: none;"></select>
                                         <input readonly id="task-1" class="line_zone_id" type="hidden"
                                                name="line_zone_id[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
@@ -705,8 +707,7 @@ $state = $model->isNewRecord ? 0 : 1;
                 </select>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success btn-add-qc">บันทึก</button>
-                <button type="button" class="btn btn-warning btn-cancel-qc">ยกเลิกการบันทึกคุณภาพ</button>
+                <button type="button" class="btn btn-success btn-add-selected-zone">ตกลง</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">ปิดหน้าต่าง</button>
             </div>
         </div>
@@ -727,6 +728,7 @@ $this->registerCssFile('@web/css/sweetalert.css');
 
 $js = '
 var cur_product = 0;
+var cur_index = 0;
 var data = [
     {
         id: 0,
@@ -786,6 +788,33 @@ var data = [
               $(this).closest("tr").find("td:eq(6)").show();
          });
       }
+      
+      $(".btn-add-selected-zone").click(function(){
+          
+          var selected = $("#selected-zone").val();
+          var i = 0;
+          
+          $(".table-line tbody >tr").each(function(){
+          
+           var this_index = $(this).index();
+           
+           if(cur_index == this_index){
+              $(this).find("select.selected-zone-hidden >option").each(function(){
+              var cval = $(this).val();
+              
+              if(cval != selected[i]){
+                 // alert($(this).attr("selected"));
+                  $(this).removeAttr("selected");
+              }
+              i++;
+          });
+           }
+          });
+        
+          
+          
+      });
+      
       $(".btn-add").click(function(){
 
               var linenum = 0;
@@ -991,7 +1020,7 @@ var data = [
           data : {id:prodid,qty:curqty,state:state,listzone:listzone},
           success: function(data){
           console.log(data);
-          alert(data[0]["name"]);
+         // alert(data[0]["name"]);
              if(data.length > 0){
                 for(var x=0;x<=data.length -1;x++){
                 res+=1;
@@ -1020,20 +1049,17 @@ var data = [
             console.log("error");
           }
        });
-       //alert(zonename);
-      // e.closest("tr").find(".line_zone").select2();
-
+      // alert(zonename);
+   
        e.closest("tr").find(".line_zone_id").val("");
        
        if(res>0){
         e.closest("tr").find(".btn-select-zone").show();
        }
        
-       
-       //e.closest("tr").find(".line_zone").val("");
-
-       //e.closest("tr").find(".line_zone").val(zonename);
-       //e.closest("tr").find(".line_zone").html(zonename);
+   
+       e.closest("tr").find(".selected-zone-qty").val(zonename);
+       e.closest("tr").find(".selected-zone-hidden").html(zonename);
        
        e.closest("tr").find(".line_zone_id").val(zonelist);
        e.closest("tr").find(".line_zone_qty").val(zonelistqty);
@@ -1164,10 +1190,15 @@ var data = [
  }
  
  function selectzone(e){
- var html = "<option value=0 selected>niran</option>"; 
+ var idx = e.parent().parent().index();
+ cur_index = idx;
+ var html = e.closest("tr").find("select.selected-zone-hidden").html();
+
     $("#selected-zone").html(html);
     $("#selected-zone").select2();
     $("#selectModal").modal("show");
+
+ 
  }
  
 ';

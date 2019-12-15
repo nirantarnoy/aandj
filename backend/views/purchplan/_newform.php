@@ -46,7 +46,7 @@
                                        <input type="text" style="text-align: right" class="form-control" name="line_plan1[]" value="">
                                    </td>
                                    <td>
-                                       <input type="text" style="text-align: right" class="form-control" name="line_qty1[]" value="">
+                                       <input type="text" style="text-align: right" class="form-control" name="line_qty1[]" value="" readonly>
                                    </td>
                                    <td>
                                        <input type="text" style="text-align: right" class="form-control" name="line_price1[]" value="">
@@ -75,7 +75,7 @@
                                                 <input type="text" style="text-align: right" class="form-control" name="line_plan1[]" value="<?=$val->plan_qty?>">
                                             </td>
                                             <td>
-                                                <input type="text" style="text-align: right" class="form-control" name="line_qty1[]" value="<?=$val->received_qty?>">
+                                                <input type="text" style="text-align: right" class="form-control" name="line_qty1[]" value="<?=$val->received_qty?>" readonly>
                                             </td>
                                             <td>
                                                 <input type="text" style="text-align: right" class="form-control" name="line_price1[]" value="<?=$val->plan_price?>">
@@ -121,7 +121,7 @@
                                     <input type="text" class="form-control" name="line_plan2[]" value="">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="line_qty2[]" value="">
+                                    <input type="text" class="form-control" name="line_qty2[]" value="" readonly>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" name="line_price2[]" value="">
@@ -150,7 +150,7 @@
                                                 <input type="text" style="text-align: right" class="form-control" name="line_plan2[]" value="<?=$val->plan_qty?>">
                                             </td>
                                             <td>
-                                                <input type="text" style="text-align: right" class="form-control" name="line_qty2[]" value="<?=$val->received_qty?>">
+                                                <input type="text" style="text-align: right" class="form-control" name="line_qty2[]" value="<?=$val->received_qty?>" readonly>
                                             </td>
                                             <td>
                                                 <input type="text" style="text-align: right" class="form-control" name="line_price2[]" value="<?=$val->plan_price?>">
@@ -196,7 +196,7 @@
                                     <input type="text" class="form-control" name="line_plan3[]" value="">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="line_qty3[]" value="">
+                                    <input type="text" class="form-control" name="line_qty3[]" value="" readonly>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" name="line_price3[]" value="">
@@ -225,7 +225,7 @@
                                                 <input type="text" style="text-align: right" class="form-control" name="line_plan3[]" value="<?=$val->plan_qty?>">
                                             </td>
                                             <td>
-                                                <input type="text" style="text-align: right" class="form-control" name="line_qty3[]" value="<?=$val->received_qty?>">
+                                                <input type="text" style="text-align: right" class="form-control" name="line_qty3[]" value="<?=$val->received_qty?>" readonly>
                                             </td>
                                             <td>
                                                 <input type="text" style="text-align: right" class="form-control" name="line_price3[]" value="<?=$val->plan_price?>">
@@ -271,7 +271,7 @@
                                     <input type="text" class="form-control" name="line_plan4[]" value="">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="line_qty4[]" value="">
+                                    <input type="text" class="form-control" name="line_qty4[]" value="" readonly>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" name="line_price4[]" value="">
@@ -300,7 +300,7 @@
                                     <input type="text" style="text-align: right" class="form-control" name="line_plan4[]" value="<?=$val->plan_qty?>">
                                 </td>
                                 <td>
-                                    <input type="text" style="text-align: right" class="form-control" name="line_qty4[]" value="<?=$val->received_qty?>">
+                                    <input type="text" style="text-align: right" class="form-control" name="line_qty4[]" value="<?=$val->received_qty?>" readonly>
                                 </td>
                                 <td>
                                     <input type="text" style="text-align: right" class="form-control" name="line_price4[]" value="<?=$val->plan_price?>">
