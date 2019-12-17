@@ -107,6 +107,16 @@ use yii\helpers\Url;
                                          </div>
                                      </div>
                                      <div class="form-group">
+                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ใช้กับแผนก <span class="required"></span>
+                                         </label>
+                                         <div class="col-md-6 col-sm-6 col-xs-12">
+                                             <?= $form->field($model, 'dept_use')->widget(Select2::className(),[
+                                                 'data' => ArrayHelper::map(\backend\models\Section::find()->all(),'id','name'),
+                                                 'options' => ['placeholder'=>'เลือกประแผนก']
+                                             ])->label(false) ?>
+                                         </div>
+                                     </div>
+                                     <div class="form-group">
                                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">จำนวน/กอง <span class="required"></span>
                                          </label>
                                          <div class="col-md-6 col-sm-6 col-xs-12">
@@ -121,9 +131,9 @@ use yii\helpers\Url;
                                             </div>
                                           </div>
 
-                                           
+
                                  </div>
-                                
+
                             </div>
 
                            <hr />
@@ -143,4 +153,3 @@ use yii\helpers\Url;
 
 
 </div>
-            

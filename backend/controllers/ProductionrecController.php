@@ -423,6 +423,7 @@ public function countOld($prodrecid){
         if($id){
            $zone_id = \backend\models\Product::findZonegroup($id);
            if($zone_id){
+               echo $zone_id;
                $zonename = '';
                if($zone_id == 1){$zonename='A';}
                if($zone_id == 2){$zonename='B';}
@@ -430,7 +431,7 @@ public function countOld($prodrecid){
 
                $zone_by_group = \backend\models\Zone::find()->where(['LIKE','name',$zonename])->asArray()->all();
 
-               $zone_list = \backend\models\Zoneproduct::find()->where(['zone_id'=>$$zone_by_group])->all();
+               $zone_list = \backend\models\Zoneproduct::find()->where(['zone_id'=>$zone_by_group])->all();
 
                if($zone_list){
                    $html = '';
@@ -438,6 +439,7 @@ public function countOld($prodrecid){
                        $zone_show_name = \backend\models\Zone::findName($val->zone_id);
                        $html.="<option value='".$val->zone_id."'>"+$zone_show_name+"</option>";
                    }
+                   echo $html;
                }
 
            }else{

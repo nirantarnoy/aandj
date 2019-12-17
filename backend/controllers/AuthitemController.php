@@ -33,7 +33,7 @@ class AuthitemController extends Controller
                 'rules'=>[
                     [
                         'allow'=>true,
-                        'actions'=>['index','create','update','view','resetpassword','managerule'],
+                        'actions'=>['index','create','update','view','resetpassword','autogen'],
                         'roles'=>['@'],
                     ],
                     [
@@ -188,7 +188,7 @@ class AuthitemController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
-    public function actionManagerule(){
+    public function actionAutogen(){
 
         $auth = Yii::$app->authManager;
         $auth->removeAll();
@@ -443,6 +443,8 @@ class AuthitemController extends Controller
         $auth->add($productionrec_findemp);
         $productionrec_findzonedate = $auth->createPermission('productionrec/findzonedate');
         $auth->add($productionrec_findzonedate);
+        $productionrec_findzonebydept = $auth->createPermission('productionrec/findzonebydept');
+        $auth->add($productionrec_findzonebydept);
         $productionrec_finditem = $auth->createPermission('productionrec/finditem');
         $auth->add($productionrec_finditem);
 
@@ -458,6 +460,7 @@ class AuthitemController extends Controller
         $auth->addChild($productionrec_permission,$productionrec_print);
         $auth->addChild($productionrec_permission,$productionrec_findemp);
         $auth->addChild($productionrec_permission,$productionrec_findzonedate);
+        $auth->addChild($productionrec_permission,$productionrec_findzonebydept);
         $auth->addChild($productionrec_permission,$productionrec_finditem);
 
         $manage_productionrec = $auth->createRole('Manage productionrec');
@@ -603,8 +606,8 @@ class AuthitemController extends Controller
         $auth->addChild($user_role,$manage_productionrec);
 
 
-        $auth->assign($admin_role,4);
-        $auth->assign($user_role,4);
+        $auth->assign($admin_role,1);
+        $auth->assign($user_role,1);
 
     }
 }

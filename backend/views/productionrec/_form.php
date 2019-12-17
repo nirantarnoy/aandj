@@ -137,7 +137,8 @@ $this->registerJs($js, static::POS_END);
                                            $(".zone_date").val(data);                                             
                                         });
                                   var findzone = "' . Url::to(['productionrec/findzonebydept'], true) . '&id="+$(this).val();
-                                    $.post(xx,function(data){
+                                    $.post(findzone,function(data){
+                                    alert(data);
                                            $("#zone-id").html(data);                                             
                                         });      
                                         

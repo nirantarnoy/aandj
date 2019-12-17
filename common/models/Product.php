@@ -48,7 +48,7 @@ class Product extends \yii\db\ActiveRecord
             [['product_code'],'required'],
             [['product_code'],'unique'],
             [['category_id', 'product_type_id','zone_group', 'unit_id', 'is_hold', 'has_variant', 'bom_type', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['min_stock', 'max_stock', 'cost', 'price'], 'number'],
+            [['min_stock', 'max_stock', 'cost', 'price','dept_use'], 'number'],
             [['product_code', 'name', 'description', 'barcode', 'photo'], 'string', 'max' => 255],
         ];
     }
@@ -77,6 +77,7 @@ class Product extends \yii\db\ActiveRecord
             'price' => Yii::t('app', 'ราคา'),
             'zone_group' => Yii::t('app', 'ประเภทกอง'),
             'zone_qty_per' => Yii::t('app', 'จำนวน/กอง'),
+            'dept_use' =>'ใช้กับแผนก',
             'status' => Yii::t('app', 'สถานะ'),
             'all_qty' => Yii::t('app', 'จำนวนทั้งหมด'),
             'reserved_qty' => Yii::t('app', 'จำนวนจอง'),
