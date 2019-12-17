@@ -418,6 +418,35 @@ public function countOld($prodrecid){
             }
         }
     }
+    public function actionFindzonebydept($id)
+    {
+        if($id){
+           $zone_id = \backend\models\Product::findZonegroup($id);
+           if($zone_id){
+               $zonename = '';
+               if($zone_id == 1){$zonename='A';}
+               if($zone_id == 2){$zonename='B';}
+               if($zone_id == 3){$zonename='C';}
+
+               $zone_by_group = \backend\models\Zone::find()->where(['LIKE','name',$zonename])->asArray()->all();
+
+               $zone_list = \backend\models\Zoneproduct::find()->where(['zone_id'=>$$zone_by_group])->all();
+
+               if($zone_list){
+                   $html = '';
+                   foreach ($zone_list as $val){
+                       $zone_show_name = \backend\models\Zone::findName($val->zone_id);
+                       $html.="<option value='".$val->zone_id."'>"+$zone_show_name+"</option>";
+                   }
+               }
+
+           }else{
+               echo "";
+           }
+        }else{
+            echo "";
+        }
+    }
     public function actionPrint(){
         $product = Yii::$app->request->post('selected_product');
         $from_date = date('Y-m-d',strtotime(Yii::$app->request->post('from_date')));

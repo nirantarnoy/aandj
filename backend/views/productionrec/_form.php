@@ -136,6 +136,11 @@ $this->registerJs($js, static::POS_END);
                                     $.post(xx,function(data){
                                            $(".zone_date").val(data);                                             
                                         });
+                                  var findzone = "' . Url::to(['productionrec/findzonebydept'], true) . '&id="+$(this).val();
+                                    $.post(xx,function(data){
+                                           $("#zone-id").html(data);                                             
+                                        });      
+                                        
                                   var this_val = $("#dept-id option:checked").text();
                                   if(this_val == "ควั่น"){
                                      $("table.table-line thead>tr").each(function(){
@@ -161,7 +166,7 @@ $this->registerJs($js, static::POS_END);
                 <div class="col-lg-3">
                     <?= $form->field($model, 'zone_id')->widget(Select2::className(), [
                         'data' => ArrayHelper::map($modelzone, 'id', 'name'),
-                        'options' => ['placeholder' => 'เลือก',
+                        'options' => ['placeholder' => 'เลือก','id'=>'zone-id',
                             'onchange' => ' 
                                   var xx = "' . Url::to(['productionrec/findzonedate'], true) . '&id="+$(this).val();
                                     $.post(xx,function(data){

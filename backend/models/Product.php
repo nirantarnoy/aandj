@@ -68,4 +68,10 @@ class Product extends \common\models\Product
             return $catname;
         }
 
+        public function findZonegroup($id){
+           $model = Product::find()->where(['id'=>$id])->one();
+           return $model!=null?$model->zone_group:0;
+
+        }
+
 }
