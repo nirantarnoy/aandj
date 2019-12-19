@@ -818,6 +818,7 @@ var data = [
            }
           });
         
+        $("#selectModal").modal("hide");
           
           
       });
