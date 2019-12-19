@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Purchplan */
 
-//$this->title = 'สร้างแผนสั่งซื้อ';
-//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'แผนสั่งซื้อ'), 'url' => ['index']];
-//$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'สร้างแผนสั่งซื้อ';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'แผนสั่งซื้อ'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="purchplan-create">
 

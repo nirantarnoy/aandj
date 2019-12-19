@@ -1,8 +1,12 @@
 <?php
+
 use yii\helpers\Url;
 
+$this->title = 'สร้างแผนสั่งซื้อ';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'แผนสั่งซื้อ'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 
-$this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
+$this->registerJsFile('@web/js/sweetalert.min.js?V=002',
     ['depends' => [\yii\web\JqueryAsset::className()]],
     static::POS_HEAD
 );
@@ -12,7 +16,7 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
         <form id="form-plan" action="index.php?r=purchplan/createnew" method="post">
             <div class="panel">
                 <div class="panel-heading">
-                    วางแผนสั่งซ์้อ
+                    <?= $this->title ?>
                     <?php if (!$model->isNewRecord): ?>
                         <div class="btn btn-default btn-copy" onclick="copy($(this));"><i class="fa fa-copy"></i> copy
                         </div>
@@ -54,8 +58,8 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="text" style="text-align: right" class="form-control"
-                                                   name="line_plan1[]" value="">
+                                            <input type="text" style="text-align: right" class="form-control line-plan"
+                                                   name="line_plan1[]" value="" onchange="cal_plan($(this),1);">
                                         </td>
                                         <td>
                                             <input type="text" style="text-align: right" class="form-control"
@@ -88,8 +92,10 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" style="text-align: right" class="form-control"
-                                                           name="line_plan1[]" value="<?= $val->plan_qty ?>">
+                                                    <input type="text" style="text-align: right"
+                                                           class="form-control line-plan"
+                                                           name="line_plan1[]" value="<?= $val->plan_qty ?>"
+                                                           onchange="cal_plan($(this),1);">
                                                 </td>
                                                 <td>
                                                     <input type="text" style="text-align: right" class="form-control"
@@ -110,6 +116,18 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                                 </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td style="text-align: right;font-weight: bold">รวม</td>
+                                    <td style="font-weight: bold;">
+                                        <input type="text" class="form-control sum-qty-plan1" style="text-align: right"
+                                               readonly value="0">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tfoot>
                             </table>
                             <div class="btn btn-primary btn-add-plan1">เพิ่มรายการ</div>
                         </div>
@@ -140,7 +158,8 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="line_plan2[]" value="">
+                                            <input type="text" class="form-control line-plan" name="line_plan2[]"
+                                                   value="" onchange="cal_plan($(this),2);">
                                         </td>
                                         <td>
                                             <input type="text" class="form-control" name="line_qty2[]" value=""
@@ -172,8 +191,10 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" style="text-align: right" class="form-control"
-                                                           name="line_plan2[]" value="<?= $val->plan_qty ?>">
+                                                    <input type="text" style="text-align: right"
+                                                           class="form-control line-plan"
+                                                           name="line_plan2[]" value="<?= $val->plan_qty ?>"
+                                                           onchange="cal_plan($(this),2);">
                                                 </td>
                                                 <td>
                                                     <input type="text" style="text-align: right" class="form-control"
@@ -194,6 +215,18 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                                 </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td style="text-align: right;font-weight: bold">รวม</td>
+                                    <td style="font-weight: bold;">
+                                        <input type="text" class="form-control sum-qty-plan2" style="text-align: right"
+                                               readonly value="0">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tfoot>
                             </table>
                             <div class="btn btn-primary btn-add-plan2">เพิ่มรายการ</div>
                         </div>
@@ -224,7 +257,8 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="line_plan3[]" value="">
+                                            <input type="text" class="form-control line-plan" name="line_plan3[]"
+                                                   value="" onchange="cal_plan($(this),3);">
                                         </td>
                                         <td>
                                             <input type="text" class="form-control" name="line_qty3[]" value=""
@@ -256,8 +290,10 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" style="text-align: right" class="form-control"
-                                                           name="line_plan3[]" value="<?= $val->plan_qty ?>">
+                                                    <input type="text" style="text-align: right"
+                                                           class="form-control line-plan"
+                                                           name="line_plan3[]" value="<?= $val->plan_qty ?>"
+                                                           onchange="cal_plan($(this),3);">
                                                 </td>
                                                 <td>
                                                     <input type="text" style="text-align: right" class="form-control"
@@ -278,6 +314,18 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                                 </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td style="text-align: right;font-weight: bold">รวม</td>
+                                    <td style="font-weight: bold;">
+                                        <input type="text" class="form-control sum-qty-plan3" style="text-align: right"
+                                               readonly value="0">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tfoot>
                             </table>
                             <div class="btn btn-primary btn-add-plan3">เพิ่มรายการ</div>
                         </div>
@@ -308,7 +356,8 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="line_plan4[]" value="">
+                                            <input type="text" class="form-control line-plan" name="line_plan4[]"
+                                                   value="" onchange="cal_plan($(this),4);">
                                         </td>
                                         <td>
                                             <input type="text" class="form-control" name="line_qty4[]" value=""
@@ -340,8 +389,10 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" style="text-align: right" class="form-control"
-                                                           name="line_plan4[]" value="<?= $val->plan_qty ?>">
+                                                    <input type="text" style="text-align: right"
+                                                           class="form-control line-plan"
+                                                           name="line_plan4[]" value="<?= $val->plan_qty ?>"
+                                                           onchange="cal_plan($(this),4);">
                                                 </td>
                                                 <td>
                                                     <input type="text" style="text-align: right" class="form-control"
@@ -362,6 +413,18 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                                 </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td style="text-align: right;font-weight: bold">รวม</td>
+                                    <td style="font-weight: bold;">
+                                        <input type="text" class="form-control sum-qty-plan4" style="text-align: right"
+                                               readonly value="0">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tfoot>
                             </table>
                             <div class="btn btn-primary btn-add-plan4">เพิ่มรายการ</div>
                         </div>
@@ -381,9 +444,10 @@ $this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
     </div>
 </div>
 <?php
-$this->registerCssFile( '@web/css/sweetalert.css');
+$this->registerCssFile('@web/css/sweetalert.css');
 $url_to_copy = Url::to(['purchplan/copyplan'], true);
 $js = <<<JS
+cal_sum();
 $(function() {
     $(".btn-form-save").click(function() {
       $("form#form-plan").submit();
@@ -485,6 +549,31 @@ function copy(e){
               });
         });
     }
+    
+    function cal_plan(e,index){
+      var table_id = "table-plan"+index;
+      var total = 0;
+      $("."+table_id+" tbody>tr").each(function(){
+          var qty = $(this).find(".line-plan").val();
+          total = total + parseFloat(qty);
+      });
+      $(".sum-qty-plan"+index).val(parseFloat(total).toFixed(0));
+    }
+    
+    function cal_sum() {
+      var x = 4;
+      for(var i=1;i<=x;i++){
+         // alert();
+          var total = 0;
+          var table_id = "table-plan"+i;
+           $("."+table_id+" tbody>tr").each(function(){
+               var qty = $(this).find(".line-plan").val();
+               total = total + parseFloat(qty);
+            });
+           $(".sum-qty-plan"+i).val(parseFloat(total).toFixed(0));
+      }
+    }
+    
 JS;
 $this->registerJs($js, static::POS_END);
 ?>
