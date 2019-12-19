@@ -1,338 +1,389 @@
 <?php
+use yii\helpers\Url;
+
+
+$this->registerJsFile( '@web/js/sweetalert.min.js?V=002',
+    ['depends' => [\yii\web\JqueryAsset::className()]],
+    static::POS_HEAD
+);
 ?>
 <div class="row">
     <div class="col-lg-12">
         <form id="form-plan" action="index.php?r=purchplan/createnew" method="post">
-        <div class="panel">
-            <div class="panel-heading">
-                วางแผนสั่งซ์้อ
-            </div>
-            <div class="panel-body">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home" style="font-weight: bold">ควั่น</a></li>
-                    <li><a data-toggle="tab" href="#menu1" style="font-weight: bold">หัวโต</a></li>
-                    <li><a data-toggle="tab" href="#menu2" style="font-weight: bold">เจีย</a></li>
-                    <li><a data-toggle="tab" href="#menu3" style="font-weight: bold">เจียสำเร็จ</a></li>
-                </ul>
-                <div class="tab-content">
+            <div class="panel">
+                <div class="panel-heading">
+                    วางแผนสั่งซ์้อ
+                    <?php if (!$model->isNewRecord): ?>
+                        <div class="btn btn-default btn-copy" onclick="copy($(this));"><i class="fa fa-copy"></i> copy
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home" style="font-weight: bold">ควั่น</a></li>
+                        <li><a data-toggle="tab" href="#menu1" style="font-weight: bold">หัวโต</a></li>
+                        <li><a data-toggle="tab" href="#menu2" style="font-weight: bold">เจีย</a></li>
+                        <li><a data-toggle="tab" href="#menu3" style="font-weight: bold">เจียสำเร็จ</a></li>
+                    </ul>
+                    <div class="tab-content">
 
-                    <div id="home" class="tab-pane fade in active">
-                        <br>
-                        <table class="table table-bordered table-plan1">
-                            <thead>
-                            <tr>
-                                <th style="text-align: center">ผู้ขาย</th>
-                                <th style="text-align: right">แผน</th>
-                                <th style="text-align: right">เข้าจริง</th>
-                                <th style="text-align: right">ราคา</th>
-                                <th style="text-align: center">-</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php if($model->isNewRecord):?>
-                               <tr>
-                                   <td>
-                                       <select name="line_sup1[]" class="form-control sub" id="">
-                                           <?php $sub = \backend\models\Suplier::find()->all();?>
-                                           <?php foreach($sub as $data2):?>
-                                               <?php
-                                               $select = '';
-                                               ?>
-                                               <option value="<?=$data2->id?>" <?=$select?>><?=$data2->name?></option>
-                                           <?php endforeach;?>
-                                       </select>
-                                   </td>
-                                   <td>
-                                       <input type="text" style="text-align: right" class="form-control" name="line_plan1[]" value="">
-                                   </td>
-                                   <td>
-                                       <input type="text" style="text-align: right" class="form-control" name="line_qty1[]" value="" readonly>
-                                   </td>
-                                   <td>
-                                       <input type="text" style="text-align: right" class="form-control" name="line_price1[]" value="">
-                                   </td>
-                                   <td style="text-align: center">
-                                       <div class="btn btn-danger btn-delete-plan1" onclick="removeline1($(this))">ลบ</div>
-                                   </td>
-                               </tr>
-                            <?php else:?>
-                            <?php foreach ($modelline as $val):?>
-                                <?php if($val->plan_type == 1):?>
-                                        <tr>
-                                            <td>
-                                                <select name="line_sup1[]" class="form-control sub" id="">
-                                                    <?php $sub = \backend\models\Suplier::find()->all();?>
-                                                    <?php foreach($sub as $data2):?>
-                                                        <?php
-                                                        $select = '';
-                                                        if($val->sup_id == $data2->id)$select='selected';
-                                                        ?>
-                                                        <option value="<?=$data2->id?>" <?=$select?>><?=$data2->name?></option>
-                                                    <?php endforeach;?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="text-align: right" class="form-control" name="line_plan1[]" value="<?=$val->plan_qty?>">
-                                            </td>
-                                            <td>
-                                                <input type="text" style="text-align: right" class="form-control" name="line_qty1[]" value="<?=$val->received_qty?>" readonly>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="text-align: right" class="form-control" name="line_price1[]" value="<?=$val->plan_price?>">
-                                            </td>
-                                            <td style="text-align: center">
-                                                <div class="btn btn-danger btn-delete-plan1" onclick="removeline1($(this))">ลบ</div>
-                                            </td>
-                                        </tr>
-                                <?php endif;?>
-                            <?php endforeach;?>
-                            <?php endif;?>
-                            </tbody>
-                        </table>
-                        <div class="btn btn-primary btn-add-plan1">เพิ่มรายการ</div>
+                        <div id="home" class="tab-pane fade in active">
+                            <br>
+                            <table class="table table-bordered table-plan1">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center">ผู้ขาย</th>
+                                    <th style="text-align: right">แผน</th>
+                                    <th style="text-align: right">เข้าจริง</th>
+                                    <th style="text-align: right">ราคา</th>
+                                    <th style="text-align: center">-</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php if ($model->isNewRecord): ?>
+                                    <tr>
+                                        <td>
+                                            <select name="line_sup1[]" class="form-control sub" id="">
+                                                <?php $sub = \backend\models\Suplier::find()->all(); ?>
+                                                <?php foreach ($sub as $data2): ?>
+                                                    <?php
+                                                    $select = '';
+                                                    ?>
+                                                    <option value="<?= $data2->id ?>" <?= $select ?>><?= $data2->name ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" style="text-align: right" class="form-control"
+                                                   name="line_plan1[]" value="">
+                                        </td>
+                                        <td>
+                                            <input type="text" style="text-align: right" class="form-control"
+                                                   name="line_qty1[]" value="" readonly>
+                                        </td>
+                                        <td>
+                                            <input type="text" style="text-align: right" class="form-control"
+                                                   name="line_price1[]" value="">
+                                        </td>
+                                        <td style="text-align: center">
+                                            <div class="btn btn-danger btn-delete-plan1" onclick="removeline1($(this))">
+                                                ลบ
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php foreach ($modelline as $val): ?>
+                                        <?php if ($val->plan_type == 1): ?>
+                                            <tr>
+                                                <td>
+                                                    <select name="line_sup1[]" class="form-control sub" id="">
+                                                        <?php $sub = \backend\models\Suplier::find()->all(); ?>
+                                                        <?php foreach ($sub as $data2): ?>
+                                                            <?php
+                                                            $select = '';
+                                                            if ($val->sup_id == $data2->id) $select = 'selected';
+                                                            ?>
+                                                            <option value="<?= $data2->id ?>" <?= $select ?>><?= $data2->name ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="text-align: right" class="form-control"
+                                                           name="line_plan1[]" value="<?= $val->plan_qty ?>">
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="text-align: right" class="form-control"
+                                                           name="line_qty1[]" value="<?= $val->received_qty ?>"
+                                                           readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="text-align: right" class="form-control"
+                                                           name="line_price1[]" value="<?= $val->plan_price ?>">
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <div class="btn btn-danger btn-delete-plan1"
+                                                         onclick="removeline1($(this))">ลบ
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                </tbody>
+                            </table>
+                            <div class="btn btn-primary btn-add-plan1">เพิ่มรายการ</div>
+                        </div>
+                        <div id="menu1" class="tab-pane fade">
+                            <br>
+                            <table class="table table-bordered table-plan2">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center">ผู้ขาย</th>
+                                    <th style="text-align: right">แผน</th>
+                                    <th style="text-align: right">เข้าจริง</th>
+                                    <th style="text-align: right">ราคา</th>
+                                    <th style="text-align: center">-</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php if ($model->isNewRecord): ?>
+                                    <tr>
+                                        <td>
+                                            <select name="line_sup2[]" class="form-control sub" id="">
+                                                <?php $sub = \backend\models\Suplier::find()->all(); ?>
+                                                <?php foreach ($sub as $data2): ?>
+                                                    <?php
+                                                    $select = '';
+                                                    ?>
+                                                    <option value="<?= $data2->id ?>" <?= $select ?>><?= $data2->name ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="line_plan2[]" value="">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="line_qty2[]" value=""
+                                                   readonly>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="line_price2[]" value="">
+                                        </td>
+                                        <td style="text-align: center">
+                                            <div class="btn btn-danger btn-delete-plan2" onclick="removeline2($(this))">
+                                                ลบ
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php foreach ($modelline as $val): ?>
+                                        <?php if ($val->plan_type == 2): ?>
+                                            <tr>
+                                                <td>
+                                                    <select name="line_sup2[]" class="form-control sub" id="">
+                                                        <?php $sub = \backend\models\Suplier::find()->all(); ?>
+                                                        <?php foreach ($sub as $data2): ?>
+                                                            <?php
+                                                            $select = '';
+                                                            if ($val->sup_id == $data2->id) $select = 'selected';
+                                                            ?>
+                                                            <option value="<?= $data2->id ?>" <?= $select ?>><?= $data2->name ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="text-align: right" class="form-control"
+                                                           name="line_plan2[]" value="<?= $val->plan_qty ?>">
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="text-align: right" class="form-control"
+                                                           name="line_qty2[]" value="<?= $val->received_qty ?>"
+                                                           readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="text-align: right" class="form-control"
+                                                           name="line_price2[]" value="<?= $val->plan_price ?>">
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <div class="btn btn-danger btn-delete-plan2"
+                                                         onclick="removeline2($(this))">ลบ
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                </tbody>
+                            </table>
+                            <div class="btn btn-primary btn-add-plan2">เพิ่มรายการ</div>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <br>
+                            <table class="table table-bordered table-plan3">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center">ผู้ขาย</th>
+                                    <th style="text-align: right">แผน</th>
+                                    <th style="text-align: right">เข้าจริง</th>
+                                    <th style="text-align: right">ราคา</th>
+                                    <th style="text-align: center">-</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php if ($model->isNewRecord): ?>
+                                    <tr>
+                                        <td>
+                                            <select name="line_sup3[]" class="form-control sub" id="">
+                                                <?php $sub = \backend\models\Suplier::find()->all(); ?>
+                                                <?php foreach ($sub as $data2): ?>
+                                                    <?php
+                                                    $select = '';
+                                                    ?>
+                                                    <option value="<?= $data2->id ?>" <?= $select ?>><?= $data2->name ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="line_plan3[]" value="">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="line_qty3[]" value=""
+                                                   readonly>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="line_price3[]" value="">
+                                        </td>
+                                        <td style="text-align: center">
+                                            <div class="btn btn-danger btn-delete-plan3" onclick="removeline3($(this))">
+                                                ลบ
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php foreach ($modelline as $val): ?>
+                                        <?php if ($val->plan_type == 3): ?>
+                                            <tr>
+                                                <td>
+                                                    <select name="line_sup3[]" class="form-control sub" id="">
+                                                        <?php $sub = \backend\models\Suplier::find()->all(); ?>
+                                                        <?php foreach ($sub as $data2): ?>
+                                                            <?php
+                                                            $select = '';
+                                                            if ($val->sup_id == $data2->id) $select = 'selected';
+                                                            ?>
+                                                            <option value="<?= $data2->id ?>" <?= $select ?>><?= $data2->name ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="text-align: right" class="form-control"
+                                                           name="line_plan3[]" value="<?= $val->plan_qty ?>">
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="text-align: right" class="form-control"
+                                                           name="line_qty3[]" value="<?= $val->received_qty ?>"
+                                                           readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="text-align: right" class="form-control"
+                                                           name="line_price3[]" value="<?= $val->plan_price ?>">
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <div class="btn btn-danger btn-delete-plan3"
+                                                         onclick="removeline3($(this))">ลบ
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                </tbody>
+                            </table>
+                            <div class="btn btn-primary btn-add-plan3">เพิ่มรายการ</div>
+                        </div>
+                        <div id="menu3" class="tab-pane fade">
+                            <br>
+                            <table class="table table-bordered table-plan4">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center">ผู้ขาย</th>
+                                    <th style="text-align: right">แผน</th>
+                                    <th style="text-align: right">เข้าจริง</th>
+                                    <th style="text-align: right">ราคา</th>
+                                    <th style="text-align: center">-</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php if ($model->isNewRecord): ?>
+                                    <tr>
+                                        <td>
+                                            <select name="line_sup4[]" class="form-control sub" id="">
+                                                <?php $sub = \backend\models\Suplier::find()->all(); ?>
+                                                <?php foreach ($sub as $data2): ?>
+                                                    <?php
+                                                    $select = '';
+                                                    ?>
+                                                    <option value="<?= $data2->id ?>" <?= $select ?>><?= $data2->name ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="line_plan4[]" value="">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="line_qty4[]" value=""
+                                                   readonly>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="line_price4[]" value="">
+                                        </td>
+                                        <td style="text-align: center">
+                                            <div class="btn btn-danger btn-delete-plan4" onclick="removeline4($(this))">
+                                                ลบ
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php foreach ($modelline as $val): ?>
+                                        <?php if ($val->plan_type == 4): ?>
+                                            <tr>
+                                                <td>
+                                                    <select name="line_sup4[]" class="form-control sub" id="">
+                                                        <?php $sub = \backend\models\Suplier::find()->all(); ?>
+                                                        <?php foreach ($sub as $data2): ?>
+                                                            <?php
+                                                            $select = '';
+                                                            if ($val->sup_id == $data2->id) $select = 'selected';
+                                                            ?>
+                                                            <option value="<?= $data2->id ?>" <?= $select ?>><?= $data2->name ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="text-align: right" class="form-control"
+                                                           name="line_plan4[]" value="<?= $val->plan_qty ?>">
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="text-align: right" class="form-control"
+                                                           name="line_qty4[]" value="<?= $val->received_qty ?>"
+                                                           readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="text-align: right" class="form-control"
+                                                           name="line_price4[]" value="<?= $val->plan_price ?>">
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <div class="btn btn-danger btn-delete-plan4"
+                                                         onclick="removeline4($(this))">ลบ
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                </tbody>
+                            </table>
+                            <div class="btn btn-primary btn-add-plan4">เพิ่มรายการ</div>
+                        </div>
+
                     </div>
-                    <div id="menu1" class="tab-pane fade">
-                        <br>
-                        <table class="table table-bordered table-plan2">
-                            <thead>
-                            <tr>
-                                <th style="text-align: center">ผู้ขาย</th>
-                                <th style="text-align: right">แผน</th>
-                                <th style="text-align: right">เข้าจริง</th>
-                                <th style="text-align: right">ราคา</th>
-                                <th style="text-align: center">-</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php if($model->isNewRecord):?>
-                            <tr>
-                                <td>
-                                    <select name="line_sup2[]" class="form-control sub" id="">
-                                        <?php $sub = \backend\models\Suplier::find()->all();?>
-                                        <?php foreach($sub as $data2):?>
-                                            <?php
-                                            $select = '';
-                                            ?>
-                                            <option value="<?=$data2->id?>" <?=$select?>><?=$data2->name?></option>
-                                        <?php endforeach;?>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="line_plan2[]" value="">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="line_qty2[]" value="" readonly>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="line_price2[]" value="">
-                                </td>
-                                <td style="text-align: center">
-                                    <div class="btn btn-danger btn-delete-plan2" onclick="removeline2($(this))">ลบ</div>
-                                </td>
-                            </tr>
-                            <?php else:?>
-                                <?php foreach ($modelline as $val):?>
-                                    <?php if($val->plan_type == 2):?>
-                                        <tr>
-                                            <td>
-                                                <select name="line_sup2[]" class="form-control sub" id="">
-                                                    <?php $sub = \backend\models\Suplier::find()->all();?>
-                                                    <?php foreach($sub as $data2):?>
-                                                        <?php
-                                                        $select = '';
-                                                        if($val->sup_id == $data2->id)$select='selected';
-                                                        ?>
-                                                        <option value="<?=$data2->id?>" <?=$select?>><?=$data2->name?></option>
-                                                    <?php endforeach;?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="text-align: right" class="form-control" name="line_plan2[]" value="<?=$val->plan_qty?>">
-                                            </td>
-                                            <td>
-                                                <input type="text" style="text-align: right" class="form-control" name="line_qty2[]" value="<?=$val->received_qty?>" readonly>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="text-align: right" class="form-control" name="line_price2[]" value="<?=$val->plan_price?>">
-                                            </td>
-                                            <td style="text-align: center">
-                                                <div class="btn btn-danger btn-delete-plan2" onclick="removeline2($(this))">ลบ</div>
-                                            </td>
-                                        </tr>
-                                    <?php endif;?>
-                                <?php endforeach;?>
-                            <?php endif;?>
-                            </tbody>
-                        </table>
-                        <div class="btn btn-primary btn-add-plan2">เพิ่มรายการ</div>
-                    </div>
-                    <div id="menu2" class="tab-pane fade">
-                        <br>
-                        <table class="table table-bordered table-plan3">
-                            <thead>
-                            <tr>
-                                <th style="text-align: center">ผู้ขาย</th>
-                                <th style="text-align: right">แผน</th>
-                                <th style="text-align: right">เข้าจริง</th>
-                                <th style="text-align: right">ราคา</th>
-                                <th style="text-align: center">-</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php if($model->isNewRecord):?>
-                            <tr>
-                                <td>
-                                    <select name="line_sup3[]" class="form-control sub" id="">
-                                        <?php $sub = \backend\models\Suplier::find()->all();?>
-                                        <?php foreach($sub as $data2):?>
-                                            <?php
-                                            $select = '';
-                                            ?>
-                                            <option value="<?=$data2->id?>" <?=$select?>><?=$data2->name?></option>
-                                        <?php endforeach;?>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="line_plan3[]" value="">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="line_qty3[]" value="" readonly>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="line_price3[]" value="">
-                                </td>
-                                <td style="text-align: center">
-                                    <div class="btn btn-danger btn-delete-plan3" onclick="removeline3($(this))">ลบ</div>
-                                </td>
-                            </tr>
-                            <?php else:?>
-                                <?php foreach ($modelline as $val):?>
-                                    <?php if($val->plan_type == 3):?>
-                                        <tr>
-                                            <td>
-                                                <select name="line_sup3[]" class="form-control sub" id="">
-                                                    <?php $sub = \backend\models\Suplier::find()->all();?>
-                                                    <?php foreach($sub as $data2):?>
-                                                        <?php
-                                                        $select = '';
-                                                        if($val->sup_id == $data2->id)$select='selected';
-                                                        ?>
-                                                        <option value="<?=$data2->id?>" <?=$select?>><?=$data2->name?></option>
-                                                    <?php endforeach;?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="text-align: right" class="form-control" name="line_plan3[]" value="<?=$val->plan_qty?>">
-                                            </td>
-                                            <td>
-                                                <input type="text" style="text-align: right" class="form-control" name="line_qty3[]" value="<?=$val->received_qty?>" readonly>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="text-align: right" class="form-control" name="line_price3[]" value="<?=$val->plan_price?>">
-                                            </td>
-                                            <td style="text-align: center">
-                                                <div class="btn btn-danger btn-delete-plan3" onclick="removeline3($(this))">ลบ</div>
-                                            </td>
-                                        </tr>
-                                    <?php endif;?>
-                                <?php endforeach;?>
-                            <?php endif;?>
-                            </tbody>
-                        </table>
-                        <div class="btn btn-primary btn-add-plan3">เพิ่มรายการ</div>
-                    </div>
-                    <div id="menu3" class="tab-pane fade">
-                        <br>
-                        <table class="table table-bordered table-plan4">
-                            <thead>
-                            <tr>
-                                <th style="text-align: center">ผู้ขาย</th>
-                                <th style="text-align: right">แผน</th>
-                                <th style="text-align: right">เข้าจริง</th>
-                                <th style="text-align: right">ราคา</th>
-                                <th style="text-align: center">-</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php if($model->isNewRecord):?>
-                            <tr>
-                                <td>
-                                    <select name="line_sup4[]" class="form-control sub" id="">
-                                        <?php $sub = \backend\models\Suplier::find()->all();?>
-                                        <?php foreach($sub as $data2):?>
-                                            <?php
-                                            $select = '';
-                                            ?>
-                                            <option value="<?=$data2->id?>" <?=$select?>><?=$data2->name?></option>
-                                        <?php endforeach;?>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="line_plan4[]" value="">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="line_qty4[]" value="" readonly>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="line_price4[]" value="">
-                                </td>
-                                <td style="text-align: center">
-                                    <div class="btn btn-danger btn-delete-plan4" onclick="removeline4($(this))">ลบ</div>
-                                </td>
-                            </tr>
-                            <?php else:?>
-                            <?php foreach ($modelline as $val):?>
-                            <?php if($val->plan_type == 4):?>
-                            <tr>
-                                <td>
-                                    <select name="line_sup4[]" class="form-control sub" id="">
-                                        <?php $sub = \backend\models\Suplier::find()->all();?>
-                                                    <?php foreach($sub as $data2):?>
-                                                        <?php
-                                        $select = '';
-                                        if($val->sup_id == $data2->id)$select='selected';
-                                        ?>
-                                        <option value="<?=$data2->id?>" <?=$select?>><?=$data2->name?></option>
-                                        <?php endforeach;?>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="text" style="text-align: right" class="form-control" name="line_plan4[]" value="<?=$val->plan_qty?>">
-                                </td>
-                                <td>
-                                    <input type="text" style="text-align: right" class="form-control" name="line_qty4[]" value="<?=$val->received_qty?>" readonly>
-                                </td>
-                                <td>
-                                    <input type="text" style="text-align: right" class="form-control" name="line_price4[]" value="<?=$val->plan_price?>">
-                                </td>
-                                <td style="text-align: center">
-                                    <div class="btn btn-danger btn-delete-plan4" onclick="removeline4($(this))">ลบ</div>
-                                </td>
-                            </tr>
-                            <?php endif;?>
-                            <?php endforeach;?>
-                            <?php endif;?>
-                            </tbody>
-                        </table>
-                        <div class="btn btn-primary btn-add-plan4">เพิ่มรายการ</div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="btn btn-success btn-form-save pull-right">บันทึกรายการ</div>
+                        </div>
                     </div>
 
                 </div>
             </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="btn btn-success btn-form-save pull-right">บันทึกรายการ</div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
         </form>
     </div>
 </div>
 <?php
-$js=<<<JS
+$this->registerCssFile( '@web/css/sweetalert.css');
+$url_to_copy = Url::to(['purchplan/copyplan'], true);
+$js = <<<JS
 $(function() {
     $(".btn-form-save").click(function() {
       $("form#form-plan").submit();
@@ -411,6 +462,29 @@ function removeline4(e) {
      
    }
 }
+function copy(e){
+        //e.preventDefault();
+        var plan = "$model->id";
+        swal({
+              title: "ต้องการสำเนารายการนี้ใช่หรือไม่",
+              text: "",
+              type: "success",
+              showCancelButton: true,
+              closeOnConfirm: false,
+              showLoaderOnConfirm: true
+            }, function () {
+              
+              $.ajax({
+                 type: 'post',
+                 dataType: 'html',
+                 url: '$url_to_copy',
+                 data: {planid: plan},
+                 success: function(data){
+                     alert(data);
+                 }
+              });
+        });
+    }
 JS;
-$this->registerJs($js,static::POS_END);
+$this->registerJs($js, static::POS_END);
 ?>

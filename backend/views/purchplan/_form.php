@@ -74,3 +74,36 @@ use kartik\date\DatePicker;
 
 </div>
 </div>
+<?php
+$url_to_copy = Url::to(['purchplan/copyplan'],true);
+$js =<<<JS
+$(function() {
+  
+});
+function copy(e){
+        //e.preventDefault();
+        var plan = "$model->id";
+        swal({
+              title: "ต้องการสำเนารายการนี้ใช่หรือไม่",
+              text: "",
+              type: "success",
+              showCancelButton: true,
+              closeOnConfirm: false,
+              showLoaderOnConfirm: true
+            }, function () {
+              
+              $.ajax({
+                 type: 'post',
+                 dataType: 'html',
+                 url: '$url_to_copy',
+                 data: {planid: plan},
+                 success: function(data){
+                     alert(data);
+                 }
+              });
+        });
+    }
+JS;
+
+$this->registerJs($js,static::POS_END);
+?>
