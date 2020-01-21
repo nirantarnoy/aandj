@@ -1,6 +1,6 @@
-/*	
+/*
 *	############################################################################################
-*	
+*
 *	KLOROFIL - Free Bootstrap Dashboard Template
 *	---------------------------------------------------------------------
 *
@@ -9,30 +9,32 @@
 *	Website: 	https://www.themeineed.com/
 *	Copyright: 	Copyright 2016 The Develovers
 *	License: 	Creative Common Attribution 4.0 https://creativecommons.org/licenses/by/4.0/
-*	
+*
 *	############################################################################################
 */
 /********************
  * GENERAL STYLES
  ********************/
 @font-face{
-  font-family: 'Cloud-Light';
-  src: url('../fonts/Cloud-Light.ttf') format('truetype');
+  /*font-family: 'Cloud-Light';*/
+  /*src: url('../fonts/Cloud-Light.ttf') format('truetype');*/
+  font-family: 'Kanit-Regular';
+  src: url('../fonts/Kanit-Regular.ttf') format('truetype');
   /* src: url('../fonts/thsarabunnew-webfont.eot?#iefix') format('embedded-opentype'),
         url('../fonts/thsarabunnew-webfont.woff') format('woff'),
         url('../fonts/EkkamaiStandard-Light.ttf') format('truetype');*/
   font-weight: normal;
   font-style: normal;
 }
-@font-face{
-  font-family: 'Cloud-Bold';
-  src: url('../fonts/Cloud-Bold.ttf') format('truetype');
-  /* src: url('../fonts/thsarabunnew-webfont.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/thsarabunnew-webfont.woff') format('woff'),
-        url('../fonts/EkkamaiStandard-Light.ttf') format('truetype');*/
-  font-weight: normal;
-  font-style: normal;
-}
+/*@font-face{*/
+  /*font-family: 'Cloud-Bold';*/
+  /*src: url('../fonts/Cloud-Bold.ttf') format('truetype');*/
+  /*!* src: url('../fonts/thsarabunnew-webfont.eot?#iefix') format('embedded-opentype'),*/
+        /*url('../fonts/thsarabunnew-webfont.woff') format('woff'),*/
+        /*url('../fonts/EkkamaiStandard-Light.ttf') format('truetype');*!*/
+  /*font-weight: normal;*/
+  /*font-style: normal;*/
+/*}*/
 html {
   position: relative;
   min-height: 100%; }

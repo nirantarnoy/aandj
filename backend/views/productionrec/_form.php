@@ -253,73 +253,74 @@ $this->registerJs($js, static::POS_END);
                                                value="">
                                     </td>
                                     <td class="type-1">
-                                        <input id="task-1" class="line_time_two" onchange="cal_num($(this));"
+                                        <input id="task-2" class="line_time_two" onchange="cal_num($(this));"
                                                type="text" name="line_time_two[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-1">
-                                        <input id="task-1" class="line_time_three" onchange="cal_num($(this));"
+                                        <input id="task-3" class="line_time_three" onchange="cal_num($(this));"
                                                type="text" name="line_time_three[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-1">
-                                        <input id="task-1" class="line_time_four" onchange="cal_num($(this));"
+                                        <input id="task-4" class="line_time_four" onchange="cal_num($(this));"
                                                type="text" name="line_time_four[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-2">
-                                        <input id="task-1" class="line_time_five" onchange="cal_num($(this));"
+                                        <input id="task-5" class="line_time_five" onchange="cal_num($(this));"
                                                type="text" name="line_time_five[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-2">
-                                        <input id="task-1" class="line_time_six" onchange="cal_num($(this));"
+                                        <input id="task-6" class="line_time_six" onchange="cal_num($(this));"
                                                type="text" name="line_time_six[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-2">
-                                        <input id="task-1" class="line_time_eight" onchange="cal_num($(this));"
+                                        <input id="task-6" class="line_time_seven" onchange="cal_num($(this));"
+                                               type="text" name="line_time_seven[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td class="type-3">
+                                        <input id="task-7" class="line_time_eight" onchange="cal_num($(this));"
                                                type="text" name="line_time_eight[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-3">
-                                        <input id="task-1" class="line_time_nine" onchange="cal_num($(this));"
+                                        <input id="task-8" class="line_time_nine" onchange="cal_num($(this));"
                                                type="text" name="line_time_nine[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-3">
-                                        <input id="task-1" class="line_time_ten" onchange="cal_num($(this));"
+                                        <input id="task-9" class="line_time_ten" onchange="cal_num($(this));"
                                                type="text" name="line_time_ten[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-3">
-                                        <input id="task-1" class="line_time_eleven" onchange="cal_num($(this));"
+                                        <input id="task-10" class="line_time_eleven" onchange="cal_num($(this));"
                                                type="text" name="line_time_eleven[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-3">
-                                        <input id="task-1" class="line_time_twelve" onchange="cal_num($(this));"
+                                        <input id="task-11" class="line_time_twelve" onchange="cal_num($(this));"
                                                type="text" name="line_time_twelve[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
-                                    <td class="type-3">
-                                        <input id="task-1" class="line_time_thirteen" onchange="cal_num($(this));"
-                                               type="text" name="line_time_thirteen[]"
-                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
-                                               value="">
-                                    </td>
+
                                     <td class="type-total">
-                                        <input readonly id="task-1" class="line_total" type="text" name="line_total[]"
+                                        <input readonly id="task-13" class="line_total" type="text" name="line_total[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: right"
                                                value="">
                                     </td>
@@ -597,7 +598,7 @@ $this->registerJs('
                 }
             });
       idInc+=1;
-      $clone.find(".line_time_one,.line_time_two,.line_time_three,.line_time_four,.line_time_five").on("keypress",function(event){
+      $clone.find(".line_time_one,.line_time_two,.line_time_three,.line_time_four,.line_time_five,.line_time_six,.line_time_seven,.line_time_eight,.line_time_nine,.line_time_ten,.line_time_eleven,.line_time_twelve").on("keypress",function(event){
        $(this).val($(this).val().replace(/[^0-9\.]/g,""));
        if((event.which != 46 || $(this).val().indexOf(".") != -1) && (event.which <48 || event.which >57)){event.preventDefault();}
     });
@@ -608,8 +609,9 @@ $this->registerJs('
          $(this).closest("tr").find("td:eq(0)").text(linenum);
       });
      });
-    $(".line_time_one,.line_time_two,.line_time_three,.line_time_four,.line_time_five").on("keypress",function(event){
+    $(".line_time_one,.line_time_two,.line_time_three,.line_time_four,.line_time_five,.line_time_six,.line_time_seven,.line_time_eight,.line_time_nine,.line_time_ten,.line_time_eleven,.line_time_twelve").on("keypress",function(event){
        $(this).val($(this).val().replace(/[^0-9\.]/g,""));
+      // alert($(this).val());
        if((event.which != 46 || $(this).val().indexOf(".") != -1) && (event.which <48 || event.which >57)){event.preventDefault();}
     });
     
@@ -621,14 +623,31 @@ $this->registerJs('
      var three = e.closest("tr").find(".line_time_three").val();
      var four = e.closest("tr").find(".line_time_four").val();
      var five = e.closest("tr").find(".line_time_five").val();
+    var six = e.closest("tr").find(".line_time_six").val();
+    var seven = e.closest("tr").find(".line_time_seven").val();
+    var eight = e.closest("tr").find(".line_time_eight").val();
+    var nine = e.closest("tr").find(".line_time_nine").val();
+    var ten = e.closest("tr").find(".line_time_ten").val();
+    var eleven = e.closest("tr").find(".line_time_eleven").val();
+    var twelve = e.closest("tr").find(".line_time_twelve").val();
      
      if(one == ""){one = 0;}
      if(two == ""){two = 0;}
      if(three == ""){three = 0;}
      if(four == ""){four = 0;}
      if(five == ""){five = 0;}
+     if(six == ""){six = 0;}
+     if(seven == ""){seven = 0;}
+     if(eight == ""){eight = 0;}
+     if(nine == ""){nine = 0;}
+     if(ten == ""){ten = 0;}
+     if(eleven == ""){eleven = 0;}
+     if(twelve == ""){twelve = 0;}
+
+
+    
      
-     var newqty = parseInt(one) + parseInt(two) + parseInt(three) + parseInt(four) + parseInt(five);
+     var newqty = parseInt(one) + parseInt(two) + parseInt(three) + parseInt(four) + parseInt(five) + parseInt(six) + parseInt(seven) + parseInt(eight)+ parseInt(nine)+ parseInt(ten)+ parseInt(eleven)+ parseInt(twelve);
      e.closest("tr").find(".line_total").val("");
      e.closest("tr").find(".line_total").val(parseFloat(newqty).toFixed(0));
    }
