@@ -207,6 +207,7 @@ $this->registerJs($js, static::POS_END);
                                 <th>#</th>
                                 <th>พนักงาน</th>
                                 <th class="type-1" style="text-align: center">ควั่นใหญ่</th>
+                                <th class="type-1" style="text-align: center">ควั่นเล็ก</th>
                                 <th class="type-1" style="text-align: center">ขี้กาก</th>
                                 <th class="type-1" style="text-align: center">เศษ</th>
                                 <th class="type-2" style="text-align: center">หัวโต</th>
@@ -245,37 +246,79 @@ $this->registerJs($js, static::POS_END);
                                 </span>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="type-1">
                                         <input id="task-1" class="line_time_one" onchange="cal_num($(this));"
                                                type="text" name="line_time_one[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
-                                    <td>
+                                    <td class="type-1">
                                         <input id="task-1" class="line_time_two" onchange="cal_num($(this));"
                                                type="text" name="line_time_two[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
-                                    <td>
+                                    <td class="type-1">
                                         <input id="task-1" class="line_time_three" onchange="cal_num($(this));"
                                                type="text" name="line_time_three[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
-                                    <td>
+                                    <td class="type-1">
                                         <input id="task-1" class="line_time_four" onchange="cal_num($(this));"
                                                type="text" name="line_time_four[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
-                                    <td>
+                                    <td class="type-2">
                                         <input id="task-1" class="line_time_five" onchange="cal_num($(this));"
                                                type="text" name="line_time_five[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
-                                    <td>
+                                    <td class="type-2">
+                                        <input id="task-1" class="line_time_six" onchange="cal_num($(this));"
+                                               type="text" name="line_time_six[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td class="type-2">
+                                        <input id="task-1" class="line_time_eight" onchange="cal_num($(this));"
+                                               type="text" name="line_time_eight[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td class="type-3">
+                                        <input id="task-1" class="line_time_nine" onchange="cal_num($(this));"
+                                               type="text" name="line_time_nine[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td class="type-3">
+                                        <input id="task-1" class="line_time_ten" onchange="cal_num($(this));"
+                                               type="text" name="line_time_ten[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td class="type-3">
+                                        <input id="task-1" class="line_time_eleven" onchange="cal_num($(this));"
+                                               type="text" name="line_time_eleven[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td class="type-3">
+                                        <input id="task-1" class="line_time_twelve" onchange="cal_num($(this));"
+                                               type="text" name="line_time_twelve[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td class="type-3">
+                                        <input id="task-1" class="line_time_thirteen" onchange="cal_num($(this));"
+                                               type="text" name="line_time_thirteen[]"
+                                               style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                               value="">
+                                    </td>
+                                    <td class="type-total">
                                         <input readonly id="task-1" class="line_total" type="text" name="line_total[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: right"
                                                value="">
@@ -425,17 +468,18 @@ $this->registerJs('
    
    var this_val = $("#create-dept").val();
    if(this_val == "ควั่น"){
-        $("table.table-line thead>tr").each(function(){
-        $(this).find(".type-1").show();
-        $(this).find(".type-2,.type-3").hide();
+        $("table.table-line thead>tr , table.table-line tbody>tr").each(function(){
+            $(this).find(".type-1").show();
+            $(this).find(".type-2,.type-3").hide();
         });
+        
    }else if(this_val == "หัวโต"){
-        $("table.table-line thead>tr").each(function(){
+        $("table.table-line thead>tr , table.table-line tbody>tr").each(function(){
             $(this).find(".type-2").show();
             $(this).find(".type-1,.type-3").hide();
         });
    }else if(this_val == "ปอกฝาก"){
-        $("table.table-line thead>tr").each(function(){
+        $("table.table-line thead>tr , table.table-line tbody>tr").each(function(){
             $(this).find(".type-3").show();
             $(this).find(".type-2,.type-1").hide();
         });
