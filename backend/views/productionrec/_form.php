@@ -467,18 +467,18 @@ $this->registerJs('
    });
    
    var this_val = $("#create-dept").val();
-   if(this_val == "ควั่น"){
+   if(this_val == "แผนกควั่น"){
         $("table.table-line thead>tr , table.table-line tbody>tr").each(function(){
             $(this).find(".type-1").show();
             $(this).find(".type-2,.type-3").hide();
         });
         
-   }else if(this_val == "หัวโต"){
+   }else if(this_val == "แผนกหัวโต"){
         $("table.table-line thead>tr , table.table-line tbody>tr").each(function(){
             $(this).find(".type-2").show();
             $(this).find(".type-1,.type-3").hide();
         });
-   }else if(this_val == "ปอกฝาก"){
+   }else if(this_val == "แผนกปอกฝาก"){
         $("table.table-line thead>tr , table.table-line tbody>tr").each(function(){
             $(this).find(".type-3").show();
             $(this).find(".type-2,.type-1").hide();
