@@ -112,7 +112,7 @@ $this->registerJs($js, static::POS_END);
 <div class="productionrec-form">
     <div class="panel panel-headline">
         <div class="panel-heading">
-            <h3 style="font-weight: bold">รับเข้าแผนก<?=$rec_type_name?></h3>
+            <h3 style="font-weight: bold">รับเข้า<?=$rec_type_name?></h3>
             <input type="hidden" id="create-dept" value="<?=$rec_type_name?>">
         </div>
         <div class="panel-body">
