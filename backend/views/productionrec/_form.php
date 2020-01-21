@@ -112,7 +112,8 @@ $this->registerJs($js, static::POS_END);
 <div class="productionrec-form">
     <div class="panel panel-headline">
         <div class="panel-heading">
-            <h3 style="font-weight: bold">รับเข้าแผนก<?=$rec_type?></h3>
+            <h3 style="font-weight: bold">รับเข้าแผนก<?=$rec_type_name?></h3>
+            <input type="hidden" id="create-dept" value="<?=$rec_type_name?>">
         </div>
         <div class="panel-body">
             <?php $form = ActiveForm::begin(); ?>
@@ -415,6 +416,30 @@ $url_to_search = Url::to(['productionrec/findemp'], true);
 
 $this->registerJs('
    $(function(){
+   var create_dept = $("#create-dept").val();
+   var findzone = "' . Url::to(['productionrec/findzonebydept'], true) . '&id="+$(this).val();
+       $.post(findzone,function(data){
+           //  alert(data);
+       $("#zone-id").html(data);
+   });
+   
+   var this_val = $("#create-dept").val();
+   if(this_val == "ควั่น"){
+        $("table.table-line thead>tr").each(function(){
+        $(this).find(".type-1").show();
+        $(this).find(".type-2,.type-3").hide();
+        });
+   }else if(this_val == "หัวโต"){
+        $("table.table-line thead>tr").each(function(){
+            $(this).find(".type-2").show();
+            $(this).find(".type-1,.type-3").hide();
+        });
+   }else if(this_val == "ปอกฝาก"){
+        $("table.table-line thead>tr").each(function(){
+            $(this).find(".type-3").show();
+            $(this).find(".type-2,.type-1").hide();
+        });
+   }
    
    checkDeptType();
    

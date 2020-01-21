@@ -235,7 +235,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php foreach ($dept as $value): ?>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <a href="index.php?r=productionrec/create&type=<?=$value->name?>" class="btn btn-info"
+                                    <a href="index.php?r=productionrec/create&type=<?=$value->id?>&typename=<?=$value->name?>" class="btn btn-info"
                                          style="width: 100%;font-weight: bold;padding: 15px 15px 15px 15px;"><?= $value->name; ?></a>
                                 </div>
                             </div>
