@@ -5,9 +5,8 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
 use lavrentiev\widgets\toastr\Notification;
-/* @var $this yii\web\View */
-/* @var $searchModel backend\models\ProductionrecSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$dept = \backend\models\Section::find()->all();
 
 $this->title = Yii::t('app', 'รับยอดผลิต');
 $this->params['breadcrumbs'][] = $this->title;
@@ -49,26 +48,30 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="panel panel-headline">
         <div class="panel-heading">
             <div class="btn-group">
-                <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> รับยอดผลิต'), ['create'], ['class' => 'btn btn-success']) ?>
+                <?php //echo Html::a(Yii::t('app', '<i class="fa fa-plus"></i> รับยอดผลิต'), ['create'], ['class' => 'btn btn-success']) ?>
+                <div class="btn btn-success btn-rec"><i class="fa fa-plus"></i> รับยอดผลิต</div>
             </div>
-            <h4 class="pull-right"><?=$this->title?> <i class="fa fa-cubes"></i><small></small></h4>
+            <h4 class="pull-right"><?= $this->title ?> <i class="fa fa-cubes"></i>
+                <small></small>
+            </h4>
         </div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-9">
                     <div class="form-inline">
-                        <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+                        <?php echo $this->render('_search', ['model' => $searchModel]); ?>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="pull-right">
-                        <form id="form-perpage" class="form-inline" action="<?=Url::to(['productionrec/index'],true)?>" method="post">
+                        <form id="form-perpage" class="form-inline"
+                              action="<?= Url::to(['productionrec/index'], true) ?>" method="post">
                             <div class="form-group">
                                 <label>แสดง </label>
                                 <select class="form-control" name="perpage" id="perpage">
-                                    <option value="20" <?=$perpage=='20'?'selected':''?>>20</option>
-                                    <option value="50" <?=$perpage=='50'?'selected':''?> >50</option>
-                                    <option value="100" <?=$perpage=='100'?'selected':''?>>100</option>
+                                    <option value="20" <?= $perpage == '20' ? 'selected' : '' ?>>20</option>
+                                    <option value="50" <?= $perpage == '50' ? 'selected' : '' ?> >50</option>
+                                    <option value="100" <?= $perpage == '100' ? 'selected' : '' ?>>100</option>
                                 </select>
                                 <label> รายการ</label>
                             </div>
@@ -77,80 +80,80 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="table-responsive">
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        //'filterModel' => $searchModel,
-        'emptyCell'=>'-',
-        'layout'=>'{items}{summary}{pager}',
-        'summary' => "แสดง {begin} - {end} ของทั้งหมด {totalCount} รายการ",
-        'showOnEmpty'=>false,
-        'tableOptions' => ['class' => 'table table-hover'],
-        'emptyText' => '<div style="color: red;align: center;"> <b>ไม่พบรายการไดๆ</b></div>',
-        'columns' => [
-            [
-                'class' => 'yii\grid\SerialColumn',
-                'contentOptions' => ['style' => 'vertical-align: middle','text-align:center'],
-            ],
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    //'filterModel' => $searchModel,
+                    'emptyCell' => '-',
+                    'layout' => '{items}{summary}{pager}',
+                    'summary' => "แสดง {begin} - {end} ของทั้งหมด {totalCount} รายการ",
+                    'showOnEmpty' => false,
+                    'tableOptions' => ['class' => 'table table-hover'],
+                    'emptyText' => '<div style="color: red;align: center;"> <b>ไม่พบรายการไดๆ</b></div>',
+                    'columns' => [
+                        [
+                            'class' => 'yii\grid\SerialColumn',
+                            'contentOptions' => ['style' => 'vertical-align: middle', 'text-align:center'],
+                        ],
 
-           // 'id',
-            [
-                'attribute'=>'productrec_no',
-                'contentOptions' => ['style' => 'vertical-align: middle'],
+                        // 'id',
+                        [
+                            'attribute' => 'productrec_no',
+                            'contentOptions' => ['style' => 'vertical-align: middle'],
 
-            ],
-            [
-                'attribute'=>'trans_date',
-                'contentOptions' => ['style' => 'vertical-align: middle'],
-                'value'=>function($data){
-                    return date('d-m-Y',$data->trans_date);
-                }
-            ],
-            [
-                'attribute'=>'dept_id',
-                'contentOptions' => ['style' => 'vertical-align: middle'],
-                'value'=>function($data){
-                    return \backend\models\Section::findName($data->dept_id);
-                }
-            ],
-            [
-                'attribute'=>'zone_id',
-                'contentOptions' => ['style' => 'vertical-align: middle'],
-                'value'=>function($data){
-                    return \backend\models\Zone::findName($data->zone_id);
-                }
-            ],
+                        ],
+                        [
+                            'attribute' => 'trans_date',
+                            'contentOptions' => ['style' => 'vertical-align: middle'],
+                            'value' => function ($data) {
+                                return date('d-m-Y', $data->trans_date);
+                            }
+                        ],
+                        [
+                            'attribute' => 'dept_id',
+                            'contentOptions' => ['style' => 'vertical-align: middle'],
+                            'value' => function ($data) {
+                                return \backend\models\Section::findName($data->dept_id);
+                            }
+                        ],
+                        [
+                            'attribute' => 'zone_id',
+                            'contentOptions' => ['style' => 'vertical-align: middle'],
+                            'value' => function ($data) {
+                                return \backend\models\Zone::findName($data->zone_id);
+                            }
+                        ],
 
-            [
-                'attribute'=>'zone_date',
-                'contentOptions' => ['style' => 'vertical-align: middle'],
-                'value'=>function($data){
-                    return date('d-m-Y',$data->zone_date);
-                }
-            ],
-            [
-                'attribute'=>'product_id',
-                'contentOptions' => ['style' => 'vertical-align: middle'],
-                'value'=>function($data){
-                    return \backend\models\Product::findName($data->product_id);
-                }
-            ],
-            [
-                'attribute'=>'zone_status',
-                'contentOptions' => ['style' => 'vertical-align: middle'],
-                'format' => 'html',
-                'value'=>function($data){
-                    return $data->zone_status === 1 ? '<div class="label label-success">เปิดกอง</div>':'<div class="label label-danger">ปิดกอง</div>';
-                }
-            ],
-            //'name',
-            //'all_qty',
-            //'note',
-            //'status',
-            //'created_at',
-            //'updated_at',
-            //'created_by',
-            //'updated_by',
-            //'zone_type',
+                        [
+                            'attribute' => 'zone_date',
+                            'contentOptions' => ['style' => 'vertical-align: middle'],
+                            'value' => function ($data) {
+                                return date('d-m-Y', $data->zone_date);
+                            }
+                        ],
+                        [
+                            'attribute' => 'product_id',
+                            'contentOptions' => ['style' => 'vertical-align: middle'],
+                            'value' => function ($data) {
+                                return \backend\models\Product::findName($data->product_id);
+                            }
+                        ],
+                        [
+                            'attribute' => 'zone_status',
+                            'contentOptions' => ['style' => 'vertical-align: middle'],
+                            'format' => 'html',
+                            'value' => function ($data) {
+                                return $data->zone_status === 1 ? '<div class="label label-success">เปิดกอง</div>' : '<div class="label label-danger">ปิดกอง</div>';
+                            }
+                        ],
+                        //'name',
+                        //'all_qty',
+                        //'note',
+                        //'status',
+                        //'created_at',
+                        //'updated_at',
+                        //'created_by',
+                        //'updated_by',
+                        //'zone_type',
 
 //            [
 //                'attribute'=>'status',
@@ -160,65 +163,102 @@ $this->params['breadcrumbs'][] = $this->title;
 //                    return $data->status === 1 ? '<div class="label label-success">Active</div>':'<div class="label label-default">Inactive</div>';
 //                }
 //            ],
-            [
+                        [
 
-                'header' => '',
-                'headerOptions' => ['style' => 'text-align:center;','class' => 'activity-view-link',],
-                'class' => 'yii\grid\ActionColumn',
-                'contentOptions' => ['style' => 'text-align: right','vertical-align: middle'],
-                'buttons' => [
-                    'view' => function($url, $data, $index) {
-                        $options = [
-                            'title' => Yii::t('yii', 'View'),
-                            'aria-label' => Yii::t('yii', 'View'),
-                            'data-pjax' => '0',
-                        ];
-                        return Html::a(
-                            '<span class="glyphicon glyphicon-eye-open btn btn-xs btn-default"></span>', $url, $options);
-                    },
-                    'update' => function($url, $data, $index) {
-                        $options = array_merge([
-                            'title' => Yii::t('yii', 'Update'),
-                            'aria-label' => Yii::t('yii', 'Update'),
-                            'data-pjax' => '0',
-                            'id'=>'modaledit',
-                        ]);
-                        return  Html::a(
-                            '<span class="glyphicon glyphicon-pencil btn btn-xs btn-default"></span>', $url, [
-                            'id' => 'activity-view-link',
-                            //'data-toggle' => 'modal',
-                            // 'data-target' => '#modal',
-                            'data-id' => $index,
-                            'data-pjax' => '0',
-                            // 'style'=>['float'=>'rigth'],
-                        ]);
-                    },
-                    'delete' => function($url, $data, $index) {
-                        $options = array_merge([
-                            'title' => Yii::t('yii', 'Delete'),
-                            'aria-label' => Yii::t('yii', 'Delete'),
-                            //'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                            //'data-method' => 'post',
-                            //'data-pjax' => '0',
-                            'data-url'=>$url,
-                            'onclick'=>'recDelete($(this));'
-                        ]);
-                        return Html::a('<span class="glyphicon glyphicon-trash btn btn-xs btn-default"></span>', 'javascript:void(0)', $options);
-                    }
-                ]
-            ],
-        ],
-    ]); ?>
+                            'header' => '',
+                            'headerOptions' => ['style' => 'text-align:center;', 'class' => 'activity-view-link',],
+                            'class' => 'yii\grid\ActionColumn',
+                            'contentOptions' => ['style' => 'text-align: right', 'vertical-align: middle'],
+                            'buttons' => [
+                                'view' => function ($url, $data, $index) {
+                                    $options = [
+                                        'title' => Yii::t('yii', 'View'),
+                                        'aria-label' => Yii::t('yii', 'View'),
+                                        'data-pjax' => '0',
+                                    ];
+                                    return Html::a(
+                                        '<span class="glyphicon glyphicon-eye-open btn btn-xs btn-default"></span>', $url, $options);
+                                },
+                                'update' => function ($url, $data, $index) {
+                                    $options = array_merge([
+                                        'title' => Yii::t('yii', 'Update'),
+                                        'aria-label' => Yii::t('yii', 'Update'),
+                                        'data-pjax' => '0',
+                                        'id' => 'modaledit',
+                                    ]);
+                                    return Html::a(
+                                        '<span class="glyphicon glyphicon-pencil btn btn-xs btn-default"></span>', $url, [
+                                        'id' => 'activity-view-link',
+                                        //'data-toggle' => 'modal',
+                                        // 'data-target' => '#modal',
+                                        'data-id' => $index,
+                                        'data-pjax' => '0',
+                                        // 'style'=>['float'=>'rigth'],
+                                    ]);
+                                },
+                                'delete' => function ($url, $data, $index) {
+                                    $options = array_merge([
+                                        'title' => Yii::t('yii', 'Delete'),
+                                        'aria-label' => Yii::t('yii', 'Delete'),
+                                        //'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                        //'data-method' => 'post',
+                                        //'data-pjax' => '0',
+                                        'data-url' => $url,
+                                        'onclick' => 'recDelete($(this));'
+                                    ]);
+                                    return Html::a('<span class="glyphicon glyphicon-trash btn btn-xs btn-default"></span>', 'javascript:void(0)', $options);
+                                }
+                            ]
+                        ],
+                    ],
+                ]); ?>
             </div>
 
             <?php Pjax::end(); ?>
-</div>
-<?php
-//$url_to_delete =  Url::to(['product/bulkdelete'],true);
-$this->registerJs('
+        </div>
+        <div id="selectModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!--                    <div class="modal-header">-->
+                    <!--                        <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                    <!--                        <h4 class="modal-title"><i class="fa fa-list-alt"></i> เลือกแผนกที่ต้องการรับเข้า-->
+                    <!--                            <small id="items"></small>-->
+                    <!--                        </h4>-->
+                    <!--                    </div>-->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12" style="text-align: center;">
+                                <h3 style="font-weight: bold;">เลือกแผนกที่ต้องการรับเข้า</h3>
+                            </div>
+                        </div>
+                        <?php foreach ($dept as $value): ?>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <a href="index.php?r=productionrec/create&type=<?=$value->name?>" class="btn btn-info"
+                                         style="width: 100%;font-weight: bold;padding: 15px 15px 15px 15px;"><?= $value->name; ?></a>
+                                </div>
+                            </div>
+                            <br>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <?php
+        //$url_to_delete =  Url::to(['product/bulkdelete'],true);
+        $this->registerJs('
     $(function(){
         $("#perpage").change(function(){
             $("#form-perpage").submit();
+        });
+        
+        $(".btn-rec").click(function(){
+            $("#selectModal").modal("show");
         });
     });
 
@@ -239,5 +279,5 @@ $this->registerJs('
         });
     }
 
-    ',static::POS_END);
-?>
+    ', static::POS_END);
+        ?>

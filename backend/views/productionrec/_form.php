@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
 use kartik\date\DatePicker;
+use toxor88\switchery\Switchery;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Productionrec */
@@ -111,6 +112,7 @@ $this->registerJs($js, static::POS_END);
 <div class="productionrec-form">
     <div class="panel panel-headline">
         <div class="panel-heading">
+            <h3 style="font-weight: bold">รับเข้าแผนก<?=$rec_type?></h3>
         </div>
         <div class="panel-body">
             <?php $form = ActiveForm::begin(); ?>
@@ -127,42 +129,42 @@ $this->registerJs($js, static::POS_END);
                         ],
                     ]) ?>
                 </div>
-                <div class="col-lg-3">
-                    <?= $form->field($model, 'dept_id')->widget(Select2::className(), [
-                        'data' => ArrayHelper::map($dept, 'id', 'name'),
-                        'options' => ['placeholder' => 'เลือก', 'id' => 'dept-id',
-                            'onchange' => ' 
-                                  var xx = "' . Url::to(['productionrec/findzonedate'], true) . '&id="+$(this).val();
-                                    $.post(xx,function(data){
-                                           $(".zone_date").val(data);                                             
-                                        });
-                                  var findzone = "' . Url::to(['productionrec/findzonebydept'], true) . '&id="+$(this).val();
-                                    $.post(findzone,function(data){
-                                    alert(data);
-                                           $("#zone-id").html(data);                                             
-                                        });      
-                                        
-                                  var this_val = $("#dept-id option:checked").text();
-                                  if(this_val == "ควั่น"){
-                                     $("table.table-line thead>tr").each(function(){
-                                        $(this).find(".type-1").show();
-                                        $(this).find(".type-2,.type-3").hide();
-                                     });
-                                  }else if(this_val == "หัวโต"){
-                                     $("table.table-line thead>tr").each(function(){
-                                     $(this).find(".type-2").show();
-                                        $(this).find(".type-1,.type-3").hide();
-                                     });
-                                  }else if(this_val == "ปอกฝาก"){
-                                     $("table.table-line thead>tr").each(function(){
-                                     $(this).find(".type-3").show();
-                                        $(this).find(".type-2,.type-1").hide();
-                                     });
-                                  }       
-                                '
-                        ],
-                    ]) ?>
-                </div>
+<!--                <div class="col-lg-3">-->
+<!--                    --><?php ////echo $form->field($model, 'dept_id')->widget(Select2::className(), [
+//                        'data' => ArrayHelper::map($dept, 'id', 'name'),
+//                        'options' => ['placeholder' => 'เลือก', 'id' => 'dept-id',
+//                            'onchange' => '
+//                                  var xx = "' . Url::to(['productionrec/findzonedate'], true) . '&id="+$(this).val();
+//                                    $.post(xx,function(data){
+//                                           $(".zone_date").val(data);
+//                                        });
+//                                  var findzone = "' . Url::to(['productionrec/findzonebydept'], true) . '&id="+$(this).val();
+//                                    $.post(findzone,function(data){
+//                                    alert(data);
+//                                           $("#zone-id").html(data);
+//                                        });
+//
+//                                  var this_val = $("#dept-id option:checked").text();
+//                                  if(this_val == "ควั่น"){
+//                                     $("table.table-line thead>tr").each(function(){
+//                                        $(this).find(".type-1").show();
+//                                        $(this).find(".type-2,.type-3").hide();
+//                                     });
+//                                  }else if(this_val == "หัวโต"){
+//                                     $("table.table-line thead>tr").each(function(){
+//                                     $(this).find(".type-2").show();
+//                                        $(this).find(".type-1,.type-3").hide();
+//                                     });
+//                                  }else if(this_val == "ปอกฝาก"){
+//                                     $("table.table-line thead>tr").each(function(){
+//                                     $(this).find(".type-3").show();
+//                                        $(this).find(".type-2,.type-1").hide();
+//                                     });
+//                                  }
+//                                '
+//                        ],
+//                    ]) ?>
+<!--                </div>-->
 
                 <div class="col-lg-3">
                     <?= $form->field($model, 'zone_id')->widget(Select2::className(), [
@@ -177,17 +179,18 @@ $this->registerJs($js, static::POS_END);
                         ],
                     ]) ?>
                 </div>
-
-            </div>
-            <div class="row">
                 <div class="col-lg-3">
                     <?php $model->zone_date = $model->isNewRecord ? date('d-m-Y') : date('d-m-Y', $model->zone_date); ?>
                     <?= $form->field($model, 'zone_date')->textInput(['class' => 'form-control zone_date', 'readonly' => 'readonly']) ?>
                 </div>
+            </div>
+            <div class="row">
+
                 <div class="col-lg-4">
-                    <?= $form->field($model, 'zone_status')->widget(Select2::className(), [
-                        'data' => ArrayHelper::map([['id' => 1, 'name' => 'ยังไม่ปิดกอง'], ['id' => 2, 'name' => 'ปิดกอง']], 'id', 'name'),
-                    ]) ?>
+<!--                    --><?php ////echo $form->field($model, 'zone_status')->widget(Select2::className(), [
+//                        'data' => ArrayHelper::map([['id' => 1, 'name' => 'ยังไม่ปิดกอง'], ['id' => 2, 'name' => 'ปิดกอง']], 'id', 'name'),
+//                    ]) ?>
+                    <?= $form->field($model, 'zone_status')->widget(Switchery::className(),['options'=>['label'=>'','class'=>'form-control']])->label('อัพเดทการปิดกอง') ?>
                 </div>
                 <div class="col-lg-4">
                     <?php //echo $form->field($model, 'all_qty')->textInput() ?>
