@@ -437,9 +437,11 @@ $this->registerJs($js, static::POS_END);
 
 
                                         <td>
+                                            <?php if($model->isNewRecord):?>
                                             <div class="btn btn-danger btn-sm btn-remove-line"
                                                  onclick="removeline($(this))">ลบ
                                             </div>
+                                            <?php endif;?>
                                         </td>
                                     </tr>
                                 <?php endfor; ?>
@@ -447,7 +449,10 @@ $this->registerJs($js, static::POS_END);
                             </tbody>
 
                         </table>
-                        <?php if ($model->status != 2): ?>
+                        <?php //if ($model->status != 2): ?>
+<!--                            <div class="btn btn-primary btn-add"><i class="fa fa-plus-circle"></i> เพิ่มรายการ</div>-->
+                        <?php //endif; ?>
+                        <?php if ($model->isNewRecord): ?>
                             <div class="btn btn-primary btn-add"><i class="fa fa-plus-circle"></i> เพิ่มรายการ</div>
                         <?php endif; ?>
                     </div>
@@ -456,7 +461,7 @@ $this->registerJs($js, static::POS_END);
             </div>
             <hr>
             <div class="form-group">
-                <?php if ($model->status != 2): ?>
+                <?php if ($model->isNewRecord): ?>
                     <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
                 <?php endif; ?>
             </div>
@@ -502,7 +507,7 @@ $this->registerJs($js, static::POS_END);
 
 <?php
 $url_to_search = Url::to(['productionrec/findemp'], true);
-
+$rec_zone = $model->zone_id;
 
 $this->registerJs('
    $(function(){
@@ -513,6 +518,7 @@ $this->registerJs('
        $.post(findzone,function(data){
             // alert(data);
        $("#zone-id").html(data);
+       $("#zone-id").val("'.$rec_zone.'").change();
    });
    
    var this_val = $("#create-dept").val();
