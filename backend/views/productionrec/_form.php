@@ -120,6 +120,7 @@ $this->registerJs($js, static::POS_END);
 
             <div class="row">
                 <div class="col-lg-3">
+
                     <?= $form->field($model, 'productrec_no')->textInput(['maxlength' => true, 'value' => $model->isNewRecord ? $runno : $model->productrec_no, 'readonly' => 'readonly', 'class' => 'form-control journal_no']) ?>
                 </div>
                 <div class="col-lg-3">
@@ -194,6 +195,7 @@ $this->registerJs($js, static::POS_END);
                     <?= $form->field($model, 'zone_status')->widget(Switchery::className(),['options'=>['label'=>'','class'=>'form-control']])->label('อัพเดทการปิดกอง') ?>
                 </div>
                 <div class="col-lg-4">
+                    <?= $form->field($model, 'dept_id')->hiddenInput(['maxlength' => true, 'value' => $rec_type])->label(false) ?>
                     <?php //echo $form->field($model, 'all_qty')->textInput() ?>
                 </div>
 
@@ -283,37 +285,37 @@ $this->registerJs($js, static::POS_END);
                                                value="">
                                     </td>
                                     <td class="type-2">
-                                        <input id="task-6" class="line_time_seven" onchange="cal_num($(this));"
+                                        <input id="task-7" class="line_time_seven" onchange="cal_num($(this));"
                                                type="text" name="line_time_seven[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-3">
-                                        <input id="task-7" class="line_time_eight" onchange="cal_num($(this));"
+                                        <input id="task-8" class="line_time_eight" onchange="cal_num($(this));"
                                                type="text" name="line_time_eight[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-3">
-                                        <input id="task-8" class="line_time_nine" onchange="cal_num($(this));"
+                                        <input id="task-9" class="line_time_nine" onchange="cal_num($(this));"
                                                type="text" name="line_time_nine[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-3">
-                                        <input id="task-9" class="line_time_ten" onchange="cal_num($(this));"
+                                        <input id="task-10" class="line_time_ten" onchange="cal_num($(this));"
                                                type="text" name="line_time_ten[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-3">
-                                        <input id="task-10" class="line_time_eleven" onchange="cal_num($(this));"
+                                        <input id="task-11" class="line_time_eleven" onchange="cal_num($(this));"
                                                type="text" name="line_time_eleven[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
                                     </td>
                                     <td class="type-3">
-                                        <input id="task-11" class="line_time_twelve" onchange="cal_num($(this));"
+                                        <input id="task-12" class="line_time_twelve" onchange="cal_num($(this));"
                                                type="text" name="line_time_twelve[]"
                                                style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
                                                value="">
@@ -342,11 +344,11 @@ $this->registerJs($js, static::POS_END);
                                             <div class="input-group">
                                                 <input type="text" name="line_emp_code[]" class="form-control emp_code"
                                                        placeholder="ค้นหารหัส..."
-                                                       value="<?= \backend\models\Employee::findFullname($modelline[$m][0]) ?>">
+                                                       value="<?= \backend\models\Employee::findFullname($modelline[$m]['emp_id']) ?>">
                                                 <input type="hidden" class="emp_id" name="emp_id[]"
-                                                       value="<?= $modelline[$m][0] ?>">
+                                                       value="<?= $modelline[$m]['emp_id'] ?>">
                                                 <input type="hidden" class="line_id" name="line_id[]"
-                                                       value="<?php echo $modelline[$m][6] ?>">
+                                                       value="<?php echo $modelline[$m]['id'] ?>">
                                                 <span class="input-group-btn">
                                                  <div class="btn btn-default btn-search-item"
                                                       onclick="findItem($(this));"><i
@@ -354,42 +356,86 @@ $this->registerJs($js, static::POS_END);
                                                </span>
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="type-1">
                                             <input id="task-1" class="line_time_one" onchange="cal_num($(this));"
                                                    type="text" name="line_time_one[]"
                                                    style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
-                                                   value="<?= $modelline[$m][1] ?>">
+                                                   value="<?= $modelline[$m]['line_qty'] ?>">
                                         </td>
-                                        <td>
-                                            <input id="task-1" class="line_time_two" onchange="cal_num($(this));"
+                                        <td class="type-1">
+                                            <input id="task-2" class="line_time_two" onchange="cal_num($(this));"
                                                    type="text" name="line_time_two[]"
                                                    style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
-                                                   value="<?= $modelline[$m][2] ?>">
+                                                   value="<?= $modelline[$m]['line_qty2'] ?>">
                                         </td>
-                                        <td>
-                                            <input id="task-1" class="line_time_three" onchange="cal_num($(this));"
+                                        <td class="type-1">
+                                            <input id="task-3" class="line_time_three" onchange="cal_num($(this));"
                                                    type="text" name="line_time_three[]"
                                                    style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
-                                                   value="<?= $modelline[$m][3] ?>">
+                                                   value="<?= $modelline[$m]['line_qty3'] ?>">
                                         </td>
-                                        <td>
-                                            <input id="task-1" class="line_time_four" onchange="cal_num($(this));"
+                                        <td class="type-1">
+                                            <input id="task-4" class="line_time_four" onchange="cal_num($(this));"
                                                    type="text" name="line_time_four[]"
                                                    style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
-                                                   value="<?= $modelline[$m][4] ?>">
+                                                   value="<?= $modelline[$m]['line_qty4'] ?>">
                                         </td>
-                                        <td>
-                                            <input id="task-1" class="line_time_five" onchange="cal_num($(this));"
+                                        <td class="type-2">
+                                            <input id="task-5" class="line_time_five" onchange="cal_num($(this));"
                                                    type="text" name="line_time_five[]"
                                                    style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
-                                                   value="<?= $modelline[$m][5] ?>">
+                                                   value="<?= $modelline[$m]['line_qty5'] ?>">
                                         </td>
-                                        <td>
-                                            <input readonly id="task-1" class="line_total" type="text"
-                                                   name="line_total[]"
+                                        <td class="type-2">
+                                            <input id="task-6" class="line_time_six" onchange="cal_num($(this));"
+                                                   type="text" name="line_time_six[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                                   value="<?= $modelline[$m]['line_qty6'] ?>">
+                                        </td>
+                                        <td class="type-2">
+                                            <input id="task-7" class="line_time_seven" onchange="cal_num($(this));"
+                                                   type="text" name="line_time_seven[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                                   value="<?= $modelline[$m]['line_qty7'] ?>">
+                                        </td>
+                                        <td class="type-3">
+                                            <input id="task-8" class="line_time_eight" onchange="cal_num($(this));"
+                                                   type="text" name="line_time_eight[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                                   value="<?= $modelline[$m]['line_qty8'] ?>">
+                                        </td>
+                                        <td class="type-3">
+                                            <input id="task-9" class="line_time_nine" onchange="cal_num($(this));"
+                                                   type="text" name="line_time_nine[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                                   value="<?= $modelline[$m]['line_qty9'] ?>">
+                                        </td>
+                                        <td class="type-3">
+                                            <input id="task-10" class="line_time_ten" onchange="cal_num($(this));"
+                                                   type="text" name="line_time_ten[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                                   value="<?= $modelline[$m]['line_qty10'] ?>">
+                                        </td>
+                                        <td class="type-3">
+                                            <input id="task-11" class="line_time_eleven" onchange="cal_num($(this));"
+                                                   type="text" name="line_time_eleven[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                                   value="<?= $modelline[$m]['line_qty11'] ?>">
+                                        </td>
+                                        <td class="type-3">
+                                            <input id="task-12" class="line_time_twelve" onchange="cal_num($(this));"
+                                                   type="text" name="line_time_twelve[]"
+                                                   style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: center"
+                                                   value="<?= $modelline[$m]['line_qty12'] ?>">
+                                        </td>
+
+                                        <td class="type-total">
+                                            <input readonly id="task-13" class="line_total" type="text" name="line_total[]"
                                                    style="border: none;padding: 5px 5px 5px 5px;width: 100%;background:transparent;text-align: right"
                                                    value="">
                                         </td>
+
+
                                         <td>
                                             <div class="btn btn-danger btn-sm btn-remove-line"
                                                  onclick="removeline($(this))">ลบ
@@ -461,9 +507,11 @@ $url_to_search = Url::to(['productionrec/findemp'], true);
 $this->registerJs('
    $(function(){
    var create_dept = $("#create-dept").val();
-   var findzone = "' . Url::to(['productionrec/findzonebydept'], true) . '&id="+$(this).val();
+   
+   var findzone = "' . Url::to(['productionrec/findzonebydept'], true) . '&id="+create_dept;
+   
        $.post(findzone,function(data){
-           //  alert(data);
+            // alert(data);
        $("#zone-id").html(data);
    });
    

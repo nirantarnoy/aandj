@@ -2,8 +2,9 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Productionrec */
+$create_type = '';
+$create_type = Yii::$app->request->get('type');
+$create_type_name = Yii::$app->request->get('typename');
 
 $this->title = Yii::t('app', 'รับยอดผลิต: ' . $model->productrec_no, [
     'nameAttribute' => '' . $model->name,
@@ -17,6 +18,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'แก้ไข');
     <?= $this->render('_form', [
         'model' => $model,
         'modelline' => $modelline,
+        'rec_type' => $model->dept_id,
+        'rec_type_name' => \backend\models\Section::findName($model->dept_id)
     ]) ?>
 
 </div>

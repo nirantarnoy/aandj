@@ -67,7 +67,13 @@ class Product extends \common\models\Product
 
             return $catname;
         }
-
+        public function findProdZone($dept){
+            $sec_id = \backend\models\Section::findId($dept);
+            if($sec_id){
+                $model = Product::find()->where(['dept_use'=>$sec_id])->one();
+                return $model!=null?$model->zone_group:0;
+            }
+        }
         public function findZonegroup($id){
            $model = Product::find()->where(['id'=>$id])->one();
            return $model!=null?$model->zone_group:0;

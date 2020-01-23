@@ -142,7 +142,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'contentOptions' => ['style' => 'vertical-align: middle'],
                             'format' => 'html',
                             'value' => function ($data) {
-                                return $data->zone_status === 1 ? '<div class="label label-success">เปิดกอง</div>' : '<div class="label label-danger">ปิดกอง</div>';
+                                return $data->zone_status === 0 ? '<div class="label label-success">เปิดกอง</div>' : '<div class="label label-danger">ปิดกอง</div>';
                             }
                         ],
                         //'name',

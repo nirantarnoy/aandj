@@ -119,8 +119,15 @@ class ProductionrecController extends Controller
             $time_three = Yii::$app->request->post('line_time_three');
             $time_four= Yii::$app->request->post('line_time_four');
             $time_five = Yii::$app->request->post('line_time_five');
+            $time_six = Yii::$app->request->post('line_time_six');
+            $time_seven = Yii::$app->request->post('line_time_seven');
+            $time_eight = Yii::$app->request->post('line_time_eight');
+            $time_nine = Yii::$app->request->post('line_time_nine');
+            $time_ten = Yii::$app->request->post('line_time_ten');
+            $time_eleven = Yii::$app->request->post('line_time_eleven');
+            $time_twelve = Yii::$app->request->post('line_time_twelve');
 
-          //  print_r($time_one);return;
+            //  print_r($time_one);return;
 
             $model->trans_date = strtotime($model->trans_date);
             $model->zone_date = \backend\models\Zoneproduct::findZoneDate($model->zone_id);
@@ -129,29 +136,62 @@ class ProductionrecController extends Controller
             if($model->save()){
                 $data = [];
                 for($x=0;$x<=count($emp_id)-1;$x++) {
-                    for ($m = 0; $m <= 4; $m++) {
+                   // for ($m = 0; $m <= 11; $m++) {
                         $modelline = new \backend\models\ProductionrecLine();
                         $modelline->emp_id = $emp_id[$x];
                         $modelline->production_rec_id = $model->id;
                         //$modelline->product_id = \backend\models\Zoneproduct::findProduct($model->zone_id);
-                        if ($m == 0) {
-                            $modelline->line_qty = $time_one[$x];
-                        }else  if ($m == 1) {
-                            $modelline->line_qty = $time_two[$x];
-                        }
-                        else  if ($m == 2) {
-                            $modelline->line_qty = $time_three[$x];
-                        }
-                        else  if ($m == 3) {
-                            $modelline->line_qty = $time_four[$x];
-                        }
-                        else  if ($m == 4) {
-                            $modelline->line_qty = $time_five[$x];
-                        }
+//                        if ($m == 0) {
+//                            $modelline->line_qty = $time_one[$x];
+//                        }else  if ($m == 1) {
+//                            $modelline->line_qty = $time_two[$x];
+//                        }
+//                        else  if ($m == 2) {
+//                            $modelline->line_qty = $time_three[$x];
+//                        }
+//                        else  if ($m == 3) {
+//                            $modelline->line_qty = $time_four[$x];
+//                        }
+//                        else  if ($m == 4) {
+//                            $modelline->line_qty = $time_five[$x];
+//                        }
+//                        else  if ($m == 5) {
+//                            $modelline->line_qty = $time_six[$x];
+//                        }
+//                        else  if ($m == 6) {
+//                            $modelline->line_qty = $time_seven[$x];
+//                        }
+//                        else  if ($m == 7) {
+//                            $modelline->line_qty = $time_eight[$x];
+//                        }
+//                        else  if ($m == 8) {
+//                            $modelline->line_qty = $time_nine[$x];
+//                        }
+//                        else  if ($m == 9) {
+//                            $modelline->line_qty = $time_ten[$x];
+//                        }
+//                        else  if ($m == 10) {
+//                            $modelline->line_qty = $time_eleven[$x];
+//                        }
+//                        else  if ($m == 11) {
+//                            $modelline->line_qty = $time_twelve[$x];
+//                        }
 
-                        $modelline->status = 1;
+                    $modelline->line_qty = $time_one[$x];
+                    $modelline->line_qty2 = $time_two[$x];
+                    $modelline->line_qty3 = $time_three[$x];
+                    $modelline->line_qty4 = $time_four[$x];
+                    $modelline->line_qty5 = $time_five[$x];
+                    $modelline->line_qty6 = $time_six[$x];
+                    $modelline->line_qty7 = $time_seven[$x];
+                    $modelline->line_qty8 = $time_eight[$x];
+                    $modelline->line_qty9 = $time_nine[$x];
+                    $modelline->line_qty10 = $time_ten[$x];
+                    $modelline->line_qty11 = $time_eleven[$x];
+                    $modelline->line_qty12 = $time_twelve[$x];
+                    $modelline->status = 1;
 
-                        // $modelline->list_qty = $listqty;
+                    // $modelline->list_qty = $listqty;
                         if($modelline->save(false)){
                           $this->createtran($model->zone_id,$modelline->line_qty,0);
                           $prodid = $this->findZoneproduct($model->zone_id);
@@ -162,7 +202,7 @@ class ProductionrecController extends Controller
                           }
                         }
                        // print_r($data);return;
-                    }
+                   // }
                     //echo count($emp_id);return;
 
                 }
@@ -202,57 +242,58 @@ class ProductionrecController extends Controller
     {
         $model = $this->findModel($id);
 
-        $modeltime1 = \backend\models\ProductionrecLine::find()->where(['production_rec_id'=>$id])->all();
+ //       $modeltime1 = \backend\models\ProductionrecLine::find()->where(['production_rec_id'=>$id])->all();
+        $modelline = \backend\models\ProductionrecLine::find()->where(['production_rec_id'=>$id])->all();
         $emp_line = [];
-        $modelline = [];
-        if(count($modeltime1)>0){
-            foreach ($modeltime1 as $value){
-                if(in_array($value->emp_id,$emp_line)){
-                    continue;
-                }
-                array_push($emp_line,$value->emp_id);
-            }
-
-            for($l=0;$l<=count($emp_line)-1;$l++){
-                $data1 = 0;
-                $data2 = 0;
-                $data3 = 0;
-                $data4 = 0;
-                $data5 = 0;
-
-                $data_line1 = '';
-
-
-                $modelx = \backend\models\ProductionrecLine::find()->where(['emp_id'=>$emp_line[$l]])->all();
-                if($modelx){
-                    $i = 0;
-                    foreach ($modelx as $val){
-                        $i+=1;
-                        if($i==1){
-                            $data1 = $val->line_qty;
-                            $data_line1 = $val->id;
-                        }
-                        if($i==2){
-                            $data2=$val->line_qty;
-                            $data_line1 = $data_line1.",".$val->id;
-                        }
-                        if($i==3){
-                           $data3 = $val->line_qty;
-                            $data_line1 = $data_line1.",".$val->id;
-                        }
-                        if($i==4){
-                            $data4 = $val->line_qty;
-                            $data_line1 = $data_line1.",".$val->id;
-                        }
-                        if($i==5){
-                           $data5 = $val->line_qty;
-                            $data_line1 = $data_line1.",".$val->id;
-                        }
-                    }
-                }
-                array_push($modelline,[$emp_line[$l],$data1,$data2,$data3,$data4,$data5,$data_line1]);
-            }
-        }
+//        $modelline = [];
+//        if(count($modeltime1)>0){
+//            foreach ($modeltime1 as $value){
+//                if(in_array($value->emp_id,$emp_line)){
+//                    continue;
+//                }
+//                array_push($emp_line,$value->emp_id);
+//            }
+//
+//            for($l=0;$l<=count($emp_line)-1;$l++){
+//                $data1 = 0;
+//                $data2 = 0;
+//                $data3 = 0;
+//                $data4 = 0;
+//                $data5 = 0;
+//
+//                $data_line1 = '';
+//
+//
+//                $modelx = \backend\models\ProductionrecLine::find()->where(['emp_id'=>$emp_line[$l]])->all();
+//                if($modelx){
+//                    $i = 0;
+//                    foreach ($modelx as $val){
+//                        $i+=1;
+//                        if($i==1){
+//                            $data1 = $val->line_qty;
+//                            $data_line1 = $val->id;
+//                        }
+//                        if($i==2){
+//                            $data2=$val->line_qty;
+//                            $data_line1 = $data_line1.",".$val->id;
+//                        }
+//                        if($i==3){
+//                           $data3 = $val->line_qty;
+//                            $data_line1 = $data_line1.",".$val->id;
+//                        }
+//                        if($i==4){
+//                            $data4 = $val->line_qty;
+//                            $data_line1 = $data_line1.",".$val->id;
+//                        }
+//                        if($i==5){
+//                           $data5 = $val->line_qty;
+//                            $data_line1 = $data_line1.",".$val->id;
+//                        }
+//                    }
+//                }
+//                array_push($modelline,[$emp_line[$l],$data1,$data2,$data3,$data4,$data5,$data_line1]);
+//            }
+//        }
 
         if ($model->load(Yii::$app->request->post())) {
             $emp_id = Yii::$app->request->post('emp_id');
@@ -420,33 +461,46 @@ public function countOld($prodrecid){
     }
     public function actionFindzonebydept($id)
     {
-        if($id){
-           $zone_id = \backend\models\Product::findZonegroup($id);
+        if($id != ''){
+           $zone_id = \backend\models\Product::findProdZone($id);
            if($zone_id){
-               echo $zone_id;
+              // echo $zone_id;
                $zonename = '';
                if($zone_id == 1){$zonename='A';}
                if($zone_id == 2){$zonename='B';}
                if($zone_id == 3){$zonename='C';}
 
-               $zone_by_group = \backend\models\Zone::find()->where(['LIKE','name',$zonename])->asArray()->all();
+               $zone_by_group = \backend\models\Zone::find(['id'])->where(['LIKE','name',$zonename])->asArray()->all();
 
-               $zone_list = \backend\models\Zoneproduct::find()->where(['zone_id'=>$zone_by_group])->all();
-
-               if($zone_list){
-                   $html = '';
-                   foreach ($zone_list as $val){
-                       $zone_show_name = \backend\models\Zone::findName($val->zone_id);
-                       $html.="<option value='".$val->zone_id."'>"+$zone_show_name+"</option>";
+               $zone_arr = [];
+               if(count($zone_by_group)){
+                   foreach ($zone_by_group as $x){
+                       array_push($zone_arr, $x['id']);
                    }
-                   echo $html;
+                   $zone_list = \backend\models\Zoneproduct::find()->where(['zone_id'=>$zone_arr])->all();
+
+                   if($zone_list){
+                      // print_r($zone_list);
+                       $html = '';
+                       foreach ($zone_list as $val){
+                           if($val->zone_id == 0){continue;}
+                           $zone_show_name = \backend\models\Zone::findName($val->zone_id);
+                          // echo $zone_show_name.'<br />';
+                           $html.="<option value='".$val->zone_id."'>".$zone_show_name."</option>";
+                         //  echo $html;
+                       }
+                      return $html;
+                   }
+               }else{
+                  // echo '';
                }
 
+
            }else{
-               echo "";
+              // echo "";
            }
         }else{
-            echo "";
+           // echo "";
         }
     }
     public function actionPrint(){

@@ -37,6 +37,7 @@ class ProductionRecLine extends \yii\db\ActiveRecord
         return [
             [['production_rec_id', 'emp_id', 'line_num', 'line_qty', 'case_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['list_qty'],'string'],
+            [['line_qty2,line_qty3,line_qty4,line_qty5,line_qty6,line_qty7,line_qty8,line_qty9,line_qty10,line_qty11,line_qty12'],'integer'],
             ];
     }
 
