@@ -12,12 +12,14 @@ use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\web\ForbiddenHttpException;
 use kartik\mpdf\Pdf;
+
 /**
  * ProductionrecController implements the CRUD actions for Productionrec model.
  */
 class ProductionrecController extends Controller
 {
     public $enableCsrfValidation = false;
+
     /**
      * {@inheritdoc}
      */
@@ -27,21 +29,21 @@ class ProductionrecController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST','GET'],
+                    'delete' => ['POST', 'GET'],
                 ],
             ],
-            'access'=>[
-                'class'=>AccessControl::className(),
+            'access' => [
+                'class' => AccessControl::className(),
                 'denyCallback' => function ($rule, $action) {
                     throw new ForbiddenHttpException('คุณไม่ได้รับอนุญาติให้เข้าใช้งาน!');
                 },
-                'rules'=>[
+                'rules' => [
                     [
-                        'allow'=>true,
-                        'roles'=>['@'],
-                        'matchCallback'=>function($rule,$action){
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
                             $currentRoute = Yii::$app->controller->getRoute();
-                            if(Yii::$app->user->can($currentRoute)){
+                            if (Yii::$app->user->can($currentRoute)) {
                                 return true;
                             }
                         }
@@ -59,23 +61,23 @@ class ProductionrecController extends Controller
     {
         $full_data = [];
         $rec_data = [];
-        $modelx = \backend\models\Productionrec::find()->where(['product_id'=>1])->all();
-        if($modelx){
+        $modelx = \backend\models\Productionrec::find()->where(['product_id' => 1])->all();
+        if ($modelx) {
             $id = [];
-            foreach($modelx as $value){
-                if($value->id){
-                    $modelemp = \backend\models\ProductionrecLine::find(['emp_id'])->where(['production_rec_id'=>$value->id])->groupBy('emp_id')->all();
-                    foreach ($modelemp as $val){
-                        $modelline = \backend\models\ProductionrecLine::find()->select(['line_qty'])->where(['production_rec_id'=>$value->id,'emp_id'=>$val->emp_id])->asArray()->all();
-                        array_push($rec_data,['emp_id'=>$val->emp_id,'trans'=>$modelline]);
+            foreach ($modelx as $value) {
+                if ($value->id) {
+                    $modelemp = \backend\models\ProductionrecLine::find(['emp_id'])->where(['production_rec_id' => $value->id])->groupBy('emp_id')->all();
+                    foreach ($modelemp as $val) {
+                        $modelline = \backend\models\ProductionrecLine::find()->select(['line_qty'])->where(['production_rec_id' => $value->id, 'emp_id' => $val->emp_id])->asArray()->all();
+                        array_push($rec_data, ['emp_id' => $val->emp_id, 'trans' => $modelline]);
                     }
 
                 }
-                array_push($full_data,['production_rec_id'=>$value->id,'data'=>$rec_data]);
+                array_push($full_data, ['production_rec_id' => $value->id, 'data' => $rec_data]);
             }
 
         }
-      //  print_r($full_data);return;
+        //  print_r($full_data);return;
 
         $pageSize = \Yii::$app->request->post("perpage");
         $searchModel = new ProductionrecSearch();
@@ -117,7 +119,7 @@ class ProductionrecController extends Controller
             $time_one = Yii::$app->request->post('line_time_one');
             $time_two = Yii::$app->request->post('line_time_two');
             $time_three = Yii::$app->request->post('line_time_three');
-            $time_four= Yii::$app->request->post('line_time_four');
+            $time_four = Yii::$app->request->post('line_time_four');
             $time_five = Yii::$app->request->post('line_time_five');
             $time_six = Yii::$app->request->post('line_time_six');
             $time_seven = Yii::$app->request->post('line_time_seven');
@@ -133,14 +135,14 @@ class ProductionrecController extends Controller
             $model->zone_date = \backend\models\Zoneproduct::findZoneDate($model->zone_id);
             $model->product_id = \backend\models\Zoneproduct::findProduct($model->zone_id);
 
-            if($model->save()){
+            if ($model->save()) {
                 $data = [];
-                for($x=0;$x<=count($emp_id)-1;$x++) {
-                   // for ($m = 0; $m <= 11; $m++) {
-                        $modelline = new \backend\models\ProductionrecLine();
-                        $modelline->emp_id = $emp_id[$x];
-                        $modelline->production_rec_id = $model->id;
-                        //$modelline->product_id = \backend\models\Zoneproduct::findProduct($model->zone_id);
+                for ($x = 0; $x <= count($emp_id) - 1; $x++) {
+                    // for ($m = 0; $m <= 11; $m++) {
+                    $modelline = new \backend\models\ProductionrecLine();
+                    $modelline->emp_id = $emp_id[$x];
+                    $modelline->production_rec_id = $model->id;
+                    //$modelline->product_id = \backend\models\Zoneproduct::findProduct($model->zone_id);
 //                        if ($m == 0) {
 //                            $modelline->line_qty = $time_one[$x];
 //                        }else  if ($m == 1) {
@@ -192,32 +194,32 @@ class ProductionrecController extends Controller
                     $modelline->status = 1;
 
                     // $modelline->list_qty = $listqty;
-                        if($modelline->save(false)){
-                          $this->createtran($model->zone_id,$modelline->line_qty,0);
-                          $prodid = $this->findZoneproduct($model->zone_id);
-                          if($prodid && $modelline->line_qty != null){
-                              if($modelline->line_qty != 0 || $modelline->line_qty !=''){
-                                  array_push($data,['product_id'=>$prodid,'qty'=>$modelline->line_qty,'price'=>0]);
-                              }
-                          }
+                    if ($modelline->save(false)) {
+                        $this->createtran($model->zone_id, $modelline->line_qty, 0);
+                        $prodid = $this->findZoneproduct($model->zone_id);
+                        if ($prodid && $modelline->line_qty != null) {
+                            if ($modelline->line_qty != 0 || $modelline->line_qty != '') {
+                                array_push($data, ['product_id' => $prodid, 'qty' => $modelline->line_qty, 'price' => 0]);
+                            }
                         }
-                       // print_r($data);return;
-                   // }
+                    }
+                    // print_r($data);return;
+                    // }
                     //echo count($emp_id);return;
 
                 }
-                if(count($data)>0){
-                    \backend\models\Journal::createTrans($model->zone_id,$data,'',\backend\helpers\RunnoTitle::RUNN0_PDR);
+                if (count($data) > 0) {
+                    \backend\models\Journal::createTrans($model->zone_id, $data, '', \backend\helpers\RunnoTitle::RUNN0_PDR);
                 }
-                $this->updateZoneproduct($model->zone_id,$model->id);
+                $this->updateZoneproduct($model->zone_id, $model->id);
                 $this->updateLineFirst($model->id);
 
-                if($model->zone_status == 2){
+                if ($model->zone_status == 2) {
                     $this->closeZone($model->zone_id);
                 }
 
                 $session = Yii::$app->session;
-                $session->setFlash('msg','บันทึกรายการเรียบร้อย');
+                $session->setFlash('msg', 'บันทึกรายการเรียบร้อย');
                 return $this->redirect(['index']);
             }
         }
@@ -227,10 +229,37 @@ class ProductionrecController extends Controller
             'runno' => $model->getLastNo(),
         ]);
     }
-    public function findZoneproduct($zone_id){
-       $model = \backend\models\Zoneproduct::find()->where(['zone_id'=>$zone_id])->one();
-       return count($model)>0?$model->product_id:0;
+
+    public function findZoneproduct($zone_id)
+    {
+        $model = \backend\models\Zoneproduct::find()->where(['zone_id' => $zone_id])->one();
+        return count($model) > 0 ? $model->product_id : 0;
     }
+
+    public function actionPrintdoc()
+    {
+        $from_date = '';
+        $to_date = '';
+
+        $date_select = \Yii::$app->request->post('date_select');
+        $emp_select = \Yii::$app->request->post('emp_select');
+
+        $filter_date = null;
+        if ($date_select != '') {
+            $filter_date = explode('ถึง', $date_select);
+        }
+        if ($filter_date != null) {
+            if (count($filter_date)) {
+                $from_date = $filter_date[0];
+                $to_date = $filter_date[1];
+            }
+        }
+        if ($from_date != '' && $to_date != '') {
+            $print_data = \backend\models\Productionrec::find()->andFilterWhere((['AND', ['>=', 'trans_date', date('Y-m-d', strtotime($from_date))], ['<=', 'trans_date', date('Y-m-d', strtotime($to_date))]]))->count();
+        }
+        echo $print_data;
+    }
+
     /**
      * Updates an existing Productionrec model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -242,8 +271,8 @@ class ProductionrecController extends Controller
     {
         $model = $this->findModel($id);
 
- //       $modeltime1 = \backend\models\ProductionrecLine::find()->where(['production_rec_id'=>$id])->all();
-        $modelline = \backend\models\ProductionrecLine::find()->where(['production_rec_id'=>$id])->all();
+        //       $modeltime1 = \backend\models\ProductionrecLine::find()->where(['production_rec_id'=>$id])->all();
+        $modelline = \backend\models\ProductionrecLine::find()->where(['production_rec_id' => $id])->all();
         $emp_line = [];
 //        $modelline = [];
 //        if(count($modeltime1)>0){
@@ -301,70 +330,66 @@ class ProductionrecController extends Controller
             $time_one = Yii::$app->request->post('line_time_one');
             $time_two = Yii::$app->request->post('line_time_two');
             $time_three = Yii::$app->request->post('line_time_three');
-            $time_four= Yii::$app->request->post('line_time_four');
+            $time_four = Yii::$app->request->post('line_time_four');
             $time_five = Yii::$app->request->post('line_time_five');
 
             //print_r($time_one);return;
             $model->trans_date = strtotime($model->trans_date);
-            if($model->save()){
+            if ($model->save()) {
                 $data = [];
-                if(count($emp_id)>0){
-                        for($x=0;$x<=count($emp_id)-1;$x++) {
+                if (count($emp_id) > 0) {
+                    for ($x = 0; $x <= count($emp_id) - 1; $x++) {
 
-                            $linenum = null;
-                            $linenum = explode(',',$line_id[$x]);
-                            for ($m = 0; $m <= 4; $m++) {
-                                //  $line_id[$x];
-                                $modelchk = \backend\models\ProductionrecLine::find()->where(['id'=>$linenum[$m],'emp_id'=>$emp_id[$x]])->one();
-                                if(count($modelchk)>0){
-                                    if ($m == 0) {
-                                        $modelchk->line_qty = $time_one[$x];
-                                    }else  if ($m == 1) {
-                                        $modelchk->line_qty = $time_two[$x];
-                                    }
-                                    else  if ($m == 2) {
-                                        $modelchk->line_qty = $time_three[$x];
-                                    }
-                                    else  if ($m == 3) {
-                                        $modelchk->line_qty = $time_four[$x];
-                                    }
-                                    else  if ($m == 4) {
-                                        $modelchk->line_qty = $time_five[$x];
-                                    }
-                                    if($modelchk->save(false)){
-                                        //$this->updatetran();
-                                        if(!$this->chkLineStatus($modelchk->id)) {
-                                            $this->updateLineStatus($modelchk->id);
-                                            $this->createtran($model->zone_id, $modelchk->line_qty, $modelchk->id);
-                                            $prodid = $this->findZoneproduct($model->zone_id);
-                                            if ($prodid && $modelchk->line_qty != null) {
-                                                if ($modelchk->line_qty != 0 || $modelchk->line_qty != '') {
-                                                    array_push($data, ['product_id' => $prodid, 'qty' => $modelchk->line_qty, 'price' => 0, 'oldjournal' => $model->productrec_no]);
-                                                }
+                        $linenum = null;
+                        $linenum = explode(',', $line_id[$x]);
+                        for ($m = 0; $m <= 4; $m++) {
+                            //  $line_id[$x];
+                            $modelchk = \backend\models\ProductionrecLine::find()->where(['id' => $linenum[$m], 'emp_id' => $emp_id[$x]])->one();
+                            if (count($modelchk) > 0) {
+                                if ($m == 0) {
+                                    $modelchk->line_qty = $time_one[$x];
+                                } else if ($m == 1) {
+                                    $modelchk->line_qty = $time_two[$x];
+                                } else if ($m == 2) {
+                                    $modelchk->line_qty = $time_three[$x];
+                                } else if ($m == 3) {
+                                    $modelchk->line_qty = $time_four[$x];
+                                } else if ($m == 4) {
+                                    $modelchk->line_qty = $time_five[$x];
+                                }
+                                if ($modelchk->save(false)) {
+                                    //$this->updatetran();
+                                    if (!$this->chkLineStatus($modelchk->id)) {
+                                        $this->updateLineStatus($modelchk->id);
+                                        $this->createtran($model->zone_id, $modelchk->line_qty, $modelchk->id);
+                                        $prodid = $this->findZoneproduct($model->zone_id);
+                                        if ($prodid && $modelchk->line_qty != null) {
+                                            if ($modelchk->line_qty != 0 || $modelchk->line_qty != '') {
+                                                array_push($data, ['product_id' => $prodid, 'qty' => $modelchk->line_qty, 'price' => 0, 'oldjournal' => $model->productrec_no]);
                                             }
                                         }
                                     }
-
-
-
                                 }
+
+
                             }
-
-
                         }
-                    $this->updateZoneproduct($model->zone_id,$model->id);
+
+
                     }
-                   // print_r($data);return;
-                if(count($data)>0){
-                    \backend\models\Journal::createTrans2($model->zone_id,$data,'',\backend\helpers\RunnoTitle::RUNN0_PDR);
+                    $this->updateZoneproduct($model->zone_id, $model->id);
+                }
+                // print_r($data);return;
+                if (count($data) > 0) {
+                    \backend\models\Journal::createTrans2($model->zone_id, $data, '', \backend\helpers\RunnoTitle::RUNN0_PDR);
                 }
 
-                if($model->zone_status == 2){
+                if ($model->zone_status == 2) {
                     $this->closeZone($model->zone_id);
                 }
 
                 $session = Yii::$app->session;
-                $session->setFlash('msg','บันทึกรายการเรียบร้อย');
+                $session->setFlash('msg', 'บันทึกรายการเรียบร้อย');
                 return $this->redirect(['index']);
             }
         }
@@ -374,22 +399,27 @@ class ProductionrecController extends Controller
             'modelline' => $modelline,
         ]);
     }
-public function countOld($prodrecid){
-        $modelcount = \backend\models\ProductionrecLine::find()->select('emp_id')->where(['production_rec_id'=>$prodrecid])->distinct()->count();
-        return $modelcount;
-}
-    public function createtran($zone_id,$qty,$line)
+
+    public function countOld($prodrecid)
     {
-        if($qty <=0){return false;}
-        $modelproduct = \backend\models\Zoneproduct::find()->where(['zone_id'=>$zone_id])->one();
-        if($modelproduct){
-            $modelchk = \backend\models\Stockbalance::find()->where(['product_id'=>$modelproduct->product_id])->one();
-            if($modelchk){
+        $modelcount = \backend\models\ProductionrecLine::find()->select('emp_id')->where(['production_rec_id' => $prodrecid])->distinct()->count();
+        return $modelcount;
+    }
+
+    public function createtran($zone_id, $qty, $line)
+    {
+        if ($qty <= 0) {
+            return false;
+        }
+        $modelproduct = \backend\models\Zoneproduct::find()->where(['zone_id' => $zone_id])->one();
+        if ($modelproduct) {
+            $modelchk = \backend\models\Stockbalance::find()->where(['product_id' => $modelproduct->product_id])->one();
+            if ($modelchk) {
 
                 $modelchk->qty = (float)$modelchk->qty + (float)$qty;
                 //  $modelstock->lot_id = '';
                 $modelchk->save(false);
-            }else{
+            } else {
                 $modelstock = new \backend\models\Stockbalance();
                 $modelstock->product_id = $modelproduct->product_id;
                 $modelstock->warehouse_id = 1; // default
@@ -399,10 +429,10 @@ public function countOld($prodrecid){
                 $modelstock->save(false);
             }
 
-            $modelbalance = \backend\models\Stockbalance::find()->where(['product_id'=>$modelproduct->id])->sum('qty');
+            $modelbalance = \backend\models\Stockbalance::find()->where(['product_id' => $modelproduct->id])->sum('qty');
 
-            if($modelbalance){
-                $modelproduct = \backend\models\Product::find()->where(['id'=>$modelproduct->id])->one();
+            if ($modelbalance) {
+                $modelproduct = \backend\models\Product::find()->where(['id' => $modelproduct->id])->one();
                 $modelproduct->all_qty = $modelbalance;
                 $modelproduct->save(false);
             }
@@ -422,9 +452,9 @@ public function countOld($prodrecid){
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-            $session = Yii::$app->session;
-            $session->setFlash('msg','บันทึกรายการเรียบร้อย');
-            return $this->redirect(['index']);
+        $session = Yii::$app->session;
+        $session->setFlash('msg', 'บันทึกรายการเรียบร้อย');
+        return $this->redirect(['index']);
     }
 
     /**
@@ -442,111 +472,126 @@ public function countOld($prodrecid){
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
-    public function actionFindemp(){
+
+    public function actionFindemp()
+    {
         $emp = Yii::$app->request->post('term');
-        $model = \backend\models\Employee::find()->where(['LIKE','first_name',$emp])->all();
-        if($model){
+        $model = \backend\models\Employee::find()->where(['LIKE', 'first_name', $emp])->all();
+        if ($model) {
             return Json::encode($model);
         }
     }
-    public function actionFindzonedate($id){
-        if($id){
-            $model = \backend\models\Zoneproduct::find()->where(['zone_id'=>$id])->one();
-            if($model){
-                return date('d-m-Y',$model->created_at);
-            }else{
+
+    public function actionFindzonedate($id)
+    {
+        if ($id) {
+            $model = \backend\models\Zoneproduct::find()->where(['zone_id' => $id])->one();
+            if ($model) {
+                return date('d-m-Y', $model->created_at);
+            } else {
                 return '';
             }
         }
     }
+
     public function actionFindzonebydept($id)
     {
-        if($id != ''){
-           $zone_id = \backend\models\Product::findProdZone($id);
-           if($zone_id){
-              // echo $zone_id;
-               $zonename = '';
-               if($zone_id == 1){$zonename='A';}
-               if($zone_id == 2){$zonename='B';}
-               if($zone_id == 3){$zonename='C';}
+        if ($id != '') {
+            $zone_id = \backend\models\Product::findProdZone($id);
+            if ($zone_id) {
+                // echo $zone_id;
+                $zonename = '';
+                if ($zone_id == 1) {
+                    $zonename = 'A';
+                }
+                if ($zone_id == 2) {
+                    $zonename = 'B';
+                }
+                if ($zone_id == 3) {
+                    $zonename = 'C';
+                }
 
-               $zone_by_group = \backend\models\Zone::find(['id'])->where(['LIKE','name',$zonename])->asArray()->all();
+                $zone_by_group = \backend\models\Zone::find(['id'])->where(['LIKE', 'name', $zonename])->asArray()->all();
 
-               $zone_arr = [];
-               if(count($zone_by_group)){
-                   foreach ($zone_by_group as $x){
-                       array_push($zone_arr, $x['id']);
-                   }
-                   $zone_list = \backend\models\Zoneproduct::find()->where(['zone_id'=>$zone_arr])->all();
+                $zone_arr = [];
+                if (count($zone_by_group)) {
+                    foreach ($zone_by_group as $x) {
+                        array_push($zone_arr, $x['id']);
+                    }
+                    $zone_list = \backend\models\Zoneproduct::find()->where(['zone_id' => $zone_arr])->all();
 
-                   if($zone_list){
-                      // print_r($zone_list);
-                       $html = '';
-                       foreach ($zone_list as $val){
-                           if($val->zone_id == 0){continue;}
-                           $zone_show_name = \backend\models\Zone::findName($val->zone_id);
-                          // echo $zone_show_name.'<br />';
-                           $html.="<option value='".$val->zone_id."'>".$zone_show_name."</option>";
-                         //  echo $html;
-                       }
-                      return $html;
-                   }
-               }else{
-                  // echo '';
-               }
+                    if ($zone_list) {
+                        // print_r($zone_list);
+                        $html = '';
+                        foreach ($zone_list as $val) {
+                            if ($val->zone_id == 0) {
+                                continue;
+                            }
+                            $zone_show_name = \backend\models\Zone::findName($val->zone_id);
+                            // echo $zone_show_name.'<br />';
+                            $html .= "<option value='" . $val->zone_id . "'>" . $zone_show_name . "</option>";
+                            //  echo $html;
+                        }
+                        return $html;
+                    }
+                } else {
+                    // echo '';
+                }
 
 
-           }else{
-              // echo "";
-           }
-        }else{
-           // echo "";
+            } else {
+                // echo "";
+            }
+        } else {
+            // echo "";
         }
     }
-    public function actionPrint(){
+
+    public function actionPrint()
+    {
         $product = Yii::$app->request->post('selected_product');
-        $from_date = date('Y-m-d',strtotime(Yii::$app->request->post('from_date')));
-        $to_date = date('Y-m-d',strtotime(Yii::$app->request->post('to_date')));
+        $from_date = date('Y-m-d', strtotime(Yii::$app->request->post('from_date')));
+        $to_date = date('Y-m-d', strtotime(Yii::$app->request->post('to_date')));
 
 
-        if($product!=""){
+        if ($product != "") {
 
-            $model = \backend\models\Productionrec::find()->where(['product_id'=>$product])
-                                                    ->andFilterWhere(['and',['>=','rec_date',$from_date],['<=','rec_date',$to_date]])->all();
-            if($model){
+            $model = \backend\models\Productionrec::find()->where(['product_id' => $product])
+                ->andFilterWhere(['and', ['>=', 'rec_date', $from_date], ['<=', 'rec_date', $to_date]])->all();
+            if ($model) {
                 $id = [];
-                foreach($model as $value){
-                    array_push($id,$value->id);
+                foreach ($model as $value) {
+                    array_push($id, $value->id);
                 }
-                if(sizeof($id)){
-                    $modelemp = \backend\models\ProductionrecLine::find(['emp_id'])->where(['production_rec_id'=>$id])->groupBy('emp_id')->all();
-                    $modelline = \backend\models\ProductionrecLine::find()->where(['production_rec_id'=>$id])->all();
+                if (sizeof($id)) {
+                    $modelemp = \backend\models\ProductionrecLine::find(['emp_id'])->where(['production_rec_id' => $id])->groupBy('emp_id')->all();
+                    $modelline = \backend\models\ProductionrecLine::find()->where(['production_rec_id' => $id])->all();
                 }
             }
         }
 
 
-        if($product !=''){
-             $full_data = [];
+        if ($product != '') {
+            $full_data = [];
             $rec_data = [];
             $prodrec = [];
-            $modelx = \backend\models\Productionrec::find()->where(['product_id'=>$product])->all();
-                    if($modelx){
-                        $id = [];
-                        foreach($modelx as $value){
-                            array_push($prodrec,$value->id);
-                            if($value->id){
-                                $modelemp = \backend\models\ProductionrecLine::find(['emp_id'])->where(['production_rec_id'=>$value->id])->groupBy('emp_id')->all();
-                                foreach ($modelemp as $val){
-                                    $modelline = \backend\models\ProductionrecLine::find()->select(['line_qty'])->where(['production_rec_id'=>$value->id,'emp_id'=>$val->emp_id])->asArray()->all();
-                                    array_push($rec_data,['emp_id'=>$val->emp_id,'trans'=>$modelline]);
-                                }
-
-                            }
-                            array_push($full_data,['production_rec_id'=>$prodrec,'data'=>$rec_data]);
+            $modelx = \backend\models\Productionrec::find()->where(['product_id' => $product])->all();
+            if ($modelx) {
+                $id = [];
+                foreach ($modelx as $value) {
+                    array_push($prodrec, $value->id);
+                    if ($value->id) {
+                        $modelemp = \backend\models\ProductionrecLine::find(['emp_id'])->where(['production_rec_id' => $value->id])->groupBy('emp_id')->all();
+                        foreach ($modelemp as $val) {
+                            $modelline = \backend\models\ProductionrecLine::find()->select(['line_qty'])->where(['production_rec_id' => $value->id, 'emp_id' => $val->emp_id])->asArray()->all();
+                            array_push($rec_data, ['emp_id' => $val->emp_id, 'trans' => $modelline]);
                         }
 
                     }
+                    array_push($full_data, ['production_rec_id' => $prodrec, 'data' => $rec_data]);
+                }
+
+            }
         }
 
         //echo count($modelzone);return;
@@ -557,11 +602,11 @@ public function countOld($prodrecid){
             'format' => Pdf::FORMAT_A4,
             'orientation' => Pdf::ORIENT_PORTRAIT,
             'destination' => Pdf::DEST_BROWSER,
-            'content' => $this->renderPartial('_print',[
-                'model'=>$model,
-                'modelemp'=>$modelemp,
-                'modelline'=>$modelline,
-                'full_data'=>$full_data,
+            'content' => $this->renderPartial('_print', [
+                'model' => $model,
+                'modelemp' => $modelemp,
+                'modelline' => $modelline,
+                'full_data' => $full_data,
 //                'modelissue'=>$modelissue,
 //                'modeladdress' => $modeladdress,
 //                'sup'=>$supname,
@@ -571,8 +616,8 @@ public function countOld($prodrecid){
 //                'totalamt2'=>$totalamt2,
 //                'bill_date'=>$from_date,
                 // 'list'=>$modellist,
-                 'from_date'=> $from_date,
-                 'to_date' => $to_date,
+                'from_date' => $from_date,
+                'to_date' => $to_date,
             ]),
             //'content' => "nira",
             'defaultFont' => '@backend/web/fonts/config.php',
@@ -591,27 +636,31 @@ public function countOld($prodrecid){
         //return $this->redirect(['genbill']);
         return $pdf->render();
     }
-    public function updateZoneproduct($zoneid,$id){
-        if($id){
-            $modelrec = \backend\models\ProductionrecLine::find()->where(['production_rec_id'=>$id])->sum('line_qty');
 
-            $model = \backend\models\Zoneproduct::find()->where(['zone_id'=>$zoneid])->one();
-            if($model){
+    public function updateZoneproduct($zoneid, $id)
+    {
+        if ($id) {
+            $modelrec = \backend\models\ProductionrecLine::find()->where(['production_rec_id' => $id])->sum('line_qty');
+
+            $model = \backend\models\Zoneproduct::find()->where(['zone_id' => $zoneid])->one();
+            if ($model) {
                 $model->remain_qty = $model->wip_qty - $modelrec;
                 $model->save(false);
             }
         }
     }
-    public function closeZone($zoneid){
-        $model = \backend\models\Zoneproduct::find()->where(['zone_id'=>$zoneid])->one();
-        if($model){
-            $model->qty =0;
+
+    public function closeZone($zoneid)
+    {
+        $model = \backend\models\Zoneproduct::find()->where(['zone_id' => $zoneid])->one();
+        if ($model) {
+            $model->qty = 0;
             $model->wip_qty = 0;
             $model->remain_qty = 0;
             $model->status = 0;
-            if($model->save(false)){
-                $modelzone = \backend\models\Zone::find()->where(['id'=>$zoneid])->one();
-                if($modelzone){
+            if ($model->save(false)) {
+                $modelzone = \backend\models\Zone::find()->where(['id' => $zoneid])->one();
+                if ($modelzone) {
                     $modelzone->lock = 0;
                     $modelzone->qty = 0;
                     $modelzone->save(false);
@@ -619,52 +668,60 @@ public function countOld($prodrecid){
             }
         }
     }
-    public function chkLineStatus($line){
+
+    public function chkLineStatus($line)
+    {
         $res = false;
-        $modelline = \backend\models\ProductionrecLine::find()->where(['id'=>$line])->one();
-        if($modelline){
-            if($modelline->status ==1){
-               $res = true;
+        $modelline = \backend\models\ProductionrecLine::find()->where(['id' => $line])->one();
+        if ($modelline) {
+            if ($modelline->status == 1) {
+                $res = true;
             }
         }
         return $res;
     }
-    public function updateLineStatus($line){
-        $modelline = \backend\models\ProductionrecLine::find()->where(['id'=>$line])->one();
-        if($modelline){
+
+    public function updateLineStatus($line)
+    {
+        $modelline = \backend\models\ProductionrecLine::find()->where(['id' => $line])->one();
+        if ($modelline) {
             $modelline->status = 1;
             $modelline->save(false);
         }
     }
-    public function updateLineFirst($id){
-        $model = \backend\models\ProductionrecLine::find()->where(['production_rec_id'=>$id])->all();
-        if($model){
-            foreach($model as $value){
-                if($value->line_qty > 0){
 
-                }else{
-                    $modelline =\backend\models\ProductionrecLine::find()->where(['id'=>$value->id])->one();
+    public function updateLineFirst($id)
+    {
+        $model = \backend\models\ProductionrecLine::find()->where(['production_rec_id' => $id])->all();
+        if ($model) {
+            foreach ($model as $value) {
+                if ($value->line_qty > 0) {
+
+                } else {
+                    $modelline = \backend\models\ProductionrecLine::find()->where(['id' => $value->id])->one();
                     $modelline->status = 0;
                     $modelline->save(false);
                 }
             }
         }
     }
-    public function actionFinditem(){
+
+    public function actionFinditem()
+    {
         $txt = \Yii::$app->request->post('txt');
         $list = [];
-        if($txt == ''){
+        if ($txt == '') {
             return Json::encode($list);
             //return 'no';
-        }else{
-            if($txt == "*"){
+        } else {
+            if ($txt == "*") {
                 $model = \backend\models\Employee::find()
                     ->asArray()
                     ->all();
                 return Json::encode($model);
-            }else{
-                $model = \backend\models\Employee::find()->where(['Like','first_name',$txt])
-                    ->orFilterWhere(['like','last_name',$txt])
+            } else {
+                $model = \backend\models\Employee::find()->where(['Like', 'first_name', $txt])
+                    ->orFilterWhere(['like', 'last_name', $txt])
                     ->asArray()
                     ->all();
                 return Json::encode($model);

@@ -5,11 +5,23 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
 use lavrentiev\widgets\toastr\Notification;
+use kartik\date\DatePicker;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
+use kartik\daterange\DateRangePicker;
 
 $dept = \backend\models\Section::find()->all();
 
 $this->title = Yii::t('app', 'รับยอดผลิต');
 $this->params['breadcrumbs'][] = $this->title;
+
+//$param = "";
+//$dateval = date('d-m-Y') . ' ถึง ' . date('d-m-Y');
+//if ($from_date != '' && $to_date != '') {
+//    $dateval = $from_date . ' ถึง ' . $to_date;
+//    $param = "&date_select=".$from_date." ถึง ".$to_date;
+//}
+
 ?>
 <div class="productionrec-index">
     <?php $session = Yii::$app->session;
@@ -50,6 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="btn-group">
                 <?php //echo Html::a(Yii::t('app', '<i class="fa fa-plus"></i> รับยอดผลิต'), ['create'], ['class' => 'btn btn-success']) ?>
                 <div class="btn btn-success btn-rec"><i class="fa fa-plus"></i> รับยอดผลิต</div>
+                <div class="btn btn-info btn-rec-print"><i class="fa fa-print"></i> พิมพ์</div>
             </div>
             <h4 class="pull-right"><?= $this->title ?> <i class="fa fa-cubes"></i>
                 <small></small>
@@ -235,8 +248,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php foreach ($dept as $value): ?>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <a href="index.php?r=productionrec/create&type=<?=$value->id?>&typename=<?=$value->name?>" class="btn btn-info"
-                                         style="width: 100%;font-weight: bold;padding: 15px 15px 15px 15px;"><?= $value->name; ?></a>
+                                    <a href="index.php?r=productionrec/create&type=<?= $value->id ?>&typename=<?= $value->name ?>"
+                                       class="btn btn-info"
+                                       style="width: 100%;font-weight: bold;padding: 15px 15px 15px 15px;"><?= $value->name; ?></a>
                                 </div>
                             </div>
                             <br>
@@ -249,12 +263,83 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
         </div>
+
+        <div id="printModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-md">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="fa fa-print text-primary"></i> พิมพ์ประวัติยอดรับผลิต</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="index.php?r=productionrec/printdoc" id="form-print-rec" method="post">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label for="">วันที่รับเข้า</label>
+
+                                    <?php
+                                    $dateval = date('d-m-Y') . ' ถึง ' . date('d-m-Y');
+                                    echo DateRangePicker::widget([
+                                        'name' => 'date_select',
+                                        'value' => $dateval,
+                                        'options' => ['class' => 'date_select', 'id' => 'main_picker'],
+                                        'presetDropdown' => true,
+                                        'hideInput' => false,
+                                        'convertFormat' => true,
+                                        'startAttribute' => 'start',
+                                        'endAttribute' => 'end',
+                                        'pluginOptions' => [
+                                            'locale' => ['format' => 'd-m-Y', 'separator' => ' ถึง ']
+                                        ]
+                                    ]);
+                                    ?>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label for="">พนักงาน</label>
+                                    <?php
+                                    echo Select2::widget([
+                                        'model' => new \backend\models\Employee(),
+                                        'name' => 'select_emp',
+                                        'attribute' => 'id',
+                                        'data' => ArrayHelper::map(\backend\models\Employee::find()->all(), 'id', 'first_name'),
+                                        'options' => ['placeholder' => 'Select a state ...'],
+                                        'pluginOptions' => [
+                                            'allowClear' => true
+                                        ],
+                                    ])
+
+                                    ?>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="modal-error" style="display: none;">
+                            <i class="fa fa-exclamation-triangle text-danger"> ไม่พบข้อมูล กรุณาลองใหม่อีกครั้ง</i>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success btn-ok" data-dismiss="modal">ตกลง</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <?php
         //$url_to_delete =  Url::to(['product/bulkdelete'],true);
         $this->registerJs('
     $(function(){
+        $(".btn-ok").click(function(){
+           $("form#form-print-rec").submit();
+        });
         $("#perpage").change(function(){
             $("#form-perpage").submit();
+        });
+        
+        $(".btn-rec-print").click(function(){
+      
+           $("#printModal").modal("show");
         });
         
         $(".btn-rec").click(function(){

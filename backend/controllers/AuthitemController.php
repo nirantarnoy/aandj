@@ -437,6 +437,8 @@ class AuthitemController extends Controller
         $auth->add($productionrec_view);
         $productionrec_print = $auth->createPermission('productionrec/print');
         $auth->add($productionrec_print);
+        $productionrec_print_doc = $auth->createPermission('productionrec/printdoc');
+        $auth->add($productionrec_print_doc);
         $productionrec_create = $auth->createPermission('productionrec/create');
         $auth->add($productionrec_create);
         $productionrec_findemp = $auth->createPermission('productionrec/findemp');
@@ -458,6 +460,7 @@ class AuthitemController extends Controller
         $auth->addChild($productionrec_permission,$productionrec_delete);
         $auth->addChild($productionrec_permission,$productionrec_create);
         $auth->addChild($productionrec_permission,$productionrec_print);
+        $auth->addChild($productionrec_permission,$productionrec_print_doc);
         $auth->addChild($productionrec_permission,$productionrec_findemp);
         $auth->addChild($productionrec_permission,$productionrec_findzonedate);
         $auth->addChild($productionrec_permission,$productionrec_findzonebydept);
