@@ -70,14 +70,15 @@ $this->registerJsFile('@web/js/sweetalert.min.js?V=002',
                                                    name="line_price1[]" value="">
                                         </td>
                                         <td style="text-align: center">
-                                            <div class="btn btn-danger btn-delete-plan1" onclick="removeline1($(this))">
-                                                ลบ
-                                            </div>
+                                            <i class="fa fa-trash btn-delete-plan1" onclick="removeline1($(this))">
+                                            </i>
                                         </td>
                                     </tr>
                                 <?php else: ?>
+                                   <?php $i1 = 0;?>
                                     <?php foreach ($modelline as $val): ?>
                                         <?php if ($val->plan_type == 1): ?>
+                                        <?php $i1 +=1;?>
                                             <tr>
                                                 <td>
                                                     <select name="line_sup1[]" class="form-control sub" id="">
@@ -107,13 +108,43 @@ $this->registerJsFile('@web/js/sweetalert.min.js?V=002',
                                                            name="line_price1[]" value="<?= $val->plan_price ?>">
                                                 </td>
                                                 <td style="text-align: center">
-                                                    <div class="btn btn-danger btn-delete-plan1"
-                                                         onclick="removeline1($(this))">ลบ
-                                                    </div>
+                                                    <i class="fa fa-trash btn-delete-plan1" onclick="removeline1($(this))">
+                                                    </i>
                                                 </td>
                                             </tr>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
+                                    <?php if($i1 == 0):?>
+                                        <tr>
+                                            <td>
+                                                <select name="line_sup1[]" class="form-control sub" id="">
+                                                    <?php $sub = \backend\models\Suplier::find()->all(); ?>
+                                                    <?php foreach ($sub as $data2): ?>
+                                                        <?php
+                                                        $select = '';
+                                                        ?>
+                                                        <option value="<?= $data2->id ?>" <?= $select ?>><?= $data2->name ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" style="text-align: right" class="form-control line-plan"
+                                                       name="line_plan1[]" value="" onchange="cal_plan($(this),1);">
+                                            </td>
+                                            <td>
+                                                <input type="text" style="text-align: right" class="form-control"
+                                                       name="line_qty1[]" value="" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" style="text-align: right" class="form-control"
+                                                       name="line_price1[]" value="">
+                                            </td>
+                                            <td style="text-align: center">
+                                                <i class="fa fa-trash btn-delete-plan1" onclick="removeline1($(this))">
+                                                </i>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                                 </tbody>
                                 <tfoot>
@@ -169,14 +200,15 @@ $this->registerJsFile('@web/js/sweetalert.min.js?V=002',
                                             <input type="text" class="form-control" name="line_price2[]" value="">
                                         </td>
                                         <td style="text-align: center">
-                                            <div class="btn btn-danger btn-delete-plan2" onclick="removeline2($(this))">
-                                                ลบ
-                                            </div>
+                                            <i class="fa fa-trash btn-delete-plan2" onclick="removeline2($(this))">
+                                            </i>
                                         </td>
                                     </tr>
                                 <?php else: ?>
+                                    <?php $i2 = 0;?>
                                     <?php foreach ($modelline as $val): ?>
                                         <?php if ($val->plan_type == 2): ?>
+                                            <?php $i2 +=1;?>
                                             <tr>
                                                 <td>
                                                     <select name="line_sup2[]" class="form-control sub" id="">
@@ -206,13 +238,42 @@ $this->registerJsFile('@web/js/sweetalert.min.js?V=002',
                                                            name="line_price2[]" value="<?= $val->plan_price ?>">
                                                 </td>
                                                 <td style="text-align: center">
-                                                    <div class="btn btn-danger btn-delete-plan2"
-                                                         onclick="removeline2($(this))">ลบ
-                                                    </div>
+                                                    <i class="fa fa-trash btn-delete-plan2" onclick="removeline2($(this))">
+                                                    </i>
                                                 </td>
                                             </tr>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
+                                <?php if($i2 == 0): ?>
+                                        <tr>
+                                            <td>
+                                                <select name="line_sup2[]" class="form-control sub" id="">
+                                                    <?php $sub = \backend\models\Suplier::find()->all(); ?>
+                                                    <?php foreach ($sub as $data2): ?>
+                                                        <?php
+                                                        $select = '';
+                                                        ?>
+                                                        <option value="<?= $data2->id ?>" <?= $select ?>><?= $data2->name ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control line-plan" name="line_plan2[]"
+                                                       value="" onchange="cal_plan($(this),2);">
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" name="line_qty2[]" value=""
+                                                       readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" name="line_price2[]" value="">
+                                            </td>
+                                            <td style="text-align: center">
+                                                <i class="fa fa-trash btn-delete-plan2" onclick="removeline2($(this))">
+                                                </i>
+                                            </td>
+                                        </tr>
+                                <?php endif; ?>
                                 <?php endif; ?>
                                 </tbody>
                                 <tfoot>
@@ -268,14 +329,15 @@ $this->registerJsFile('@web/js/sweetalert.min.js?V=002',
                                             <input type="text" class="form-control" name="line_price3[]" value="">
                                         </td>
                                         <td style="text-align: center">
-                                            <div class="btn btn-danger btn-delete-plan3" onclick="removeline3($(this))">
-                                                ลบ
-                                            </div>
+                                            <i class="fa fa-trash btn-delete-plan3" onclick="removeline3($(this))">
+                                            </i>
                                         </td>
                                     </tr>
                                 <?php else: ?>
+                                <?php $i3 = 0;?>
                                     <?php foreach ($modelline as $val): ?>
                                         <?php if ($val->plan_type == 3): ?>
+                                            <?php $i3 +=1; ?>
                                             <tr>
                                                 <td>
                                                     <select name="line_sup3[]" class="form-control sub" id="">
@@ -305,13 +367,42 @@ $this->registerJsFile('@web/js/sweetalert.min.js?V=002',
                                                            name="line_price3[]" value="<?= $val->plan_price ?>">
                                                 </td>
                                                 <td style="text-align: center">
-                                                    <div class="btn btn-danger btn-delete-plan3"
-                                                         onclick="removeline3($(this))">ลบ
-                                                    </div>
+                                                    <i class="fa fa-trash btn-delete-plan3" onclick="removeline3($(this))">
+                                                    </i>
                                                 </td>
                                             </tr>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
+                                <?php if($i3 == 0): ?>
+                                        <tr>
+                                            <td>
+                                                <select name="line_sup3[]" class="form-control sub" id="">
+                                                    <?php $sub = \backend\models\Suplier::find()->all(); ?>
+                                                    <?php foreach ($sub as $data2): ?>
+                                                        <?php
+                                                        $select = '';
+                                                        ?>
+                                                        <option value="<?= $data2->id ?>" <?= $select ?>><?= $data2->name ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control line-plan" name="line_plan3[]"
+                                                       value="" onchange="cal_plan($(this),3);">
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" name="line_qty3[]" value=""
+                                                       readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" name="line_price3[]" value="">
+                                            </td>
+                                            <td style="text-align: center">
+                                                <i class="fa fa-trash btn-delete-plan3" onclick="removeline3($(this))">
+                                                </i>
+                                            </td>
+                                        </tr>
+                                <?php endif; ?>
                                 <?php endif; ?>
                                 </tbody>
                                 <tfoot>
@@ -367,14 +458,15 @@ $this->registerJsFile('@web/js/sweetalert.min.js?V=002',
                                             <input type="text" class="form-control" name="line_price4[]" value="">
                                         </td>
                                         <td style="text-align: center">
-                                            <div class="btn btn-danger btn-delete-plan4" onclick="removeline4($(this))">
-                                                ลบ
-                                            </div>
+                                            <i class="fa fa-trash btn-delete-plan4" onclick="removeline4($(this))">
+                                            </i>
                                         </td>
                                     </tr>
                                 <?php else: ?>
+                                   <?php $i4=0;?>
                                     <?php foreach ($modelline as $val): ?>
                                         <?php if ($val->plan_type == 4): ?>
+                                            <?php $i4+=1;?>
                                             <tr>
                                                 <td>
                                                     <select name="line_sup4[]" class="form-control sub" id="">
@@ -404,13 +496,42 @@ $this->registerJsFile('@web/js/sweetalert.min.js?V=002',
                                                            name="line_price4[]" value="<?= $val->plan_price ?>">
                                                 </td>
                                                 <td style="text-align: center">
-                                                    <div class="btn btn-danger btn-delete-plan4"
-                                                         onclick="removeline4($(this))">ลบ
-                                                    </div>
+                                                    <i class="fa fa-trash btn-delete-plan4" onclick="removeline4($(this))">
+                                                    </i>
                                                 </td>
                                             </tr>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
+                                <?php if($i4==0): ?>
+                                        <tr>
+                                            <td>
+                                                <select name="line_sup4[]" class="form-control sub" id="">
+                                                    <?php $sub = \backend\models\Suplier::find()->all(); ?>
+                                                    <?php foreach ($sub as $data2): ?>
+                                                        <?php
+                                                        $select = '';
+                                                        ?>
+                                                        <option value="<?= $data2->id ?>" <?= $select ?>><?= $data2->name ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control line-plan" name="line_plan4[]"
+                                                       value="" onchange="cal_plan($(this),4);">
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" name="line_qty4[]" value=""
+                                                       readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" name="line_price4[]" value="">
+                                            </td>
+                                            <td style="text-align: center">
+                                                <i class="fa fa-trash btn-delete-plan4" onclick="removeline4($(this))">
+                                                </i>
+                                            </td>
+                                        </tr>
+                                <?php endif; ?>
                                 <?php endif; ?>
                                 </tbody>
                                 <tfoot>
