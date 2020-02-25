@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-12-08 11:54:13
+Date: 2020-02-25 18:17:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1071,8 +1071,8 @@ CREATE TABLE `auth_assignment` (
 -- ----------------------------
 -- Records of auth_assignment
 -- ----------------------------
-INSERT INTO `auth_assignment` VALUES ('System Administrator', '1', '1559538225');
-INSERT INTO `auth_assignment` VALUES ('System User', '1', '1559538225');
+INSERT INTO `auth_assignment` VALUES ('System Administrator', '1', '1579792293');
+INSERT INTO `auth_assignment` VALUES ('System User', '1', '1579792293');
 
 -- ----------------------------
 -- Table structure for `auth_item`
@@ -1095,106 +1095,108 @@ CREATE TABLE `auth_item` (
 -- ----------------------------
 -- Records of auth_item
 -- ----------------------------
-INSERT INTO `auth_item` VALUES ('employee/create', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('employee/delete', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('employee/index', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('employee/update', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('employee/view', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('employeemodule', '2', 'สิทธิ์ใช้งานโมดูล employee', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('invoice/bill', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('invoice/create', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('invoice/delete', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('invoice/index', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('invoice/update', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('invoice/view', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('invoicemodule', '2', 'สิทธิ์ใช้งานโมดูล invoice', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('Manage employee', '1', 'Manage invoice', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('Manage invoice', '1', 'Manage invoice', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('Manage message', '1', 'Manage message', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('Manage Plant', '1', 'Manage plant', null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('Manage prodissue', '1', 'Manage product issue', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('Manage prodrec', '1', 'Manage product received', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('Manage product', '1', 'Manage Product', null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('Manage productionrec', '1', 'Manage production received', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('Manage purchplan', '1', 'Manage purchase plan', null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('Manage warehouse', '1', 'Manage message', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('Manage workschedule', '1', 'Manage work schedule', null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('message/create', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('message/delete', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('message/index', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('message/update', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('message/view', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('messagemodule', '2', 'สิทธิ์ใช้งานโมดูล message', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('plant/create', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('plant/delete', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('plant/index', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('plant/showcity', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('plant/showdistrict', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('plant/showzipcode', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('plant/update', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('plant/view', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('plantmodule', '2', 'สิทธิ์ใช้งานโมดูล Plant', null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('prodissue/cancel', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('prodissue/create', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('prodissue/delete', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('prodissue/getzoneinfo', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('prodissue/index', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('prodissue/showemp', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('prodissue/update', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('prodissue/view', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('prodissuemodule', '2', 'สิทธิ์ใช้งานโมดูล prodissue', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('prodrec/bill', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('prodrec/cancelqc', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('prodrec/create', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('prodrec/createinv', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('prodrec/delete', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('prodrec/index', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('prodrec/update', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('prodrec/view', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('prodrecmodule', '2', 'สิทธิ์ใช้งานโมดูล prodrec', null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('product/create', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('product/delete', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('product/index', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('product/update', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('product/view', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('productionrec/create', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('productionrec/delete', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('productionrec/findemp', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('productionrec/finditem', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('productionrec/findzonedate', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('productionrec/index', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('productionrec/print', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('productionrec/update', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('productionrec/view', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('productionrecmodule', '2', 'สิทธิ์ใช้งานโมดูล productionrec', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('productmodule', '2', 'สิทธิ์ใช้งานโมดูล product', null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplan/calendaritem', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplan/checkoldplan', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplan/copyplan', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplan/create', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplan/delete', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplan/findevent', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplan/index', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplan/showcalendar', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplan/testsave', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplan/update', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplan/updateplan', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplan/view', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('purchplanmodule', '2', 'สิทธิ์ใช้งานโมดูล purchplan', null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('System Administrator', '1', 'ผู้ดูแลระบบ', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('System User', '1', 'ผู้ใช้งานทั่วไป', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('warehouse/create', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('warehouse/delete', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('warehouse/index', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('warehouse/update', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('warehouse/view', '2', null, null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('warehousemodule', '2', 'สิทธิ์ใช้งานโมดูล warehouse', null, null, '1559538225', '1559538225');
-INSERT INTO `auth_item` VALUES ('workschedule/create', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('workschedule/delete', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('workschedule/index', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('workschedule/update', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('workschedule/view', '2', null, null, null, '1559538224', '1559538224');
-INSERT INTO `auth_item` VALUES ('workschedulemodule', '2', 'สิทธิ์ใช้งานโมดูล workschedule', null, null, '1559538224', '1559538224');
+INSERT INTO `auth_item` VALUES ('employee/create', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('employee/delete', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('employee/index', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('employee/update', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('employee/view', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('employeemodule', '2', 'สิทธิ์ใช้งานโมดูล employee', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('invoice/bill', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('invoice/create', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('invoice/delete', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('invoice/index', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('invoice/update', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('invoice/view', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('invoicemodule', '2', 'สิทธิ์ใช้งานโมดูล invoice', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('Manage employee', '1', 'Manage invoice', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('Manage invoice', '1', 'Manage invoice', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('Manage message', '1', 'Manage message', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('Manage Plant', '1', 'Manage plant', null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('Manage prodissue', '1', 'Manage product issue', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('Manage prodrec', '1', 'Manage product received', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('Manage product', '1', 'Manage Product', null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('Manage productionrec', '1', 'Manage production received', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('Manage purchplan', '1', 'Manage purchase plan', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('Manage warehouse', '1', 'Manage message', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('Manage workschedule', '1', 'Manage work schedule', null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('message/create', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('message/delete', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('message/index', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('message/update', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('message/view', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('messagemodule', '2', 'สิทธิ์ใช้งานโมดูล message', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('plant/create', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('plant/delete', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('plant/index', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('plant/showcity', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('plant/showdistrict', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('plant/showzipcode', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('plant/update', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('plant/view', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('plantmodule', '2', 'สิทธิ์ใช้งานโมดูล Plant', null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('prodissue/cancel', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodissue/create', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodissue/delete', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodissue/getzoneinfo', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodissue/index', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodissue/showemp', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodissue/update', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodissue/view', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodissuemodule', '2', 'สิทธิ์ใช้งานโมดูล prodissue', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodrec/bill', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodrec/cancelqc', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodrec/create', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodrec/createinv', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodrec/delete', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodrec/index', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodrec/update', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodrec/view', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('prodrecmodule', '2', 'สิทธิ์ใช้งานโมดูล prodrec', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('product/create', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('product/delete', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('product/index', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('product/update', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('product/view', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('productionrec/create', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('productionrec/delete', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('productionrec/findemp', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('productionrec/finditem', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('productionrec/findzonebydept', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('productionrec/findzonedate', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('productionrec/index', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('productionrec/print', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('productionrec/printdoc', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('productionrec/update', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('productionrec/view', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('productionrecmodule', '2', 'สิทธิ์ใช้งานโมดูล productionrec', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('productmodule', '2', 'สิทธิ์ใช้งานโมดูล product', null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplan/calendaritem', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplan/checkoldplan', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplan/copyplan', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplan/create', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplan/delete', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplan/findevent', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplan/index', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplan/showcalendar', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplan/testsave', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplan/update', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplan/updateplan', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplan/view', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('purchplanmodule', '2', 'สิทธิ์ใช้งานโมดูล purchplan', null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('System Administrator', '1', 'ผู้ดูแลระบบ', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('System User', '1', 'ผู้ใช้งานทั่วไป', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('warehouse/create', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('warehouse/delete', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('warehouse/index', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('warehouse/update', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('warehouse/view', '2', null, null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('warehousemodule', '2', 'สิทธิ์ใช้งานโมดูล warehouse', null, null, '1579792293', '1579792293');
+INSERT INTO `auth_item` VALUES ('workschedule/create', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('workschedule/delete', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('workschedule/index', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('workschedule/update', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('workschedule/view', '2', null, null, null, '1579792292', '1579792292');
+INSERT INTO `auth_item` VALUES ('workschedulemodule', '2', 'สิทธิ์ใช้งานโมดูล workschedule', null, null, '1579792292', '1579792292');
 
 -- ----------------------------
 -- Table structure for `auth_item_child`
@@ -1267,9 +1269,11 @@ INSERT INTO `auth_item_child` VALUES ('productionrecmodule', 'productionrec/crea
 INSERT INTO `auth_item_child` VALUES ('productionrecmodule', 'productionrec/delete');
 INSERT INTO `auth_item_child` VALUES ('productionrecmodule', 'productionrec/findemp');
 INSERT INTO `auth_item_child` VALUES ('productionrecmodule', 'productionrec/finditem');
+INSERT INTO `auth_item_child` VALUES ('productionrecmodule', 'productionrec/findzonebydept');
 INSERT INTO `auth_item_child` VALUES ('productionrecmodule', 'productionrec/findzonedate');
 INSERT INTO `auth_item_child` VALUES ('productionrecmodule', 'productionrec/index');
 INSERT INTO `auth_item_child` VALUES ('productionrecmodule', 'productionrec/print');
+INSERT INTO `auth_item_child` VALUES ('productionrecmodule', 'productionrec/printdoc');
 INSERT INTO `auth_item_child` VALUES ('productionrecmodule', 'productionrec/update');
 INSERT INTO `auth_item_child` VALUES ('productionrecmodule', 'productionrec/view');
 INSERT INTO `auth_item_child` VALUES ('productmodule', 'product/create');
@@ -1329,7 +1333,7 @@ CREATE TABLE `auth_rule` (
 -- ----------------------------
 -- Records of auth_rule
 -- ----------------------------
-INSERT INTO `auth_rule` VALUES ('canDelete', 0x4F3A32383A22636F6D6D6F6E5C726261635C44656C6574655265636F726452756C65223A333A7B733A343A226E616D65223B733A393A2263616E44656C657465223B733A393A22637265617465644174223B693A313535393533383232343B733A393A22757064617465644174223B693A313535393533383232343B7D, '1559538224', '1559538224');
+INSERT INTO `auth_rule` VALUES ('canDelete', 0x4F3A32383A22636F6D6D6F6E5C726261635C44656C6574655265636F726452756C65223A333A7B733A343A226E616D65223B733A393A2263616E44656C657465223B733A393A22637265617465644174223B693A313537393739323239323B733A393A22757064617465644174223B693A313537393739323239323B7D, '1579792292', '1579792292');
 
 -- ----------------------------
 -- Table structure for `bank`
@@ -10458,12 +10462,13 @@ CREATE TABLE `employee` (
   `emp_code` varchar(255) DEFAULT NULL,
   `salary_type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of employee
 -- ----------------------------
 INSERT INTO `employee` VALUES ('1', '1', '1', 'ศาลายา', 'บาเรน', '1', null, '', '', '1', '1559723099', '1559723099', '1', null, null, 'EM001', '2');
+INSERT INTO `employee` VALUES ('2', '1', '1', 'นิรันดร์', 'วังญาติ', '2', '1', '', '', '1', '1579755665', '1579755665', '1', null, null, 'EM068', '1');
 
 -- ----------------------------
 -- Table structure for `event`
@@ -10483,7 +10488,7 @@ CREATE TABLE `event` (
   `ref_type` int(11) DEFAULT NULL,
   `event_type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of event
@@ -10496,6 +10501,11 @@ INSERT INTO `event` VALUES ('37', 'แผนซื้อประจำวัน
 INSERT INTO `event` VALUES ('41', 'แผนซื้อประจำวันที่ 16-11-2019', '1573837200', null, null, '1573915527', '1573915527', '1', null, '2019-11-16', null, '1');
 INSERT INTO `event` VALUES ('45', 'แผนซื้อประจำวันที่ 17-11-2019', '1573923600', null, null, '1573961193', '1573961193', '1', null, '2019-11-17', null, '1');
 INSERT INTO `event` VALUES ('46', 'แผนซื้อประจำวันที่ 01-12-2019', '1575133200', null, null, '1575212813', '1575212813', '1', null, '2019-12-01', null, '1');
+INSERT INTO `event` VALUES ('47', 'แผนซื้อประจำวันที่ 15-12-2019', '1576342800', null, null, '1576423182', '1576423182', '1', null, '2019-12-15', null, '1');
+INSERT INTO `event` VALUES ('48', 'แผนซื้อประจำวันที่ 19-12-2019', '1576688400', null, null, '1576730740', '1576730740', '1', null, '2019-12-19', null, '1');
+INSERT INTO `event` VALUES ('50', 'แผนซื้อประจำวันที่ 22-01-2020', '1579626000', null, null, '1579711022', '1579711022', '1', null, '2020-01-22', null, '1');
+INSERT INTO `event` VALUES ('51', 'แผนซื้อประจำวันที่ 23-02-2020', '1582390800', null, null, '1582432413', '1582432413', '1', null, '2020-02-23', null, '1');
+INSERT INTO `event` VALUES ('52', 'แผนซื้อประจำวันที่ 24-02-2020', '1582477200', null, null, '1582524167', '1582524167', '1', null, '2020-02-24', null, '1');
 
 -- ----------------------------
 -- Table structure for `invoice`
@@ -10573,7 +10583,7 @@ CREATE TABLE `journal` (
   `trans_date` int(11) DEFAULT NULL,
   `journal_no` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of journal
@@ -10584,6 +10594,16 @@ INSERT INTO `journal` VALUES ('3', null, null, '', '14', '14', '1', '1559540404'
 INSERT INTO `journal` VALUES ('4', null, null, '', '14', '14', '1', '1559540450', '1559540450', '1', null, null, 'PDR19000004');
 INSERT INTO `journal` VALUES ('5', null, null, '', '14', '14', '1', '1559540572', '1559540572', '1', null, null, 'PDR19000005');
 INSERT INTO `journal` VALUES ('6', null, null, '', '15', '15', '1', '1573951233', '1573951233', '1', null, null, 'REP19000001');
+INSERT INTO `journal` VALUES ('7', null, null, '', '14', '14', '1', '1576423437', '1576423437', '1', null, null, 'PDR19000006');
+INSERT INTO `journal` VALUES ('8', null, null, '', '15', '15', '1', '1576423756', '1576423756', '1', null, null, 'REP19000002');
+INSERT INTO `journal` VALUES ('9', null, null, '', '15', '15', '1', '1576471603', '1576471603', '1', null, null, 'REP19000003');
+INSERT INTO `journal` VALUES ('10', null, null, '', '14', '14', '1', '1576570635', '1576570635', '1', null, null, 'PDR19000007');
+INSERT INTO `journal` VALUES ('11', null, null, '', '14', '14', '1', '1576570635', '1576570635', '1', null, null, 'PDR19000008');
+INSERT INTO `journal` VALUES ('12', null, null, '', '14', '14', '1', '1579704515', '1579704515', '1', null, null, 'PDR20000009');
+INSERT INTO `journal` VALUES ('13', null, null, '', '15', '15', '1', '1579710337', '1579710337', '1', null, null, 'REP20000004');
+INSERT INTO `journal` VALUES ('14', null, null, '', '15', '15', '1', '1579711749', '1579711749', '1', null, null, 'REP20000005');
+INSERT INTO `journal` VALUES ('15', null, null, '', '15', '15', '1', '1579754976', '1579754976', '1', null, null, 'REP20000006');
+INSERT INTO `journal` VALUES ('16', null, null, '', '15', '15', '1', '1579755709', '1579755709', '1', null, null, 'REP20000007');
 
 -- ----------------------------
 -- Table structure for `journaltable`
@@ -10635,7 +10655,7 @@ CREATE TABLE `journal_trans` (
   `zone_id` int(11) DEFAULT NULL,
   `line_price` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of journal_trans
@@ -10651,6 +10671,25 @@ INSERT INTO `journal_trans` VALUES ('8', '6', '1', '2', null, '0', '1', '1573951
 INSERT INTO `journal_trans` VALUES ('9', '6', '1', '56', null, '0', '1', '1573951233', '1573951233', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
 INSERT INTO `journal_trans` VALUES ('10', '6', '1', '9', null, '0', '1', '1573951233', '1573951233', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
 INSERT INTO `journal_trans` VALUES ('11', '6', '1', '0', null, '0', '1', '1573951233', '1573951233', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('12', '7', '1', '200', null, '0', '1', '1576423437', '1576423437', '1', null, null, null, null, null, '1', null, null, null, null, null, null);
+INSERT INTO `journal_trans` VALUES ('13', '8', '1', '56', null, '0', '1', '1576423756', '1576423756', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('14', '8', '1', '9', null, '0', '1', '1576423756', '1576423756', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('15', '8', '1', '0', null, '0', '1', '1576423756', '1576423756', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('16', '8', '1', '1', null, '0', '1', '1576423756', '1576423756', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('17', '8', '1', '3', null, '0', '1', '1576423756', '1576423756', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('18', '9', '1', '56', null, '0', '1', '1576471603', '1576471603', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('19', '9', '1', '9', null, '0', '1', '1576471603', '1576471603', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('20', '10', '1', '100', null, '0', '1', '1576570635', '1576570635', '1', null, null, null, null, null, '1', null, null, null, null, null, null);
+INSERT INTO `journal_trans` VALUES ('21', '11', '2', '30', null, '0', '1', '1576570635', '1576570635', '1', null, null, null, null, null, '1', null, null, null, null, null, null);
+INSERT INTO `journal_trans` VALUES ('22', '12', '1', '100', null, '0', '1', '1579704515', '1579704515', '1', null, null, null, null, null, '1', null, null, null, null, null, null);
+INSERT INTO `journal_trans` VALUES ('23', '13', '1', '56', null, '0', '1', '1579710337', '1579710337', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('24', '13', '1', '9', null, '0', '1', '1579710337', '1579710337', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('25', '13', '1', '0', null, '0', '1', '1579710337', '1579710337', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('26', '13', '1', '1', null, '0', '1', '1579710337', '1579710337', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('27', '14', '1', '100', null, '0', '1', '1579711749', '1579711749', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('28', '15', '1', '300', null, '0', '1', '1579754976', '1579754976', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('29', '16', '1', '30', null, '0', '1', '1579755709', '1579755709', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
+INSERT INTO `journal_trans` VALUES ('30', '16', '1', '40', null, '0', '1', '1579755709', '1579755709', '1', null, null, null, null, null, '1', null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for `location`
@@ -10710,7 +10749,7 @@ CREATE TABLE `message` (
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of message
@@ -10720,6 +10759,9 @@ INSERT INTO `message` VALUES ('2', '1', 'รับวัตถุดิบเล
 INSERT INTO `message` VALUES ('3', '1', 'รับวัตถุดิบเลขที่ PDR19000002', 'รับเข้าวัตถุดิบของ ป้าปลิว จำนวน 1รายการ', '2', '1559540404', '1559541840', '1', '1');
 INSERT INTO `message` VALUES ('4', '1', 'รับวัตถุดิบเลขที่ PDR19000002', 'รับเข้าวัตถุดิบของ ป้าปลิว จำนวน 1รายการ', '2', '1559540450', '1559552885', '1', '1');
 INSERT INTO `message` VALUES ('5', '1', 'รับวัตถุดิบเลขที่ PDR19000003', 'รับเข้าวัตถุดิบของ ป้าปลิว จำนวน 1รายการ', '2', '1559540572', '1559541836', '1', '1');
+INSERT INTO `message` VALUES ('6', '1', 'รับวัตถุดิบเลขที่ PDR19000002', 'รับเข้าวัตถุดิบของ ป้าปลิว จำนวน 1รายการ', '1', '1576423437', '1576423437', '1', null);
+INSERT INTO `message` VALUES ('7', '1', 'รับวัตถุดิบเลขที่ PDR19000003', 'รับเข้าวัตถุดิบของ ป้าปลิว จำนวน 2รายการ', '1', '1576570635', '1576570635', '1', null);
+INSERT INTO `message` VALUES ('8', '1', 'รับวัตถุดิบเลขที่ PDR20000004', 'รับเข้าวัตถุดิบของ ป้าปลิว จำนวน 1รายการ', '1', '1579704515', '1579704515', '1', null);
 
 -- ----------------------------
 -- Table structure for `migration`
@@ -10872,6 +10914,9 @@ INSERT INTO `migration` VALUES ('m181226_070757_add_cut_interval_column_to_orcha
 INSERT INTO `migration` VALUES ('m190120_064244_create_orchard_treat_table', '1559532512');
 INSERT INTO `migration` VALUES ('m190120_070931_create_treat_table', '1559532512');
 INSERT INTO `migration` VALUES ('m190604_134507_add_event_type_column_to_event_table', '1559655913');
+INSERT INTO `migration` VALUES ('m191215_104906_add_dept_id_column_to_production_rec_table', '1576412311');
+INSERT INTO `migration` VALUES ('m191217_093942_add_dept_use_column_to_product_table', '1576575590');
+INSERT INTO `migration` VALUES ('m200122_164126_add_line_qty2_column_to_production_rec_line_table', '1579711329');
 
 -- ----------------------------
 -- Table structure for `onhand`
@@ -11105,13 +11150,16 @@ CREATE TABLE `product` (
   `date_price` int(11) DEFAULT NULL,
   `zone_group` int(11) DEFAULT NULL,
   `zone_qty_per` int(11) DEFAULT NULL,
+  `dept_use` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES ('1', 'P1', 'ลูกเขียว', '', '', null, '1', null, '1', null, null, null, null, null, '0', '0', '1', '1559536420', '1573951233', '1', '1', '120', null, null, null, null, null, null, null, null, '1', null);
+INSERT INTO `product` VALUES ('1', 'ควั่น', 'ลูกเขียว', '', '', null, '1', null, '1', null, null, null, null, null, '0', '0', '1', '1559536420', '1576575860', '1', '1', '120', null, null, null, null, null, null, null, null, '1', null, '2');
+INSERT INTO `product` VALUES ('2', 'หัวโต', 'หัวโต', 'กดก', '', null, '1', null, '1', null, null, null, null, null, '0', '0', '1', '1576566769', '1576566779', '1', '1', null, null, null, null, null, null, null, null, null, '2', null, null);
+INSERT INTO `product` VALUES ('3', 'เจีย', 'เจีย', '', 'P3', null, '1', null, '1', null, null, null, null, null, '0', '0', '1', '1576566864', '1576566864', '1', null, null, null, null, null, null, null, null, null, null, '3', null, null);
 
 -- ----------------------------
 -- Table structure for `production_rec`
@@ -11135,13 +11183,22 @@ CREATE TABLE `production_rec` (
   `productrec_no` varchar(255) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `rec_date` date DEFAULT NULL,
+  `dept_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of production_rec
 -- ----------------------------
-INSERT INTO `production_rec` VALUES ('1', '1573923600', '1', '1559537586', '1', null, null, null, null, '1573951233', '1573951233', '1', null, null, 'REP19000001', '1', null);
+INSERT INTO `production_rec` VALUES ('1', '1573923600', '1', '1559537586', '1', null, null, null, null, '1573951233', '1573951233', '1', null, null, 'REP19000001', '1', null, null);
+INSERT INTO `production_rec` VALUES ('2', '1576342800', '2', '1576423437', '1', null, null, null, null, '1576423507', '1576423507', '1', null, null, 'REP19000002', '1', null, '1');
+INSERT INTO `production_rec` VALUES ('3', '1576342800', '2', '1576423437', '1', null, null, null, null, '1576423695', '1576423695', '1', null, null, 'REP19000002', '1', null, '1');
+INSERT INTO `production_rec` VALUES ('4', '1576342800', '2', '1576423437', '1', null, null, null, null, '1576423755', '1576423755', '1', null, null, 'REP19000002', '1', null, '1');
+INSERT INTO `production_rec` VALUES ('5', '1576429200', '2', '1576423437', '1', null, null, null, null, '1576471603', '1576471603', '1', null, null, 'REP19000003', '1', null, '1');
+INSERT INTO `production_rec` VALUES ('6', '1579626000', '2', '1576423437', '0', null, null, null, null, '1579710337', '1579710337', '1', null, null, 'REP20000004', '1', null, '2');
+INSERT INTO `production_rec` VALUES ('7', '1579626000', '3', '1576570635', '0', null, null, null, null, '1579711749', '1579711749', '1', null, null, 'REP20000005', '1', null, '2');
+INSERT INTO `production_rec` VALUES ('8', '1579712400', '3', '1576570635', '0', null, null, null, null, '1579754976', '1579754976', '1', null, null, 'REP20000006', '1', null, '2');
+INSERT INTO `production_rec` VALUES ('9', '1579712400', '3', '1576570635', '0', null, null, null, null, '1579755708', '1579755708', '1', null, null, 'REP20000007', '1', null, '2');
 
 -- ----------------------------
 -- Table structure for `production_rec_line`
@@ -11161,22 +11218,61 @@ CREATE TABLE `production_rec_line` (
   `updated_by` int(11) DEFAULT NULL,
   `list_qty` varchar(255) DEFAULT NULL,
   `line_price` float DEFAULT NULL,
+  `line_qty2` int(11) DEFAULT NULL,
+  `line_qty3` int(11) DEFAULT NULL,
+  `line_qty4` int(11) DEFAULT NULL,
+  `line_qty5` int(11) DEFAULT NULL,
+  `line_qty6` int(11) DEFAULT NULL,
+  `line_qty7` int(11) DEFAULT NULL,
+  `line_qty8` int(11) DEFAULT NULL,
+  `line_qty9` int(11) DEFAULT NULL,
+  `line_qty10` int(11) DEFAULT NULL,
+  `line_qty11` int(11) DEFAULT NULL,
+  `line_qty12` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of production_rec_line
 -- ----------------------------
-INSERT INTO `production_rec_line` VALUES ('1', '1', '1', null, '30', null, '1', '1573951233', '1573951233', '1', null, null, null);
-INSERT INTO `production_rec_line` VALUES ('2', '1', '1', null, '23', null, '1', '1573951233', '1573951233', '1', null, null, null);
-INSERT INTO `production_rec_line` VALUES ('3', '1', '1', null, '2', null, '1', '1573951233', '1573951233', '1', null, null, null);
-INSERT INTO `production_rec_line` VALUES ('4', '1', '1', null, null, null, '0', '1573951233', '1573951233', '1', '1', null, null);
-INSERT INTO `production_rec_line` VALUES ('5', '1', '1', null, null, null, '0', '1573951233', '1573951233', '1', '1', null, null);
-INSERT INTO `production_rec_line` VALUES ('6', '1', '1', null, '56', null, '1', '1573951233', '1573951233', '1', null, null, null);
-INSERT INTO `production_rec_line` VALUES ('7', '1', '1', null, '9', null, '1', '1573951233', '1573951233', '1', null, null, null);
-INSERT INTO `production_rec_line` VALUES ('8', '1', '1', null, '0', null, '0', '1573951233', '1573951233', '1', '1', null, null);
-INSERT INTO `production_rec_line` VALUES ('9', '1', '1', null, null, null, '0', '1573951233', '1573951233', '1', '1', null, null);
-INSERT INTO `production_rec_line` VALUES ('10', '1', '1', null, null, null, '0', '1573951233', '1573951233', '1', '1', null, null);
+INSERT INTO `production_rec_line` VALUES ('1', '1', '1', null, '30', null, '1', '1573951233', '1573951233', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('2', '1', '1', null, '23', null, '1', '1573951233', '1573951233', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('3', '1', '1', null, '2', null, '1', '1573951233', '1573951233', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('4', '1', '1', null, null, null, '0', '1573951233', '1573951233', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('5', '1', '1', null, null, null, '0', '1573951233', '1573951233', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('6', '1', '1', null, '56', null, '1', '1573951233', '1573951233', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('7', '1', '1', null, '9', null, '1', '1573951233', '1573951233', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('8', '1', '1', null, '0', null, '0', '1573951233', '1573951233', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('9', '1', '1', null, null, null, '0', '1573951233', '1573951233', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('10', '1', '1', null, null, null, '0', '1573951233', '1573951233', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('11', '2', null, null, '56', null, '1', '1576423507', '1576423507', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('12', '3', null, null, '56', null, '1', '1576423695', '1576423695', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('13', '4', null, null, '56', null, '1', '1576423755', '1576423755', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('14', '4', null, null, '9', null, '1', '1576423756', '1576423756', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('15', '4', null, null, '0', null, '0', '1576423756', '1576423756', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('16', '4', null, null, '1', null, '1', '1576423756', '1576423756', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('17', '4', null, null, '3', null, '1', '1576423756', '1576423756', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('18', '5', '1', null, '56', null, '1', '1576471603', '1576471603', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('19', '5', '1', null, '9', null, '1', '1576471603', '1576471603', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('20', '5', '1', null, null, null, '0', '1576471603', '1576471603', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('21', '5', '1', null, null, null, '0', '1576471603', '1576471603', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('22', '5', '1', null, null, null, '0', '1576471603', '1576471603', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('23', '6', '1', null, '56', null, '1', '1579710337', '1579710337', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('24', '6', '1', null, '9', null, '1', '1579710337', '1579710337', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('25', '6', '1', null, '0', null, '0', '1579710337', '1579710337', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('26', '6', '1', null, '1', null, '1', '1579710337', '1579710337', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('27', '6', '1', null, null, null, '0', '1579710337', '1579710337', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('28', '6', '1', null, null, null, '0', '1579710337', '1579710337', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('29', '6', '1', null, null, null, '0', '1579710337', '1579710337', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('30', '6', '1', null, null, null, '0', '1579710337', '1579710337', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('31', '6', '1', null, null, null, '0', '1579710337', '1579710337', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('32', '6', '1', null, null, null, '0', '1579710337', '1579710337', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('33', '6', '1', null, null, null, '0', '1579710337', '1579710337', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('34', '6', '1', null, null, null, '0', '1579710337', '1579710337', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('35', '7', '1', null, '100', null, '1', '1579711749', '1579711749', '1', null, null, null, '100', '20', '1', null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('36', '8', '1', null, '300', null, '1', '1579754976', '1579754976', '1', null, null, null, '600', '70', '20', null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('37', '9', '1', null, '30', null, '1', '1579755708', '1579755708', '1', null, null, null, '30', '20', '10', null, null, null, null, null, null, null, null);
+INSERT INTO `production_rec_line` VALUES ('38', '9', '2', null, '40', null, '1', '1579755708', '1579755708', '1', null, null, null, '30', '20', '10', null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `product_category`
@@ -11239,13 +11335,16 @@ CREATE TABLE `prod_issue` (
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of prod_issue
 -- ----------------------------
 INSERT INTO `prod_issue` VALUES ('1', 'IS19000001', '1559667600', null, '100', '1', null, '1', '1559718637', '1559718637', '1', '1');
 INSERT INTO `prod_issue` VALUES ('2', 'IS19000002', '1562346000', null, '0', '1', null, '1', '1562420844', '1562420845', '1', '1');
+INSERT INTO `prod_issue` VALUES ('3', 'IS19000003', '1576342800', null, '200', '1', null, '1', '1576423466', '1576423466', '1', '1');
+INSERT INTO `prod_issue` VALUES ('4', 'IS19000004', '1576515600', null, '100', '1', null, '1', '1576570079', '1576570079', '1', '1');
+INSERT INTO `prod_issue` VALUES ('5', 'IS19000005', '1576515600', null, '100', '1', null, '1', '1576570815', '1576570815', '1', '1');
 
 -- ----------------------------
 -- Table structure for `prod_issue_line`
@@ -11269,7 +11368,7 @@ CREATE TABLE `prod_issue_line` (
   `emp_id` int(11) DEFAULT NULL,
   `note` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of prod_issue_line
@@ -11277,6 +11376,9 @@ CREATE TABLE `prod_issue_line` (
 INSERT INTO `prod_issue_line` VALUES ('1', null, '1', '1', '100', null, 'SP1030662', null, null, null, null, null, null, '1', '0', null);
 INSERT INTO `prod_issue_line` VALUES ('2', null, '2', null, null, null, '', null, null, null, null, null, null, '1', '1', null);
 INSERT INTO `prod_issue_line` VALUES ('3', null, '3', null, null, null, '', null, null, null, null, null, null, '1', '1', null);
+INSERT INTO `prod_issue_line` VALUES ('4', null, '3', '2', '200', null, 'SP1151262', null, null, null, null, null, null, '1', '1', null);
+INSERT INTO `prod_issue_line` VALUES ('5', null, '4', null, '100', null, 'SP1151262', null, null, null, null, null, null, '1', '1', null);
+INSERT INTO `prod_issue_line` VALUES ('6', null, '5', '3', '100', null, 'SP1171262', null, null, null, null, null, null, '2', '0', null);
 
 -- ----------------------------
 -- Table structure for `prod_rec`
@@ -11305,12 +11407,15 @@ CREATE TABLE `prod_rec` (
   `plan_id` int(11) DEFAULT NULL,
   `rec_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of prod_rec
 -- ----------------------------
 INSERT INTO `prod_rec` VALUES ('1', 'PDR19000001', null, '1559494800', '1', null, '100', null, null, '2', '1559537586', '1573961797', '1', '1', null, 'SP1030662', null, null, null, '1', '2019-06-03');
+INSERT INTO `prod_rec` VALUES ('2', 'PDR19000002', null, '1576342800', '1', null, '200', null, null, '1', '1576423437', '1576423437', '1', '1', null, 'SP1151262', null, null, null, '7', '2019-12-15');
+INSERT INTO `prod_rec` VALUES ('3', 'PDR19000003', null, '1576515600', '1', null, '130', null, null, '1', '1576570635', '1576570635', '1', '1', null, 'SP1171262', null, null, null, '7', '2019-12-17');
+INSERT INTO `prod_rec` VALUES ('4', 'PDR20000004', null, '1579626000', '1', null, '100', null, null, '1', '1579704515', '1579704515', '1', '1', null, 'SP1220163', null, null, null, '9', '2020-01-22');
 
 -- ----------------------------
 -- Table structure for `prod_rec_line`
@@ -11338,12 +11443,16 @@ CREATE TABLE `prod_rec_line` (
   `team2` int(11) DEFAULT NULL,
   `qc_note` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of prod_rec_line
 -- ----------------------------
 INSERT INTO `prod_rec_line` VALUES ('1', '1', '1', '1', '100', '10', 'SP1030662', null, null, '1559537586', '1559537586', '1', null, '1', 'A1', '100', null, null, null, '');
+INSERT INTO `prod_rec_line` VALUES ('2', '2', '1', '2', '200', '67', 'SP1151262', null, null, '1576423437', '1576423437', '1', null, '1', '2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89', '200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200', null, null, null, '');
+INSERT INTO `prod_rec_line` VALUES ('3', '3', '1', '3', '100', '67', 'SP1171262', null, null, '1576570635', '1576570635', '1', null, '1', '3,4,5,6,7,8,9,10,11,12,13', '100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100', null, null, null, '');
+INSERT INTO `prod_rec_line` VALUES ('4', '3', '2', '101', '30', '10', 'SP1171262', null, null, '1576570635', '1576570635', '1', null, '1', '101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148', '30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,', null, null, null, '');
+INSERT INTO `prod_rec_line` VALUES ('5', '4', '1', '4', '100', '67', 'SP1220163', null, null, '1579704515', '1579704515', '1', null, '1', '4', '100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100', null, null, null, '');
 
 -- ----------------------------
 -- Table structure for `province`
@@ -11565,7 +11674,7 @@ CREATE TABLE `purch_plan` (
   `updated_by` int(11) DEFAULT NULL,
   `trans_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of purch_plan
@@ -11575,6 +11684,12 @@ INSERT INTO `purch_plan` VALUES ('2', 'แผนซื้อประจำว�
 INSERT INTO `purch_plan` VALUES ('3', 'แผนซื้อประจำวันที่ 16-11-2019', null, '1573837200', null, null, null, null, null, null, '1', '1573915412', '1573915412', '1', '1', '2019-11-16');
 INSERT INTO `purch_plan` VALUES ('5', 'แผนซื้อประจำวันที่ 17-11-2019', null, '1573923600', null, null, null, null, null, null, '1', '1573961193', '1573961193', '1', null, '2019-11-17');
 INSERT INTO `purch_plan` VALUES ('6', 'แผนซื้อประจำวันที่ 01-12-2019', null, '1575133200', null, null, null, null, null, null, '1', '1575212813', '1575212813', '1', null, '2019-12-01');
+INSERT INTO `purch_plan` VALUES ('7', 'แผนซื้อประจำวันที่ 15-12-2019', null, '1576342800', null, null, null, null, null, null, '1', '1576423182', '1576423182', '1', null, '2019-12-15');
+INSERT INTO `purch_plan` VALUES ('8', 'แผนซื้อประจำวันที่ 19-12-2019', null, '1576688400', null, null, null, null, null, null, '1', '1576730740', '1576730740', '1', null, '2019-12-19');
+INSERT INTO `purch_plan` VALUES ('9', 'แผนซื้อประจำวันที่ 22-01-2020', null, '1579626000', null, null, null, null, null, null, '1', '1579704443', '1579704443', '1', null, '2020-01-22');
+INSERT INTO `purch_plan` VALUES ('10', 'แผนซื้อประจำวันที่ 22-01-2020', null, '1579626000', null, null, null, null, null, null, '1', '1579711022', '1579711022', '1', null, '2020-01-22');
+INSERT INTO `purch_plan` VALUES ('11', 'แผนซื้อประจำวันที่ 23-02-2020', null, '1582390800', null, null, null, null, null, null, '1', '1582432413', '1582432413', '1', null, '2020-02-23');
+INSERT INTO `purch_plan` VALUES ('12', 'แผนซื้อประจำวันที่ 24-02-2020', null, '1582477200', null, null, null, null, null, null, '1', '1582524167', '1582524167', '1', '1', '2020-02-24');
 
 -- ----------------------------
 -- Table structure for `purch_plan_line`
@@ -11595,7 +11710,7 @@ CREATE TABLE `purch_plan_line` (
   `sup_id` int(11) DEFAULT NULL,
   `trans_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=254 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of purch_plan_line
@@ -11679,6 +11794,59 @@ INSERT INTO `purch_plan_line` VALUES ('197', '5', null, '1', '34', '45', '5454',
 INSERT INTO `purch_plan_line` VALUES ('198', '5', null, '1', '34', '60', '67', '1573961193', '1573961193', '1', null, '2', '2019-11-17');
 INSERT INTO `purch_plan_line` VALUES ('199', '6', null, '1', '34', '0', '5454', '1575212813', '1575212813', '1', null, '1', '2019-12-01');
 INSERT INTO `purch_plan_line` VALUES ('200', '6', null, '1', '34', '0', '67', '1575212813', '1575212813', '1', null, '2', '2019-12-01');
+INSERT INTO `purch_plan_line` VALUES ('201', '7', null, '1', '340', '100', '67', '1576423182', '1576423182', '1', null, '1', '2019-12-15');
+INSERT INTO `purch_plan_line` VALUES ('202', '7', null, '2', '200', '30', '10', '1576423182', '1576423182', '1', null, '1', '2019-12-15');
+INSERT INTO `purch_plan_line` VALUES ('203', '8', null, '1', '340', '0', '67', '1576730740', '1576730740', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('204', '8', null, '2', '200', '0', '10', '1576730740', '1576730740', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('205', '9', null, '1', '34', '100', '67', '1579704443', '1579704443', '1', null, '1', '2020-01-22');
+INSERT INTO `purch_plan_line` VALUES ('206', '9', null, '1', '250', null, '67', '1579704443', '1579704443', '1', null, '2', '2020-01-22');
+INSERT INTO `purch_plan_line` VALUES ('207', '10', null, '1', '34', '0', '67', '1579711022', '1579711022', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('208', '10', null, '1', '250', '0', '67', '1579711022', '1579711022', '1', null, '2', null);
+INSERT INTO `purch_plan_line` VALUES ('209', '11', null, '1', '250', '45', '67', '1582432413', '1582432413', '1', null, '2', '2020-02-23');
+INSERT INTO `purch_plan_line` VALUES ('210', '11', null, '1', '250', '60', '67', '1582432413', '1582432413', '1', null, '1', '2020-02-23');
+INSERT INTO `purch_plan_line` VALUES ('211', '11', null, '2', '200', '5666', '56', '1582432413', '1582432413', '1', null, '2', '2020-02-23');
+INSERT INTO `purch_plan_line` VALUES ('212', '11', null, '2', '1000', '9000', '999', '1582432413', '1582432413', '1', null, '1', '2020-02-23');
+INSERT INTO `purch_plan_line` VALUES ('213', '12', null, '1', '1200', '0', '100', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('214', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('215', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('216', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('217', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('218', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('219', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('220', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('221', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('222', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('223', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('224', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('225', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('226', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('227', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('228', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('229', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('230', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('231', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('232', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('233', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('234', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('235', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('236', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('237', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('238', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('239', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('240', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('241', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('242', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('243', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('244', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('245', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('246', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('247', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('248', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('249', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('250', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('251', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('252', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
+INSERT INTO `purch_plan_line` VALUES ('253', '12', null, '1', '1200', '0', '10', '1582524167', '1582524167', '1', null, '1', null);
 
 -- ----------------------------
 -- Table structure for `quality`
@@ -11862,12 +12030,14 @@ CREATE TABLE `section` (
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of section
 -- ----------------------------
-INSERT INTO `section` VALUES ('1', '1', 'ปอกฝาก', '', '1', '1559534819', '1559534819', '1', null);
+INSERT INTO `section` VALUES ('1', '1', 'แผนกปอกฝาก', '', '1', '1559534819', '1579623643', '1', '1');
+INSERT INTO `section` VALUES ('2', '1', 'แผนกควั่น', 'ควั่น', '1', '1576566950', '1579623650', '1', '1');
+INSERT INTO `section` VALUES ('3', '1', 'แผนกหัวโต', 'หัวโต', '1', '1576566961', '1579623663', '1', '1');
 
 -- ----------------------------
 -- Table structure for `sequence`
@@ -11938,7 +12108,7 @@ CREATE TABLE `stock_balance` (
 -- ----------------------------
 -- Records of stock_balance
 -- ----------------------------
-INSERT INTO `stock_balance` VALUES ('1', '1', null, '1', '0', '120', '1573951233', '1573951233', '1', '1', '', null, null);
+INSERT INTO `stock_balance` VALUES ('1', '1', null, '1', '0', '902', '1573951233', '1579755708', '1', '1', '', null, null);
 
 -- ----------------------------
 -- Table structure for `team`
@@ -12285,12 +12455,308 @@ CREATE TABLE `zone` (
   `qty` int(11) DEFAULT NULL,
   `lock` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=299 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of zone
 -- ----------------------------
-INSERT INTO `zone` VALUES ('1', 'A1', 'A1', '1', '1559534927', '1573951233', '1', '1', '1000', '0', '1');
+INSERT INTO `zone` VALUES ('2', 'A1', 'A1', '1', '1576423318', '1576423437', '1', '1', '2000', '200', '1');
+INSERT INTO `zone` VALUES ('3', 'A2', 'A2', '1', '1576423318', '1576570635', '1', '1', '2000', '100', '1');
+INSERT INTO `zone` VALUES ('4', 'A3', 'A3', '1', '1576423318', '1579704515', '1', '1', '2000', '100', '1');
+INSERT INTO `zone` VALUES ('5', 'A4', 'A4', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('6', 'A5', 'A5', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('7', 'A6', 'A6', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('8', 'A7', 'A7', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('9', 'A8', 'A8', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('10', 'A9', 'A9', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('11', 'A10', 'A10', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('12', 'A11', 'A11', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('13', 'A12', 'A12', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('14', 'A13', 'A13', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('15', 'A14', 'A14', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('16', 'A15', 'A15', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('17', 'A16', 'A16', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('18', 'A17', 'A17', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('19', 'A18', 'A18', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('20', 'A19', 'A19', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('21', 'A20', 'A20', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('22', 'A21', 'A21', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('23', 'A22', 'A22', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('24', 'A23', 'A23', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('25', 'A24', 'A24', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('26', 'A25', 'A25', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('27', 'A26', 'A26', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('28', 'A27', 'A27', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('29', 'A28', 'A28', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('30', 'A29', 'A29', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('31', 'A30', 'A30', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('32', 'A31', 'A31', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('33', 'A32', 'A32', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('34', 'A33', 'A33', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('35', 'A34', 'A34', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('36', 'A35', 'A35', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('37', 'A36', 'A36', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('38', 'A37', 'A37', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('39', 'A38', 'A38', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('40', 'A39', 'A39', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('41', 'A40', 'A40', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('42', 'A41', 'A41', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('43', 'A42', 'A42', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('44', 'A43', 'A43', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('45', 'A44', 'A44', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('46', 'A45', 'A45', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('47', 'A46', 'A46', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('48', 'A47', 'A47', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('49', 'A48', 'A48', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('50', 'A49', 'A49', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('51', 'A50', 'A50', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('52', 'A51', 'A51', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('53', 'A52', 'A52', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('54', 'A53', 'A53', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('55', 'A54', 'A54', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('56', 'A55', 'A55', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('57', 'A56', 'A56', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('58', 'A57', 'A57', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('59', 'A58', 'A58', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('60', 'A59', 'A59', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('61', 'A60', 'A60', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('62', 'A61', 'A61', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('63', 'A62', 'A62', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('64', 'A63', 'A63', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('65', 'A64', 'A64', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('66', 'A65', 'A65', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('67', 'A66', 'A66', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('68', 'A67', 'A67', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('69', 'A68', 'A68', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('70', 'A69', 'A69', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('71', 'A70', 'A70', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('72', 'A71', 'A71', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('73', 'A72', 'A72', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('74', 'A73', 'A73', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('75', 'A74', 'A74', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('76', 'A75', 'A75', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('77', 'A76', 'A76', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('78', 'A77', 'A77', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('79', 'A78', 'A78', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('80', 'A79', 'A79', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('81', 'A80', 'A80', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('82', 'A81', 'A81', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('83', 'A82', 'A82', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('84', 'A83', 'A83', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('85', 'A84', 'A84', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('86', 'A85', 'A85', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('87', 'A86', 'A86', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('88', 'A87', 'A87', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('89', 'A88', 'A88', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('90', 'A89', 'A89', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('91', 'A90', 'A90', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('92', 'A91', 'A91', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('93', 'A92', 'A92', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('94', 'A93', 'A93', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('95', 'A94', 'A94', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('96', 'A95', 'A95', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('97', 'A96', 'A96', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('98', 'A97', 'A97', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('99', 'A98', 'A98', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('100', 'A99', 'A99', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('101', 'B1', 'B1', '1', '1576423318', '1576570635', '1', '1', '2000', '30', '1');
+INSERT INTO `zone` VALUES ('102', 'B2', 'B2', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('103', 'B3', 'B3', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('104', 'B4', 'B4', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('105', 'B5', 'B5', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('106', 'B6', 'B6', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('107', 'B7', 'B7', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('108', 'B8', 'B8', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('109', 'B9', 'B9', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('110', 'B10', 'B10', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('111', 'B11', 'B11', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('112', 'B12', 'B12', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('113', 'B13', 'B13', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('114', 'B14', 'B14', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('115', 'B15', 'B15', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('116', 'B16', 'B16', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('117', 'B17', 'B17', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('118', 'B18', 'B18', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('119', 'B19', 'B19', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('120', 'B20', 'B20', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('121', 'B21', 'B21', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('122', 'B22', 'B22', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('123', 'B23', 'B23', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('124', 'B24', 'B24', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('125', 'B25', 'B25', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('126', 'B26', 'B26', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('127', 'B27', 'B27', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('128', 'B28', 'B28', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('129', 'B29', 'B29', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('130', 'B30', 'B30', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('131', 'B31', 'B31', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('132', 'B32', 'B32', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('133', 'B33', 'B33', '1', '1576423318', '1576423318', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('134', 'B34', 'B34', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('135', 'B35', 'B35', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('136', 'B36', 'B36', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('137', 'B37', 'B37', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('138', 'B38', 'B38', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('139', 'B39', 'B39', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('140', 'B40', 'B40', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('141', 'B41', 'B41', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('142', 'B42', 'B42', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('143', 'B43', 'B43', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('144', 'B44', 'B44', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('145', 'B45', 'B45', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('146', 'B46', 'B46', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('147', 'B47', 'B47', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('148', 'B48', 'B48', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('149', 'B49', 'B49', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('150', 'B50', 'B50', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('151', 'B51', 'B51', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('152', 'B52', 'B52', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('153', 'B53', 'B53', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('154', 'B54', 'B54', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('155', 'B55', 'B55', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('156', 'B56', 'B56', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('157', 'B57', 'B57', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('158', 'B58', 'B58', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('159', 'B59', 'B59', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('160', 'B60', 'B60', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('161', 'B61', 'B61', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('162', 'B62', 'B62', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('163', 'B63', 'B63', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('164', 'B64', 'B64', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('165', 'B65', 'B65', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('166', 'B66', 'B66', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('167', 'B67', 'B67', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('168', 'B68', 'B68', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('169', 'B69', 'B69', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('170', 'B70', 'B70', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('171', 'B71', 'B71', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('172', 'B72', 'B72', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('173', 'B73', 'B73', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('174', 'B74', 'B74', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('175', 'B75', 'B75', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('176', 'B76', 'B76', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('177', 'B77', 'B77', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('178', 'B78', 'B78', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('179', 'B79', 'B79', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('180', 'B80', 'B80', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('181', 'B81', 'B81', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('182', 'B82', 'B82', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('183', 'B83', 'B83', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('184', 'B84', 'B84', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('185', 'B85', 'B85', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('186', 'B86', 'B86', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('187', 'B87', 'B87', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('188', 'B88', 'B88', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('189', 'B89', 'B89', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('190', 'B90', 'B90', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('191', 'B91', 'B91', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('192', 'B92', 'B92', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('193', 'B93', 'B93', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('194', 'B94', 'B94', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('195', 'B95', 'B95', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('196', 'B96', 'B96', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('197', 'B97', 'B97', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('198', 'B98', 'B98', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('199', 'B99', 'B99', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('200', 'C1', 'C1', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('201', 'C2', 'C2', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('202', 'C3', 'C3', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('203', 'C4', 'C4', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('204', 'C5', 'C5', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('205', 'C6', 'C6', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('206', 'C7', 'C7', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('207', 'C8', 'C8', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('208', 'C9', 'C9', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('209', 'C10', 'C10', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('210', 'C11', 'C11', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('211', 'C12', 'C12', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('212', 'C13', 'C13', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('213', 'C14', 'C14', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('214', 'C15', 'C15', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('215', 'C16', 'C16', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('216', 'C17', 'C17', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('217', 'C18', 'C18', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('218', 'C19', 'C19', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('219', 'C20', 'C20', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('220', 'C21', 'C21', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('221', 'C22', 'C22', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('222', 'C23', 'C23', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('223', 'C24', 'C24', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('224', 'C25', 'C25', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('225', 'C26', 'C26', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('226', 'C27', 'C27', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('227', 'C28', 'C28', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('228', 'C29', 'C29', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('229', 'C30', 'C30', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('230', 'C31', 'C31', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('231', 'C32', 'C32', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('232', 'C33', 'C33', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('233', 'C34', 'C34', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('234', 'C35', 'C35', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('235', 'C36', 'C36', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('236', 'C37', 'C37', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('237', 'C38', 'C38', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('238', 'C39', 'C39', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('239', 'C40', 'C40', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('240', 'C41', 'C41', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('241', 'C42', 'C42', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('242', 'C43', 'C43', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('243', 'C44', 'C44', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('244', 'C45', 'C45', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('245', 'C46', 'C46', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('246', 'C47', 'C47', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('247', 'C48', 'C48', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('248', 'C49', 'C49', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('249', 'C50', 'C50', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('250', 'C51', 'C51', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('251', 'C52', 'C52', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('252', 'C53', 'C53', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('253', 'C54', 'C54', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('254', 'C55', 'C55', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('255', 'C56', 'C56', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('256', 'C57', 'C57', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('257', 'C58', 'C58', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('258', 'C59', 'C59', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('259', 'C60', 'C60', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('260', 'C61', 'C61', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('261', 'C62', 'C62', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('262', 'C63', 'C63', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('263', 'C64', 'C64', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('264', 'C65', 'C65', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('265', 'C66', 'C66', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('266', 'C67', 'C67', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('267', 'C68', 'C68', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('268', 'C69', 'C69', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('269', 'C70', 'C70', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('270', 'C71', 'C71', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('271', 'C72', 'C72', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('272', 'C73', 'C73', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('273', 'C74', 'C74', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('274', 'C75', 'C75', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('275', 'C76', 'C76', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('276', 'C77', 'C77', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('277', 'C78', 'C78', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('278', 'C79', 'C79', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('279', 'C80', 'C80', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('280', 'C81', 'C81', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('281', 'C82', 'C82', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('282', 'C83', 'C83', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('283', 'C84', 'C84', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('284', 'C85', 'C85', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('285', 'C86', 'C86', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('286', 'C87', 'C87', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('287', 'C88', 'C88', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('288', 'C89', 'C89', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('289', 'C90', 'C90', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('290', 'C91', 'C91', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('291', 'C92', 'C92', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('292', 'C93', 'C93', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('293', 'C94', 'C94', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('294', 'C95', 'C95', '1', '1576423319', '1576423319', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('295', 'C96', 'C96', '1', '1576423320', '1576423320', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('296', 'C97', 'C97', '1', '1576423320', '1576423320', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('297', 'C98', 'C98', '1', '1576423320', '1576423320', '1', null, '2000', '0', '0');
+INSERT INTO `zone` VALUES ('298', 'C99', 'C99', '1', '1576423320', '1576423320', '1', null, '2000', '0', '0');
 
 -- ----------------------------
 -- Table structure for `zone_product`
@@ -12310,7 +12776,7 @@ CREATE TABLE `zone_product` (
   `wip_qty` float DEFAULT NULL,
   `remain_qty` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of zone_product
@@ -12320,6 +12786,10 @@ INSERT INTO `zone_product` VALUES ('2', '0', '1', null, 'SP1030662', '0', '15595
 INSERT INTO `zone_product` VALUES ('3', '0', '1', null, 'SP1030662', '0', '1559540404', '1559540404', '1', null, null, null);
 INSERT INTO `zone_product` VALUES ('4', '0', '1', null, 'SP1030662', '0', '1559540450', '1559540450', '1', null, null, null);
 INSERT INTO `zone_product` VALUES ('5', '0', '1', null, 'SP1030662', '0', '1559540572', '1559540572', '1', null, null, null);
+INSERT INTO `zone_product` VALUES ('6', '2', '1', '200', 'SP1151262', '1', '1576423437', '1579710337', '1', '1', '200', '134');
+INSERT INTO `zone_product` VALUES ('7', '3', '1', '100', 'SP1171262', '1', '1576570635', '1579755709', '1', '1', '100', '30');
+INSERT INTO `zone_product` VALUES ('8', '101', '2', '30', 'SP1171262', '0', '1576570635', '1576570635', '1', null, null, null);
+INSERT INTO `zone_product` VALUES ('9', '4', '1', '100', 'SP1220163', '0', '1579704515', '1579704515', '1', null, null, null);
 
 -- ----------------------------
 -- View structure for `query_prodrecline`
@@ -12332,3 +12802,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- ----------------------------
 DROP VIEW IF EXISTS `query_product_receive`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `query_product_receive` AS select `zone_product`.`product_id` AS `product_id`,sum(`production_rec_line`.`line_qty`) AS `line_qty`,`product`.`name` AS `name`,`production_rec`.`trans_date` AS `trans_date` from (`product` left join ((`production_rec_line` join `production_rec` on((`production_rec`.`id` = `production_rec_line`.`production_rec_id`))) join `zone_product` on((`production_rec`.`zone_id` = `zone_product`.`zone_id`))) on((`zone_product`.`product_id` = `product`.`id`))) group by `production_rec`.`trans_date`,`zone_product`.`product_id`;
+
+-- ----------------------------
+-- View structure for `query_prod_receive`
+-- ----------------------------
+DROP VIEW IF EXISTS `query_prod_receive`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `query_prod_receive` AS select `production_rec`.`id` AS `id`,`production_rec`.`trans_date` AS `trans_date`,`production_rec`.`name` AS `name`,`production_rec`.`all_qty` AS `all_qty`,`production_rec`.`productrec_no` AS `productrec_no`,`production_rec`.`product_id` AS `product_id`,`production_rec`.`rec_date` AS `rec_date`,`production_rec_line`.`emp_id` AS `emp_id`,`production_rec_line`.`line_qty` AS `line_qty`,`production_rec_line`.`case_id` AS `case_id`,`production_rec`.`dept_id` AS `dept_id`,`production_rec`.`zone_type` AS `zone_type` from (`production_rec` join `production_rec_line` on((`production_rec`.`id` = `production_rec_line`.`production_rec_id`)));
+
+-- ----------------------------
+-- View structure for `query_receive_prod`
+-- ----------------------------
+DROP VIEW IF EXISTS `query_receive_prod`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `query_receive_prod` AS select `prod_rec`.`journal_no` AS `journal_no`,`prod_rec`.`trans_date` AS `trans_date`,`prod_rec`.`suplier_id` AS `suplier_id`,`prod_rec_line`.`product_id` AS `product_id`,`prod_rec_line`.`qty` AS `qty`,`prod_rec_line`.`price` AS `price`,`prod_rec_line`.`lot_no` AS `lot_no`,`prod_rec_line`.`ref_no` AS `ref_no`,`prod_rec_line`.`status` AS `status`,`product`.`name` AS `name`,`product`.`description` AS `description`,`prod_rec_line`.`zone_id` AS `zone_id`,`zone`.`name` AS `zone_name`,`prod_rec_line`.`team1` AS `team1`,`prod_rec_line`.`team2` AS `team2`,`vendor`.`name` AS `supplier_name` from ((((`prod_rec` join `prod_rec_line` on((`prod_rec`.`id` = `prod_rec_line`.`prod_rec_id`))) join `product` on((`prod_rec_line`.`product_id` = `product`.`id`))) join `zone` on((`prod_rec_line`.`zone_id` = `zone`.`id`))) join `vendor` on((`prod_rec`.`suplier_id` = `vendor`.`id`)));
