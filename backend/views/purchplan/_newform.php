@@ -10,10 +10,19 @@ $this->registerJsFile('@web/js/sweetalert.min.js?V=002',
     ['depends' => [\yii\web\JqueryAsset::className()]],
     static::POS_HEAD
 );
+
+$action = 'createnew';
+if($model->isNewRecord){
+    $action = 'createnew';
+}else{
+    $action = 'updatenew';
+}
+
 ?>
 <div class="row">
     <div class="col-lg-12">
-        <form id="form-plan" action="index.php?r=purchplan/createnew" method="post">
+        <form id="form-plan" action="index.php?r=purchplan/<?=$action?>" method="post">
+            <input type="hidden" class="plan_id" name="plan_id" value="<?=$model->id;?>">
             <div class="panel">
                 <div class="panel-heading">
                     <?= $this->title ?>

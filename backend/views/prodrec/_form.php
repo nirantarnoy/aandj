@@ -43,6 +43,7 @@ $state = $model->isNewRecord ? 0 : 1;
                 <div class="col-lg-3">
                     <input type="hidden" class="cur_no"
                            value="<?= $model->isNewRecord ? $runno : $model->journal_no ?>">
+                    <input type="hidden" class="sup-type" value="">
                     <?= $form->field($model, 'journal_no')->textInput(['maxlength' => true, 'value' => $model->isNewRecord ? $runno : $model->journal_no, 'readonly' => 'readonly', 'class' => 'form-control journal_no']) ?>
                 </div>
                 <div class="col-lg-3">
@@ -56,7 +57,7 @@ $state = $model->isNewRecord ? 0 : 1;
                 </div>
                 <div class="col-lg-3">
                     <?= $form->field($model, 'plan_id')->widget(Select2::className(), [
-                        'data' => ArrayHelper::map(\backend\models\Purchplan::find()->orderBy(['id' => SORT_DESC])->all(), 'id', 'name'),
+                        'data' => ArrayHelper::map(\backend\models\Purchplan::find()->where(['receive_status'=>1])->orderBy(['id' => SORT_DESC])->all(), 'id', 'name'),
                         'options' => ['placeholder' => 'เลือกแผนซื้อ', 'id' => 'plan_id', 'class' => 'input-group-lg']
                     ]) ?>
                 </div>
@@ -88,6 +89,7 @@ $state = $model->isNewRecord ? 0 : 1;
                                           });
                                           
                                           if(data[0]["company"] == 1){
+                                             $(".sup-type").val("company");
                                              $("table.table-line tbody tr").each(function(){
                                                  $("table.table-line thead tr").find("th:eq(4)").show();
                                                  $("table.table-line thead tr").find("th:eq(5)").show();
@@ -98,6 +100,7 @@ $state = $model->isNewRecord ? 0 : 1;
                                                  //$(this).closest("tr").find("td:eq(6)").find(".line_qc").prop("disabled","");
                                               });
                                           }else{
+                                           $(".sup-type").val("");
                                               $("table.table-line tbody tr").each(function(){
                                                  $("table.table-line thead tr").find("th:eq(4)").hide();
                                                  $("table.table-line thead tr").find("th:eq(5)").hide();
@@ -592,7 +595,7 @@ $state = $model->isNewRecord ? 0 : 1;
             <div class="form-group">
                 <?php if ($model->status < 2): ?>
                     <?php // echo Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success btn-submit']) ?>
-                    <input type="submit" class="btn btn-success" value="Save">
+                    <input type="submit" class="btn btn-success btn-save" value="Save">
                 <?php endif; ?>
             </div>
 <!--            <input type="submit" value="ok">-->
@@ -820,7 +823,22 @@ var data = [
         
         $("#selectModal").modal("hide");
           
-          
+      });
+      
+      $(".btn-save").click(function(){
+         var sup_type =  $(".sup-type").val();
+         var line_zone = $(".line_zone").val();
+         var line_qty = $(".line_qty").val();
+         var line_orchard = $(".line_orchard").val();
+         var line_team = $(".line_team").val();
+        
+         if(sup_type == "company"){
+            if(line_orchard == "" || line_team == ""){
+               alert("กรุณาเลือกข้อมูลให้ครบ");
+               return false;
+            }
+         }
+         
       });
       
       $(".btn-add").click(function(){

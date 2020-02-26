@@ -135,12 +135,21 @@ $this->registerJs($js,static::POS_END);
                     return date('d-m-Y',$data->plan_date);
                 }
             ],
+//            [
+//                'attribute'=>'status',
+//                'contentOptions' => ['style' => 'vertical-align: middle'],
+//                'format' => 'html',
+//                'value'=>function($data){
+//                    return $data->status === 1 ? '<div class="label label-success">Active</div>':'<div class="label label-default">Inactive</div>';
+//                }
+//            ],
             [
-                'attribute'=>'status',
+                'attribute'=>'receive_status',
+                'label'=>'สถานะรับเข้า',
                 'contentOptions' => ['style' => 'vertical-align: middle'],
                 'format' => 'html',
                 'value'=>function($data){
-                    return $data->status === 1 ? '<div class="label label-success">Active</div>':'<div class="label label-default">Inactive</div>';
+                    return $data->receive_status === 1 || $data->receive_status == null ? '<div class="label label-default">ยังไม่รับ</div>':'<div class="label label-success">รับเข้าแล้ว</div>';
                 }
             ],
             [
@@ -166,7 +175,7 @@ $this->registerJs($js,static::POS_END);
                             'data-pjax' => '0',
                             'id'=>'modaledit',
                         ]);
-                        return $data->status == 1? Html::a(
+                        return $data->receive_status == 1? Html::a(
                             '<span class="glyphicon glyphicon-pencil btn btn-default"></span>', $url, [
                             'id' => 'activity-view-link',
                             //'data-toggle' => 'modal',

@@ -187,7 +187,10 @@ $this->registerJs($js, static::POS_END);
                 </div>
             </div>
             <div class="row">
-
+                <div class="col-lg-4">
+                    <label for="">ค้างผลิต</label>
+                    <input type="text" class="form-control" value="" readonly>
+                </div>
                 <div class="col-lg-4">
 <!--                    --><?php ////echo $form->field($model, 'zone_status')->widget(Select2::className(), [
 //                        'data' => ArrayHelper::map([['id' => 1, 'name' => 'ยังไม่ปิดกอง'], ['id' => 2, 'name' => 'ปิดกอง']], 'id', 'name'),
@@ -198,7 +201,7 @@ $this->registerJs($js, static::POS_END);
                     <?= $form->field($model, 'dept_id')->hiddenInput(['maxlength' => true, 'value' => $rec_type])->label(false) ?>
                     <?php //echo $form->field($model, 'all_qty')->textInput() ?>
                 </div>
-
+            </div>
                 <br/>
                 <br/>
                 <div class="row">
