@@ -59,15 +59,15 @@
         <tbody>
         <?php foreach ($model as $val): ?>
             <tr>
-                <td><?=$val->trans_date?></td>
+                <td><?=date("d/m/Y",$val->trans_date)?></td>
                 <td><?=$val->journal_no?></td>
                 <td><?=$val->supplier_name?></td>
-                <td></td>
-                <td></td>
+                <td>-</td>
+                <td><?=$val->name?></td>
                 <td style="color: red"><?=$val->zone_name?></td>
                 <td><?=number_format($val->qty)?></td>
-                <td></td>
-                <td style="border-right: 1px solid black"></td>
+                <td><?=$val->qc_note?></td>
+                <td style="border-right: 1px solid black"><?=\backend\models\Team::findNameByType($val->team2,2)?></td>
 
                 <td>0</td>
                 <td>0</td>
@@ -104,4 +104,8 @@
         <?php endforeach; ?>
         </tbody>
     </table>
+</div>
+<br>
+<div class="container">
+    <div class="btn btn-success">ยืนยัน</div>
 </div>

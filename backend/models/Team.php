@@ -60,4 +60,9 @@ class Team extends \common\models\Team
         return count($model)>0?$model->id:0;
     }
 
+    public function findNameByType($id,$type){
+        $model = Team::find()->where(['id'=>$id,'team_type'=>$type])->one();
+        return count($model)>0?$model->name:'';
+    }
+
 }
