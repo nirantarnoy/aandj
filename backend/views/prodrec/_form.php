@@ -160,6 +160,11 @@ $state = $model->isNewRecord ? 0 : 1;
                     ]) ?>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <?= $form->field($model, 'qc_note')->textarea(['maxlength' => true, 'value' => $model->qc_note, 'class' => 'form-control']) ?>
+                </div>
+            </div>
 
 
             <br>

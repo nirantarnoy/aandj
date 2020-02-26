@@ -66,7 +66,7 @@ class ReportController extends Controller
         $model = \common\models\QueryReceiveProd::find()->all();
         return $this->render('_summary2',[
             'model'=>$model,
-            'from_data'=>$from_date,
+            'from_date'=>$from_date,
             'to_date'=>$to_date
         ]);
     }

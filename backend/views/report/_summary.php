@@ -67,27 +67,27 @@
                 <td style="color: red"><?=$val->zone_name?></td>
                 <td><?=number_format($val->qty)?></td>
                 <td></td>
-                <td style="border-right: 1px solid black">ทีมขน</td>
+                <td style="border-right: 1px solid black"></td>
 
-                <td>ควั่น(ใหญ่ดี)</td>
-                <td>ควั่น(เล็ก)</td>
-                <td>ควั่น(ขี้กาก)</td>
-                <td>หัวโต(ใหญ่ดี)</td>
-                <td>หัวโต(หัวแหลม)</td>
-                <td>หัวโต(ขี้กาก)</td>
-                <td>เจีย(ใหญ่)</td>
-                <td>เจีย(ตกไซต์)</td>
-                <td style="border-right: 1px solid black">เจีย(แก่)</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td style="border-right: 1px solid black">0</td>
 
-                <td style="border-right: 1px solid black;background-color: pink">เสียทิ้ง(ไม่นับ)</td>
+                <td style="border-right: 1px solid black;background-color: pink">0</td>
 
-                <td>ทำได้</td>
-                <td>%</td>
-                <td>ขี้กาก</td>
-                <td>%</td>
-                <td>แถม/ขาด</td>
-                <td>%</td>
-                <td style="border-right: 1px solid black">รวม</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td style="border-right: 1px solid black">0</td>
 
                 <td style="background-color: darkseagreen"><input type="text" class="form-control"
                                                                   style="width: 100px;"></td>

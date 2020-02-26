@@ -70,7 +70,7 @@ class ZoneSearch extends Zone
         ]);
         if($this->globalSearch != ''){
             $query->orFilterWhere(['like','name',$this->globalSearch])
-                ->orFilterWhere(['like','description',$this->globalSearch]);
+                ->orFilterWhere(['like','discription',$this->globalSearch]);
         }
 
         return $dataProvider;

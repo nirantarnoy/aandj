@@ -224,6 +224,26 @@ HTML;
                                 }
                             ],
                             [
+                                    'label' => 'กอง',
+                                'contentOptions' => ['style' => 'vertical-align: middle'],
+                                'value'=>function($data){
+                                    $zonelist = '';
+                                    $list = \backend\models\Prodrecline::find()->where(['prod_rec_id'=>$data->id])->all();
+                                    if($list){
+                                        $i=0;
+                                        foreach ($list as $value){
+                                            if($i>0 && $i<count($list)){
+                                                $zonelist = \backend\models\Zone::findName($value->zone_id).",";
+                                            }else{
+                                                $zonelist = \backend\models\Zone::findName($value->zone_id);
+                                            }
+
+                                        }
+                                    }
+                                    return $zonelist;
+                                }
+                            ],
+                            [
                                 'attribute'=>'lot_no',
                                 'contentOptions' => ['style' => 'vertical-align: middle'],
                             ],
